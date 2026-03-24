@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { authGateway } from "@/lib/supabase";
 import type { AuthSession, AuthUser } from "@/lib/supabase";
+import { setApiToken } from "@/services/api";
 
 interface AuthContextValue {
   user: AuthUser | null
@@ -24,9 +25,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(false);
     });
 
-    const unsubscribe = authGateway.onAuthStateChange((event, session) => {
+    const unsubscribe = authGateway.onAuthStateChange((_, session) => {
       setSession(session);
       setUser(session?.user ?? null);
+      setApiToken(session?.accessToken ?? null);
     });
 
     return unsubscribe;
@@ -36,12 +38,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const session = await authGateway.signIn(email, password);
     setSession(session);
     setUser(session.user);
+    setApiToken(session?.accessToken ?? null);
   }
 
   async function signOut() {
     await authGateway.signOut();
     setSession(null);
     setUser(null);
+    setApiToken(null);
   }
 
   return (
