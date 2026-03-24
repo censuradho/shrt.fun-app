@@ -62,6 +62,7 @@ export function SignInScreen () {
               <Link className="text-sm text-right text-card-foreground font-medium hover:opacity-80" to={paths.public.forgotPassword}>Esqueceu a senha?</Link>
               <Button
                 className="w-full justify-center"
+                loading={viewModel.isLoading}
               >
               Entrar
               </Button>
