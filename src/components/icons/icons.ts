@@ -10,7 +10,9 @@ import {
   QrCode,
   Play,
   Eye,
-  EyeOff
+  EyeOff,
+  ChevronRight,
+  ChevronLeft
 } from 'lucide-react'
 
 export const icons = {
@@ -25,6 +27,8 @@ export const icons = {
   QrCode,
   Play,
   Eye,
-  EyeOff
+  EyeOff,
+  ChevronRight,
+  ChevronLeft
 }
 
