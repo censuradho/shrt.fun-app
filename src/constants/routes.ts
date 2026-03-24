@@ -1,6 +1,6 @@
 export const paths = {
   public: {
-    signin: "/signin",
+    signin: "/",
     forgotPassword: '/forgot-password',
   }
 } as const
