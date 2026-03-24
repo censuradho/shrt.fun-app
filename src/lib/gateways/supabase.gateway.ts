@@ -10,7 +10,7 @@ class SupabaseGateway implements AuthGateway {
   async signIn(email: string, password: string): Promise<AuthSession> {
     const { data, error } = await client.auth.signInWithPassword({ email, password });
 
-    if (error) throw new Error(error.message);
+    if (error) throw error;
 
     return {
       accessToken: data.session.access_token,
@@ -22,7 +22,7 @@ class SupabaseGateway implements AuthGateway {
   async signUp(email: string, password: string): Promise<AuthUser> {
     const { data, error } = await client.auth.signUp({ email, password });
 
-    if (error) throw new Error(error.message);
+    if (error) throw error;
     if (!data.user) throw new Error("Sign up failed");
 
     return { id: data.user.id, email: data.user.email };
@@ -30,13 +30,13 @@ class SupabaseGateway implements AuthGateway {
 
   async signOut(): Promise<void> {
     const { error } = await client.auth.signOut();
-    if (error) throw new Error(error.message);
+    if (error) throw error;
   }
 
   async getSession(): Promise<AuthSession | null> {
     const { data, error } = await client.auth.getSession();
 
-    if (error) throw new Error(error.message);
+    if (error) throw error;
     if (!data.session) return null;
 
     return {
