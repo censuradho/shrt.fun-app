@@ -24,6 +24,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: keyof typeof sizes
   loading?: boolean
   headIcon?: IconProps
+  tailIcon?: IconProps
 }
 
 export function Button (props: PropsWithChildren<ButtonProps>) {
@@ -34,6 +35,7 @@ export function Button (props: PropsWithChildren<ButtonProps>) {
     size = 'md',
     disabled = loading,
     headIcon,
+    tailIcon,
     className,
     ...otherProps
   } = props
@@ -59,6 +61,9 @@ export function Button (props: PropsWithChildren<ButtonProps>) {
         <Icon size={currentSize.icon} {...headIcon} />
       )}
       {loading ? <Spinner /> : children}
+      {!!tailIcon && (
+        <Icon size={currentSize.icon} {...tailIcon} />
+      )}
     </button>
   )
 }
