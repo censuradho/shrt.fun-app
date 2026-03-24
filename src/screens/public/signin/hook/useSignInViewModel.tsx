@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form"
 import { signInValidation, type SignInFormData } from "../validations"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAuth } from "@/contexts/auth/auth.context"
-import { isApiError } from "@/lib/supabase"
+import { isApiError, SUPABASE_ERROR_MESSAGES } from "@/lib/supabase"
+import { toast } from "sonner"
 
 export function useSignInViewModel () {
   const { 
@@ -20,9 +21,12 @@ export function useSignInViewModel () {
       await signIn(data.email, data.password)
     } catch (error) {
       if (isApiError(error)) {
-        if (error.status === 400) {
-          form.setError('email', { message: 'E-mail ou senha inválidos' })
-          form.setError('password', { message: 'E-mail ou senha inválidos' })
+        if (error.message === SUPABASE_ERROR_MESSAGES.EMAIL_NOT_CONFIRMED) {
+          toast.error('E-mail não confirmado. Por favor, verifique sua caixa de entrada.')
+          return
+        }
+        if (error.status === 400 && error.message === SUPABASE_ERROR_MESSAGES.INVALID_EMAIL_OR_PASSWORD) {
+          toast.error('E-mail ou senha inválidos')
         }
       }
     }
