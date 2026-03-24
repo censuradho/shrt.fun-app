@@ -35,10 +35,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function signIn(email: string, password: string) {
-    const session = await authGateway.signIn(email, password);
-    setSession(session);
-    setUser(session.user);
-    setApiToken(session?.accessToken ?? null);
+    try {
+      setIsLoading(true);
+      const session = await authGateway.signIn(email, password);
+      setSession(session);
+      setUser(session.user);
+      setApiToken(session?.accessToken ?? null);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function signOut() {
