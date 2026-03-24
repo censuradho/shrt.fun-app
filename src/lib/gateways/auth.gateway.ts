@@ -36,4 +36,5 @@ export interface AuthGateway {
   signOut(): Promise<void>
   getSession(): Promise<AuthSession | null>
   onAuthStateChange(callback: AuthStateChangeCallback): Unsubscribe
+  resendConfirmationEmail(email: string): Promise<void>
 }

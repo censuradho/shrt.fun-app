@@ -7,6 +7,13 @@ const client = createClient(
 );
 
 class SupabaseGateway implements AuthGateway {
+  resendConfirmationEmail(email: string): Promise<void>
+
+  async resendConfirmationEmail(email: string): Promise<void> {
+    const { error } = await client.auth.resend({ email, type: 'signup' });
+    if (error) throw error;
+  }
+
   async signIn(email: string, password: string): Promise<AuthSession> {
     const { data, error } = await client.auth.signInWithPassword({ email, password });
 
