@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --card: #111111;
-  --input: #1a1a1a;
+  --card: oklch(1 0 0);
+  --input: oklch(0.922 0 0);
   --outline: #222222;
-  --muted: #444444;
-  --muted-foreground: #353535;
-  --card-foreground: #888888;
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --card-foreground: oklch(0.145 0 0);
 
   /* Primary — Apple Blue */
   --primary-100: rgba(0, 113, 227, 0.06);
@@ -31,8 +32,8 @@
   --warn-border: rgba(251, 191, 36, 0.2);
 
   /* Surfaces */
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
   --surface: #111111;
   --surface-raised: #1a1a1a;
   --surface-overlay: #1f1f1f;
@@ -49,15 +50,15 @@
   --text-disabled: #3a3a3a;
 
   /* Ring */
-  --ring: rgba(0, 113, 227, 0.12);
+  --ring: oklch(0.708 0 0);
 
   /* Shadcn compat */
-  --popover: #1a1a1a;
-  --popover-foreground: #fff;
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
-  --accent: #555555;
+  --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -79,8 +80,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-
-
 
   /* ── Blitzit accent palette ── */
   --blitzit-green: #b5d982;
@@ -104,7 +103,7 @@
 }
 
 @theme inline {
-  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Geist Variable', sans-serif;
 
   /* Primary */
   --color-primary-100: var(--primary-100);
@@ -181,7 +180,7 @@
   --color-blitzit-pink-a20: var(--blitzit-pink-a20);
   --color-blitzit-blue-a10: var(--blitzit-blue-a10);
   --color-blitzit-blue-a20: var(--blitzit-blue-a20);
-  
+
   /* Radius scale */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -223,9 +222,43 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply font-sans bg-background text-foreground;
   }
   html {
     @apply font-sans;
   }
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
 }
