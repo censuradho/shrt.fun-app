@@ -19,7 +19,7 @@ export function CheckboxHook<T extends FieldValues>({
     <Controller
       control={control}
       name={name}
-      render={({ field, fieldState }) => (
+      render={({ field }) => (
         <div className={cn("flex flex-col gap-1", className)}>
           <Checkbox
             checked={field.value}
@@ -29,9 +29,6 @@ export function CheckboxHook<T extends FieldValues>({
             name={field.name}
             ref={field.ref}
           />
-          {fieldState.error?.message && (
-            <span className="text-error text-xs">{fieldState.error.message}</span>
-          )}
         </div>
       )}
     />
