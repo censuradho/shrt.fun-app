@@ -9,6 +9,7 @@ export function useLinkListViewModel () {
   const [urlSelected, setUrlSelected] = useState<string[]>([])
   const [search, setSearch] = useState('')
   const [queries, setQueries] = useState<FindManyLinksQueries>({})
+  const [view, setView] = useState('')
 
   const isSearchValid = !search || urlValidation(search)
 
@@ -19,6 +20,9 @@ export function useLinkListViewModel () {
     fetchNextPage,
     isFetched,
   } = useFindManyUrlPaginated(queries)
+
+  const isSelectedAll = links?.pages.flatMap(page => page.data.data.length)
+    .reduce((acc, length) => acc + length, 0) === urlSelected.length
 
   const sentinelRef = useRef<HTMLDivElement | null>(null)
 
@@ -63,9 +67,11 @@ export function useLinkListViewModel () {
     })
   }
 
-  const handleSelectAllLinks = () => {
+  const handleToggleAllLinks = () => {
     if (!links) return
-    const allLinkIds = links.pages.flatMap(page => page.data.map(link => link.id))
+    if (isSelectedAll) return setUrlSelected([])
+
+    const allLinkIds = links.pages.flatMap(page => page.data.data.map(link => link.id))
     setUrlSelected(allLinkIds)
   }
 
@@ -82,13 +88,16 @@ export function useLinkListViewModel () {
     toggleUrlSelected,
     urlSelected,
     sentinelRef,
-    handleSelectAllLinks,
+    handleToggleAllLinks,
     hasNextPage,
     setSearch,
     search,
     isFetched,
     isEmpty,
     isPending,
-    isSearchValid
+    isSearchValid,
+    isSelectedAll,
+    view, 
+    setView
   }
 }
