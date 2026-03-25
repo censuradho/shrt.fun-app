@@ -22,13 +22,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const {
     data: me,
+    isLoading: isMeLoading,
   } = useMeQuery(!!supabaseUser);
 
   useEffect(() => {
-    authGateway.getUser().then(user => {
-      setSupabaseUser(user);
-      setIsLoading(false);
-    });
+    authGateway.getUser()
+      .then(user => setSupabaseUser(user))
+      .finally(() => setIsLoading(false));
 
     const unsubscribe = authGateway.onAuthStateChange((event, session) => {
       setApiToken(session?.accessToken ?? null);
@@ -60,7 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider 
       value={{ 
         supabaseUser, 
-        isLoading, 
+        isLoading: isLoading || (!!supabaseUser && isMeLoading),
         signIn, 
         signOut,
         me
