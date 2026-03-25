@@ -12,7 +12,13 @@ import {
   Eye,
   EyeOff,
   ChevronRight,
-  ChevronLeft
+  ChevronLeft,
+  Link,
+  Menu,
+  ChartSpline,
+  LayoutGrid,
+  Plus,
+  LogOut
 } from 'lucide-react'
 
 export const icons = {
@@ -29,6 +35,12 @@ export const icons = {
   Eye,
   EyeOff,
   ChevronRight,
-  ChevronLeft
+  ChevronLeft,
+  Link,
+  Menu,
+  ChartSpline,
+  LayoutGrid,
+  Plus,
+  LogOut
 }
 
