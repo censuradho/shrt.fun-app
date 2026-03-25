@@ -2,26 +2,30 @@ import { useDebounceCallback } from "@/hooks/useDebounceCallback";
 import { useIntersectionObserver } from "@/hooks/useIntersectObserver";
 import { useFindManyUrlPaginated } from "@/services/api/url/queries";
 import type { FindManyLinksQueries } from "@/services/api/url/types";
+import { urlValidation } from "@/utils/validations";
 import { useEffect, useRef, useState } from "react";
 
 export function useLinkListViewModel () {
   const [urlSelected, setUrlSelected] = useState<string[]>([])
   const [search, setSearch] = useState('')
   const [queries, setQueries] = useState<FindManyLinksQueries>({})
-  
-  
+
+  const isSearchValid = !search || urlValidation(search)
 
   const {
     data: links,
-    isLoading,
+    isPending,
     error,
-    fetchNextPage
+    fetchNextPage,
+    isFetched,
   } = useFindManyUrlPaginated(queries)
 
   const sentinelRef = useRef<HTMLDivElement | null>(null)
 
   const lastPage = links?.pages[links.pages.length - 1]
   const hasNextPage = lastPage ? lastPage.data.nextCursor : false
+
+  const isEmpty = links?.pages[0].data.data.length === 0
 
   const observer = useIntersectionObserver(([entry]) => {
     if (entry.isIntersecting) fetchNextPage()
@@ -66,12 +70,13 @@ export function useLinkListViewModel () {
   }
 
   useDebounceCallback(() => {
+    if (!isSearchValid) return;
+
     handleChangeQueries('search', search)
   }, 500)
   
   return {
     links,
-    isLoading,
     error,
     handleChangeQueries,
     toggleUrlSelected,
@@ -80,6 +85,10 @@ export function useLinkListViewModel () {
     handleSelectAllLinks,
     hasNextPage,
     setSearch,
-    search
+    search,
+    isFetched,
+    isEmpty,
+    isPending,
+    isSearchValid
   }
 }
