@@ -29,12 +29,37 @@ export type AuthStateEvent = "SIGNED_IN" | "SIGNED_OUT" | "TOKEN_REFRESHED" | "U
 export type AuthStateChangeCallback = (event: AuthStateEvent, session: AuthSession | null) => void
 
 export type Unsubscribe = () => void
+export interface AuthClaims {
+  iss: string
+  sub: string
+  aud: string
+  exp: number
+  iat: number
+  email: string
+  phone: string
+  app_metadata: {
+    provider: string
+    providers: string[]
+  }
+  user_metadata: {
+    email: string
+    email_verified: boolean
+    phone_verified: boolean
+    sub: string
+  }
+  role: string
+  aal: string
+  amr: { method: string; timestamp: number }[]
+  session_id: string
+  is_anonymous: boolean
+}
 
 export interface AuthGateway {
-  signIn(email: string, password: string): Promise<AuthSession>
+  signInWithPassword(email: string, password: string): Promise<AuthSession>
   signUp(email: string, password: string): Promise<AuthUser>
   signOut(): Promise<void>
-  getSession(): Promise<AuthSession | null>
+  getClaims(): Promise<AuthClaims | null>
+  getUser(): Promise<AuthUser | null>
   onAuthStateChange(callback: AuthStateChangeCallback): Unsubscribe
   resendConfirmationEmail(email: string): Promise<void>
 }
