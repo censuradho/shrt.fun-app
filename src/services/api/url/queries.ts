@@ -1,6 +1,7 @@
-import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { urlService } from ".";
 import type { FindManyLinksQueries } from "./types";
+import { toastifyApiErrorMessage } from "../toastifyApiErrorMessage";
 
 export function useFindManyUrlPaginated (queries: FindManyLinksQueries) {
   return useInfiniteQuery({
@@ -12,8 +13,16 @@ export function useFindManyUrlPaginated (queries: FindManyLinksQueries) {
 }
 
 export function useCreateUrlMutation () {
+  const queryClient = useQueryClient()
+
   return useMutation({
     mutationFn: urlService.create,
-    mutationKey: ['create-link']
+    mutationKey: ['create-link'],
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['links'] })
+    },
+    onError: (error) => {
+      toastifyApiErrorMessage(error)
+    }
   })
 }
