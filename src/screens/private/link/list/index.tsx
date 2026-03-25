@@ -3,6 +3,10 @@ import { paths } from "@/constants/routes";
 import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
 import { LinkListItem } from "./components/LinkListItem";
 import { TextField } from "@/components/form/TextField";
+import { Spinner } from "@/components/spinner";
+import { Skeleton } from "@/components/ui/skeleton";
+import { urlValidation } from "@/utils/validations";
+
 
 export function LinkListScreen () {
   const { 
@@ -12,7 +16,11 @@ export function LinkListScreen () {
     toggleUrlSelected, 
     hasNextPage,
     search,
-    setSearch
+    setSearch,
+    isPending,
+    isFetched,
+    isEmpty,
+    isSearchValid
   } = useLinkListViewModel()
 
   const renderUrls = links?.pages?.flatMap(page => (
@@ -31,8 +39,8 @@ export function LinkListScreen () {
   ))
 
   return (
-    <div>
-      <div className="container mt-10">
+    <>
+      <div className="container mt-10 ">
         <header className="border-b border-outline pb-4 flex flex-col gap-6">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold mb-4">Meus links</h1>
@@ -50,15 +58,34 @@ export function LinkListScreen () {
               }}
               value={search}
               onChange={e => setSearch(e.target.value)}
+              errorMessage={!isSearchValid ? 'URL inválida' : undefined}
             />
           </div>
         </header>
-        <section className="mt-6 w-full">
+        <section className="mt-6 w-full flex-1 h-ful">
+          {!isFetched && (
+            <div className="flex flex-col gap-1">
+              <Skeleton className="h-[84px] w-full rounded-md" />
+              <Skeleton className="h-[84px] w-full rounded-md" />
+              <Skeleton className="h-[84px] w-full rounded-md" />
+            </div>
+          )}
+          {isEmpty && isFetched && (
+            <div className="flex flex-col items-center gap-4 h-40 mt-40">
+              <span className="text-[56px]">📂</span>
+              <p className="text-sm">Nenhum link foi encontrado</p>
+            </div>
+          )}
           <ul className="flex flex-col gap-1 w-full">
             {renderUrls}
           </ul>
+          {isPending && isFetched && (
+            <div className="h-4 flex items-center justify-center py-8">
+              <Spinner size={32} />
+            </div>
+          )}
           <div ref={sentinelRef} className="w-full">
-            {!hasNextPage && (
+            {!hasNextPage && isFetched && !isEmpty && (
               <div className="py-6 flex items-center gap-4 justify-center">
                 <hr className="border border-outline w-10 lg:w-30" />
                 <span className="text-sm whitespace-nowrap">Você chegou ao fim dos seus links</span>
@@ -68,6 +95,6 @@ export function LinkListScreen () {
           </div>
         </section>
       </div>
-    </div>
+    </>
   )
 }
