@@ -1,3 +1,4 @@
+import { useDebounceCallback } from "@/hooks/useDebounceCallback";
 import { useIntersectionObserver } from "@/hooks/useIntersectObserver";
 import { useFindManyUrlPaginated } from "@/services/api/url/queries";
 import type { FindManyLinksQueries } from "@/services/api/url/types";
@@ -5,7 +6,10 @@ import { useEffect, useRef, useState } from "react";
 
 export function useLinkListViewModel () {
   const [urlSelected, setUrlSelected] = useState<string[]>([])
+  const [search, setSearch] = useState('')
   const [queries, setQueries] = useState<FindManyLinksQueries>({})
+  
+  
 
   const {
     data: links,
@@ -30,10 +34,19 @@ export function useLinkListViewModel () {
     return () => observer.unobserve(node)
   }, [observer])
 
-  const handleChangeQueries = <T, K extends keyof T>(
+  const handleChangeQueries = <T extends FindManyLinksQueries, K extends keyof T>(
     key: K, 
     value: T[K]
   ) => {
+    if (!value) return setQueries(prev => {
+      return Object
+        .fromEntries(
+          Object
+            .entries(prev)
+            .filter(([k]) => k !== key)
+        ) as T
+    })
+
     setQueries(prev => ({ ...prev, [key]: value }))
   }
 
@@ -52,6 +65,10 @@ export function useLinkListViewModel () {
     setUrlSelected(allLinkIds)
   }
 
+  useDebounceCallback(() => {
+    handleChangeQueries('search', search)
+  }, 500)
+  
   return {
     links,
     isLoading,
@@ -61,6 +78,8 @@ export function useLinkListViewModel () {
     urlSelected,
     sentinelRef,
     handleSelectAllLinks,
-    hasNextPage
+    hasNextPage,
+    setSearch,
+    search
   }
 }
