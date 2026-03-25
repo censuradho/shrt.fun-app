@@ -1,5 +1,5 @@
 import { api } from "..";
-import type { FindManyLinksQueries } from "./types";
+import type { CreateUrlRequestPayload, FindManyLinksQueries } from "./types";
 
 function findManyPaginated (queries: FindManyLinksQueries) {
   return api.get('/url', {
@@ -7,6 +7,11 @@ function findManyPaginated (queries: FindManyLinksQueries) {
   })
 }
 
+function create (payload: CreateUrlRequestPayload) {
+  return api.post<{ shortUrl: string }>('/url', payload)
+}
+
 export const urlService = {
-  findManyPaginated
+  findManyPaginated,
+  create
 }
