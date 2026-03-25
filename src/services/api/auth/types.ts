@@ -13,4 +13,8 @@ export interface Me {
   username: string;
   isActive: boolean
   createdAt: Date
+  plan: {
+    name: string
+    monthlyLinkLimit: number
+  }
 }
