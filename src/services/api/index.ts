@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { authGateway } from '@/lib/supabase'
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -20,12 +19,12 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !error.config._retry) {
       error.config._retry = true;
 
-      const session = await authGateway.getSession();
-      if (session) {
-        setApiToken(session.accessToken);
-        error.config.headers['Authorization'] = `Bearer ${session.accessToken}`;
-        return api.request(error.config);
-      }
+      // const session = await authGateway.getUser();
+      // if (session) {
+      //   setApiToken(session.accessToken);
+      //   error.config.headers['Authorization'] = `Bearer ${session.accessToken}`;
+      //   return api.request(error.config);
+      // }
     }
 
     return Promise.reject(error);
