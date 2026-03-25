@@ -4,6 +4,7 @@ import { LinkListScreen } from "@/screens/private/link/list";
 import { SignInScreen } from "@/screens/public/signin";
 import { SignUpScreen } from "@/screens/public/signUp";
 import { Route, Routes } from "react-router";
+import { PrivateRoute } from "./PrivateRoute";
 
 
 export function AppRoutes () {
@@ -12,8 +13,11 @@ export function AppRoutes () {
       <Route path={paths.public.signin} element={<SignInScreen />} />
       <Route path={paths.public.signUp} element={<SignUpScreen />} />
 
-      <Route path={paths.private.root} element={<MainLayout />}>
-        <Route path={paths.private.link.list} element={<LinkListScreen />} />
+
+      <Route element={<PrivateRoute  />}>
+        <Route path={paths.private.root} element={<MainLayout />}>
+          <Route path={paths.private.link.list} element={<LinkListScreen />} />
+        </Route>
       </Route>
     </Routes>
   )
