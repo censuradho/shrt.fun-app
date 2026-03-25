@@ -24,7 +24,7 @@ import {
   Check,
   Search,
   List,
-  Columns3
+  Columns3,
 } from 'lucide-react'
 
 export const icons = {
