@@ -1,4 +1,6 @@
 import { paths } from "@/constants/routes";
+import { MainLayout } from "@/layout/main";
+import { LinkListScreen } from "@/screens/private/link/list";
 import { SignInScreen } from "@/screens/public/signin";
 import { SignUpScreen } from "@/screens/public/signUp";
 import { Route, Routes } from "react-router";
@@ -9,6 +11,10 @@ export function AppRoutes () {
     <Routes>
       <Route path={paths.public.signin} element={<SignInScreen />} />
       <Route path={paths.public.signUp} element={<SignUpScreen />} />
+
+      <Route path={paths.private.root} element={<MainLayout />}>
+        <Route path={paths.private.link.list} element={<LinkListScreen />} />
+      </Route>
     </Routes>
   )
 }
