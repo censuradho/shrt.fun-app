@@ -26,7 +26,6 @@ export function useCreateLinkViewModel () {
       slug: data.slug || undefined
     }, {
       onSuccess: ({ data }) => {
-        form.reset()
         setSuccessModal(data)
       }
     })
