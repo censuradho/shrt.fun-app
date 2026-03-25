@@ -22,7 +22,9 @@ import {
   ChevronDown,
   User,
   Check,
-  Search
+  Search,
+  List,
+  Columns3
 } from 'lucide-react'
 
 export const icons = {
@@ -49,6 +51,8 @@ export const icons = {
   ChevronDown,
   User,
   Check,
-  Search
+  Search,
+  List,
+  Columns3
 }
 
