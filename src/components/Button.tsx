@@ -5,7 +5,7 @@ import { Icon, type IconProps } from "./icons"
 
 const variants = {
   primary: 'bg-primary-500 text-primary-foreground hover:bg-primary-600',
-  ghost: 'bg-popover border border-outline text-card-foreground hover:text-foreground hover:bg-accent/30',
+  ghost: 'bg-card border border-outline text-card-foreground hover:text-foreground hover:bg-accent/30',
   text: 'text-card-foreground hover:text-foreground',
 }
 
