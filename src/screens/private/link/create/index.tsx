@@ -23,7 +23,10 @@ export function CreateLinkScreen () {
     <div>
       <SuccessCreateDialog 
         open={!!successModal}
-        onOpenChange={() => setSuccessModal(null)}
+        onOpenChange={() => { 
+          setSuccessModal(null) 
+          navigate(-1)
+        }}
         link={successModal?.shortUrl || ''}
       />
       <div className="container-sm mt-10">
