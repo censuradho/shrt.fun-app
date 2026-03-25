@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import type { AuthGateway, AuthSession, AuthStateChangeCallback, AuthStateEvent, AuthUser, Unsubscribe } from "./auth.gateway";
+import type { AuthClaims, AuthGateway, AuthSession, AuthStateChangeCallback, AuthStateEvent, AuthUser, Unsubscribe } from "./auth.gateway";
 
 const client = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -14,9 +14,10 @@ class SupabaseGateway implements AuthGateway {
     if (error) throw error;
   }
 
-  async signIn(email: string, password: string): Promise<AuthSession> {
+  async signInWithPassword(email: string, password: string): Promise<AuthSession> {
     const { data, error } = await client.auth.signInWithPassword({ email, password });
 
+    
     if (error) throw error;
 
     return {
@@ -40,17 +41,20 @@ class SupabaseGateway implements AuthGateway {
     if (error) throw error;
   }
 
-  async getSession(): Promise<AuthSession | null> {
-    const { data, error } = await client.auth.getSession();
+  async getUser(): Promise<AuthUser | null> {
+    const { data, error } = await client.auth.getUser();
 
     if (error) throw error;
-    if (!data.session) return null;
+    if (!data.user) return null;
 
-    return {
-      accessToken: data.session.access_token,
-      refreshToken: data.session.refresh_token,
-      user: { id: data.session.user.id, email: data.session.user.email },
-    };
+    return { id: data.user.id, email: data.user.email };
+  }
+
+  async getClaims(): Promise<AuthClaims | null> {
+    const { data, error } = await client.auth.getClaims();
+
+    if (error) throw error;
+    return (data?.claims as AuthClaims) ?? null;
   }
 
   onAuthStateChange(callback: AuthStateChangeCallback): Unsubscribe {
