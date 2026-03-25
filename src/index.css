@@ -215,6 +215,15 @@
     padding-right: 1rem;
   }
 
+  .container-sm {
+    max-width: 840px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .card-icon {
     @apply w-8 h-8 text-foreground bg-popover border border-outline rounded-md flex items-center justify-center;
   }
