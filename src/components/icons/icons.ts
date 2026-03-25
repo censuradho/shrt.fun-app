@@ -21,7 +21,8 @@ import {
   LogOut,
   ChevronDown,
   User,
-  Check
+  Check,
+  Search
 } from 'lucide-react'
 
 export const icons = {
@@ -47,6 +48,7 @@ export const icons = {
   LogOut,
   ChevronDown,
   User,
-  Check
+  Check,
+  Search
 }
 
