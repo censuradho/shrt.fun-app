@@ -2,6 +2,7 @@ import { LinkButton } from "@/components/LinkButton";
 import { paths } from "@/constants/routes";
 import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
 import { LinkListItem } from "./components/LinkListItem";
+import { TextField } from "@/components/form/TextField";
 
 export function LinkListScreen () {
   const { 
@@ -9,7 +10,9 @@ export function LinkListScreen () {
     links, 
     urlSelected, 
     toggleUrlSelected, 
-    hasNextPage 
+    hasNextPage,
+    search,
+    setSearch
   } = useLinkListViewModel()
 
   const renderUrls = links?.pages?.flatMap(page => (
@@ -30,9 +33,25 @@ export function LinkListScreen () {
   return (
     <div>
       <div className="container mt-10">
-        <header className="flex justify-between items-center border-b border-outline pb-4">
-          <h1 className="text-2xl font-bold mb-4">Meus links</h1>
-          <LinkButton to={paths.private.link.create}>Criar link</LinkButton>
+        <header className="border-b border-outline pb-4 flex flex-col gap-6">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold mb-4">Meus links</h1>
+            <LinkButton to={paths.private.link.create}>Criar link</LinkButton>
+          </div>
+          <div className="w-full max-w-100">
+            <TextField
+              id="search"
+              name="search"
+              placeholder="Buscar links"
+              label="Buscar links"
+              renderLabel={false}
+              headIcon={{
+                name: 'Search'
+              }}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </div>
         </header>
         <section className="mt-6 w-full">
           <ul className="flex flex-col gap-1 w-full">
