@@ -1,34 +1,39 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import type { AuthUser } from "@/lib/supabase";
 import { authGateway } from "@/lib/supabase";
-import type { AuthSession, AuthUser } from "@/lib/supabase";
 import { setApiToken } from "@/services/api";
+import { useMeQuery } from "@/services/api/auth/queries";
+import type { Me } from "@/services/api/auth/types";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextValue {
-  user: AuthUser | null
-  session: AuthSession | null
+  supabaseUser: AuthUser | null
   isLoading: boolean
   signIn: (email: string, password: string) => Promise<void>
   signOut: () => Promise<void>
+  me?: Me | null
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [session, setSession] = useState<AuthSession | null>(null);
+  const [supabaseUser, setSupabaseUser] = useState<AuthUser | null>(null);
+
   const [isLoading, setIsLoading] = useState(true);
 
+  const {
+    data: me,
+  } = useMeQuery(!!supabaseUser);
+
   useEffect(() => {
-    authGateway.getSession().then((session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    authGateway.getUser().then(user => {
+      setSupabaseUser(user);
       setIsLoading(false);
     });
 
-    const unsubscribe = authGateway.onAuthStateChange((_, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    const unsubscribe = authGateway.onAuthStateChange((event, session) => {
       setApiToken(session?.accessToken ?? null);
+      
+      if (event === 'SIGNED_OUT') setSupabaseUser(null);
     });
 
     return unsubscribe;
@@ -37,9 +42,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function signIn(email: string, password: string) {
     try {
       setIsLoading(true);
-      const session = await authGateway.signIn(email, password);
-      setSession(session);
-      setUser(session.user);
+      const session = await authGateway.signInWithPassword(email, password);
+      setSupabaseUser(session?.user ?? null);
       setApiToken(session?.accessToken ?? null);
     } finally {
       setIsLoading(false);
@@ -48,19 +52,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function signOut() {
     await authGateway.signOut();
-    setSession(null);
-    setUser(null);
+    setSupabaseUser(null);
     setApiToken(null);
   }
 
   return (
     <AuthContext.Provider 
       value={{ 
-        user, 
-        session, 
+        supabaseUser, 
         isLoading, 
         signIn, 
-        signOut 
+        signOut,
+        me
       }}
     >
       {children}
