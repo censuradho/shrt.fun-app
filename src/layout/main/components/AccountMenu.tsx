@@ -29,13 +29,13 @@ export function AccountMenu (props: AccountMenuProps) {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[300px]" align="end">
-        <DropdownMenuItem className="flex items-center gap-2 hover:text-inherit">
+        <div className="flex items-center gap-2 hover:text-inherit hover:bg-transparent py-1" >
           <Icon name="User" />
           <div className="flex flex-col">
             <strong className="text-sm font-medium">{me.firstName} {me.lastName}</strong>
             <span className="text-sm font-normal text-muted-foreground!">{me.email}</span>
           </div>
-        </DropdownMenuItem>
+        </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem 
           onClick={onSignOut}
