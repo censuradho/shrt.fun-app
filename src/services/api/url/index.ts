@@ -1,8 +1,8 @@
 import { api } from "..";
-import type { CreateUrlRequestPayload, FindManyLinksQueries } from "./types";
+import type { CreateUrlRequestPayload, FindManyLinksQueries, FindManyUrlPaginated } from "./types";
 
 function findManyPaginated (queries: FindManyLinksQueries) {
-  return api.get('/url', {
+  return api.get<FindManyUrlPaginated>('/url', {
     params: queries
   })
 }
