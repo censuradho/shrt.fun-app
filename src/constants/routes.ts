@@ -8,6 +8,7 @@ export const paths = {
     root: '/app',
     link: {
       list: "/app/links",
+      create: "/app/links/create",
     }
   }
 } as const
