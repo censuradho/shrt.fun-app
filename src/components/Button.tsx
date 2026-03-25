@@ -45,7 +45,7 @@ export function Button (props: PropsWithChildren<ButtonProps>) {
 
   const classVariants = cn(
     'px-5 text-sm rounded-md flex items-center gap-2 items-center transition-colors',
-    'cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 whitespace-nowrap',
+    'cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 whitespace-nowrap font-semibold text-primary-foreground',
     currentVariant,
     currentSize.container,
     className
