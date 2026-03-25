@@ -3,6 +3,7 @@ import { authGateway } from "@/lib/supabase";
 import { setApiToken } from "@/services/api";
 import { useMeQuery } from "@/services/api/auth/queries";
 import type { Me } from "@/services/api/auth/types";
+import { useQueryClient } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextValue {
@@ -17,7 +18,8 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [supabaseUser, setSupabaseUser] = useState<AuthUser | null>(null);
-
+  const queryClient = useQueryClient()
+  
   const [isLoading, setIsLoading] = useState(true);
 
   const {
@@ -54,6 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await authGateway.signOut();
     setSupabaseUser(null);
     setApiToken(null);
+    queryClient.clear();
   }
 
   return (
