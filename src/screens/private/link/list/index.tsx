@@ -1,12 +1,11 @@
-import { LinkButton } from "@/components/LinkButton";
-import { paths } from "@/constants/routes";
-import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
-import { LinkListItem } from "./components/LinkListItem";
 import { TextField } from "@/components/form/TextField";
+import { LinkButton } from "@/components/LinkButton";
 import { Spinner } from "@/components/spinner";
 import { Skeleton } from "@/components/ui/skeleton";
-import { urlValidation } from "@/utils/validations";
-
+import { paths } from "@/constants/routes";
+import { LinkListItem } from "./components/LinkListItem";
+import { ToolsMenu } from "./components/ToolsMenu";
+import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
 
 export function LinkListScreen () {
   const { 
@@ -20,7 +19,11 @@ export function LinkListScreen () {
     isPending,
     isFetched,
     isEmpty,
-    isSearchValid
+    isSearchValid,
+    handleToggleAllLinks,
+    isSelectedAll,
+    view, 
+    setView
   } = useLinkListViewModel()
 
   const renderUrls = links?.pages?.flatMap(page => (
@@ -62,6 +65,13 @@ export function LinkListScreen () {
             />
           </div>
         </header>
+        <ToolsMenu 
+          onSelectAll={handleToggleAllLinks}
+          isSelectedAll={isSelectedAll}
+          onToggleView={setView}
+          view={view}
+          selectedCount={urlSelected.length}
+        />
         <section className="mt-6 w-full flex-1 h-ful">
           {!isFetched && (
             <div className="flex flex-col gap-1">
