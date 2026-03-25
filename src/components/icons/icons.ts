@@ -18,7 +18,9 @@ import {
   ChartSpline,
   LayoutGrid,
   Plus,
-  LogOut
+  LogOut,
+  ChevronDown,
+  User
 } from 'lucide-react'
 
 export const icons = {
@@ -41,6 +43,8 @@ export const icons = {
   ChartSpline,
   LayoutGrid,
   Plus,
-  LogOut
+  LogOut,
+  ChevronDown,
+  User
 }
 
