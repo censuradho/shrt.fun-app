@@ -1,9 +1,9 @@
 import { useCreateUrlMutation } from "@/services/api/url/queries";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { slugify } from "@/utils/slugify";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { createLinkValidation, type CreateLinkFormData } from "../validations";
-import { useState } from "react";
-import { slugify } from "@/utils/slugify";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface SuccessModalData {
   shortUrl: string;
@@ -12,8 +12,8 @@ interface SuccessModalData {
 export function useCreateLinkViewModel () {
   const [successModal, setSuccessModal] = useState<SuccessModalData | null>(null);
   
-  const form = useForm<CreateLinkFormData>({
-    resolver: standardSchemaResolver(createLinkValidation),
+  const form = useForm({
+    resolver: zodResolver(createLinkValidation),
     mode: 'onChange'
   })
 
@@ -21,6 +21,7 @@ export function useCreateLinkViewModel () {
     mutate,
     isPending
   } = useCreateUrlMutation()
+
   const handleSubmit = (data: CreateLinkFormData) => {
     mutate({
       url: data.url,
@@ -53,13 +54,11 @@ export function useCreateLinkViewModel () {
   }
 
   return {
-    form: {
-      ...form,
-      handleSubmit: form.handleSubmit(handleSubmit)
-    },
+    form,
     isPending,
     successModal,
     setSuccessModal,
-    handleGenerateSlug
+    handleGenerateSlug,
+    handleSubmit
   }
 }
