@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
+import { LinkMenu } from "./LinkMenu"
 
 interface LinkItemRichProps {
   data: UrlNode
@@ -71,11 +72,13 @@ export function LinkItemRich({ data, selected, onSelect }: LinkItemRichProps) {
                 name: 'ChartColumn'
               }}
             />
-            <IconButton 
-              icon={{
-                name: 'Ellipsis'
-              }}
-            />
+            <LinkMenu>
+              <IconButton 
+                icon={{
+                  name: 'Ellipsis'
+                }}
+              />
+            </LinkMenu>
           </div>
         </div>
 
