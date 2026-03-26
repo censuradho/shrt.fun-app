@@ -14,7 +14,8 @@ export function CreateLinkScreen () {
     form,
     setSuccessModal,
     successModal,
-    isPending
+    isPending,
+    handleGenerateSlug
   } = useCreateLinkViewModel()
 
   const { errors } = useFormState({ control: form.control })
@@ -64,6 +65,17 @@ export function CreateLinkScreen () {
               placeholder="seu-slug-personalizado"
               register={form.register('slug')}
               errorMessage={errors.slug?.message}
+              tailLabel={(
+                <Button 
+                  type="button"
+                  size="sm"
+                  variant="ghost"
+                  headIcon={{
+                    name: 'RefreshCw',
+                  }}
+                  onClick={handleGenerateSlug}
+                >Gerar</Button>
+              )}
               id="slug"
             />
             <div className="flex justify-end">
