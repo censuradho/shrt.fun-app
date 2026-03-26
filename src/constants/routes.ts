@@ -9,6 +9,7 @@ export const paths = {
     link: {
       list: "/app/links",
       create: "/app/links/create",
+      details: '/app/links/:id'
     }
   }
 } as const
