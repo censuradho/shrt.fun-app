@@ -27,6 +27,7 @@ export function LinkListItem ({ data, selected, onSelect }: LinkListItemProps) {
       <Checkbox 
         checked={selected}
         onCheckedChange={onSelect}
+        className="data-unchecked:bg-popover!"
       />
       <div className="grid grid-cols-[1fr] min-w-0 flex-1">
         <a
