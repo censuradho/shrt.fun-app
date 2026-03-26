@@ -120,7 +120,6 @@ export function LinkListScreen () {
               errorMessage={!isSearchValid ? 'URL inválida' : undefined}
             />
           </div>
-          <LinearProgress  className="absolute bottom-0 left-0"/>
           {(isTogglingLinkActive || isPending) && <LinearProgress  className="absolute bottom-0 left-0"/>}
         </header>
         <ToolsMenu 
