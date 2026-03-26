@@ -23,7 +23,8 @@ export function useCreateLinkViewModel () {
   const handleSubmit = (data: CreateLinkFormData) => {
     mutate({
       url: data.url,
-      slug: data.slug || undefined
+      slug: data.slug || undefined,
+      title: data.title || undefined
     }, {
       onSuccess: ({ data }) => {
         setSuccessModal(data)
