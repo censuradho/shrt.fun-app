@@ -11,6 +11,7 @@ import { LinkGrid } from "./components/LinkGrid";
 import { cn } from "@/lib/utils";
 import { ShareLinkDialog } from "./components/ShareLinkDialog";
 import type { LinkMenuProps } from "./components/LinkMenu";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function LinkListScreen () {
   const { 
@@ -32,13 +33,17 @@ export function LinkListScreen () {
     sharing, 
     setSharing,
     handleChangeQueries,
-    queries
+    queries,
+    toggleLinkIsActive
   } = useLinkListViewModel()
+  const queryClient = useQueryClient()
 
   const renderUrls = links?.pages?.flatMap(page => (
     page.data?.data.map(link => {
       const menu: LinkMenuProps = {
         onShare: () => setSharing({ shortUrl: link.shortUrl, id: link.id }),
+        onToggleActive: () => toggleLinkIsActive(link.id),
+        isActive: link.isActive
       }
 
       return  (
@@ -85,8 +90,6 @@ export function LinkListScreen () {
     })
   ))
 
-  console.log(sharing)
-
   return (
     <>
       <ShareLinkDialog 
@@ -123,7 +126,10 @@ export function LinkListScreen () {
           view={view}
           selectedCount={urlSelected.length}
           isActive={queries.isActive}
-          onChangeIsActive={(value) => handleChangeQueries('isActive', value)}
+          onChangeIsActive={(value) => {
+            handleChangeQueries('isActive', value)
+            queryClient.invalidateQueries({ queryKey: ['links', queries] })
+          }}
         />
         <section className="mt-6 w-full flex-1 h-ful">
           {!isFetched && (
