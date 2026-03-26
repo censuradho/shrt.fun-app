@@ -25,6 +25,14 @@ import {
   Search,
   List,
   Columns3,
+  Pencil,
+  Share2,
+  ChartColumn,
+  Ellipsis,
+  CornerDownRight,
+  MousePointerClick,
+  Calendar,
+  Tag,
 } from 'lucide-react'
 
 export const icons = {
@@ -53,6 +61,14 @@ export const icons = {
   Check,
   Search,
   List,
-  Columns3
+  Columns3,
+  Pencil,
+  Share2,
+  ChartColumn,
+  Ellipsis,
+  CornerDownRight,
+  MousePointerClick,
+  Calendar,
+  Tag,
 }
 
