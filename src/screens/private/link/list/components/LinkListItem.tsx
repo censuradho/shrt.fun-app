@@ -54,7 +54,7 @@ export function LinkListItem ({ data, selected, onSelect }: LinkListItemProps) {
               href={data.shortUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm hover:underline text-blitzit-green truncate"
+              className="text-link text-sm hover:underline truncate"
             >
               {data.shortUrl.replace(/^(https?:\/\/)?(www\.)?/, '')}
             </a>
