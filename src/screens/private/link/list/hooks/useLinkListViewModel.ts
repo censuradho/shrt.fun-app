@@ -18,7 +18,9 @@ export function useLinkListViewModel () {
   const [search, setSearch] = useState('')
   const [queries, setQueries] = useState<FindManyLinksQueries>({})
   const [view, setView] = useState<ViewEnumType>(ViewEnum.LIST)
+  const [sharing, setSharing] = useState<{ id: string, shortUrl: string } | null>(null)
 
+  
   const isSearchValid = !search || urlValidation(search)
 
   const {
@@ -106,6 +108,8 @@ export function useLinkListViewModel () {
     isSearchValid,
     isSelectedAll,
     view, 
-    setView
+    setView,
+    sharing, 
+    setSharing
   }
 }
