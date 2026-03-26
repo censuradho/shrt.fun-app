@@ -16,8 +16,9 @@ function toggleIsActive (id: string) {
 }
 
 
-export function getById (id: string) {
-  return api.get<UrlNode>(`/url/${id}`)
+export async function getById (id: string) {
+  const { data } = await api.get<UrlNode>(`/url/${id}`)
+  return data
 }
 
 export const urlService = {
