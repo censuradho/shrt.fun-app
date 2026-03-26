@@ -34,6 +34,7 @@ import {
   Calendar,
   Tag,
   Trash,
+  House
 } from 'lucide-react'
 
 export const icons = {
@@ -72,5 +73,6 @@ export const icons = {
   MousePointerClick,
   Calendar,
   Tag,
+  House
 }
 
