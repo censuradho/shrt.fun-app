@@ -34,10 +34,12 @@ import {
   Calendar,
   Tag,
   Trash,
-  House
+  House,
+  RefreshCw
 } from 'lucide-react'
 
 export const icons = {
+  RefreshCw,
   Trash,
   CircleCheck,
   Copy,
