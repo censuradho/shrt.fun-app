@@ -7,10 +7,13 @@ import { Button } from "@/components/Button"
 import Google from '@/assets/google.svg?react'
 import Github from '@/assets/github.svg?react'
 import { paths } from "@/constants/routes"
+import { useFormState } from "react-hook-form"
 
 export function SignInScreen () {
   const viewModel = useSignInViewModel()
   
+  const { errors } = useFormState({ control: viewModel.form.control })
+
   return (
     <main className="flex flex-col items-center justify-center h-full w-full min-h-dvh">
       <div
@@ -49,14 +52,14 @@ export function SignInScreen () {
               type="email"
               register={viewModel.form.register('email')}
               id="email"
-              errorMessage={viewModel.form.formState.errors.email?.message}
+              errorMessage={errors.email?.message}
               placeholder="voce@email.com"
             />
             <PasswordFieldHook 
               label="Senha"
               register={viewModel.form.register('password')}
               id="password"
-              errorMessage={viewModel.form.formState.errors.password?.message}
+              errorMessage={errors.password?.message}
             />
             <div className="flex flex-col items-end gap-2">
               <Link className="text-sm text-right text-card-foreground font-medium hover:opacity-80" to={paths.public.forgotPassword}>Esqueceu a senha?</Link>
