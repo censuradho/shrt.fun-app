@@ -16,8 +16,8 @@ export function ToolsMenu (props: ToolsMenuProps) {
 
   console.log(isSelectedAll)
   return (
-    <div className="flex justify-between py-4">
-      <div className="flex items-center gap-2">
+    <div className="flex justify-between py-4 sticky top-0 z-10 bg-background/90 backdrop-blur-lg">
+      <div className="flex items-center gap-2 pl-4">
         <Checkbox  
           checked={isSelectedAll}
           onCheckedChange={() => {
