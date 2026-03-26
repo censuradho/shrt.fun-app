@@ -1,7 +1,7 @@
 import type { PaginationParams, PaginationResult } from "../types";
 
 export interface FindManyLinksQueries extends PaginationParams {
-  isActive?: boolean
+  isActive?: string
   search?: string
 }
 
