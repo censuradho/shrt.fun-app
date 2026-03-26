@@ -19,7 +19,7 @@ const cleanLink = (url: string) => {
     .replace(/^(https?:\/\/)?(www\.)?/, '')
     .split('/')[0]
 }
-export function LinkListItem ({ data, selected, onSelect }: LinkListItemProps) {
+export function LinkListItem ({ data, selected, onSelect, menu }: LinkListItemProps) {
 
   return (
     <div className={cn(
@@ -78,7 +78,7 @@ export function LinkListItem ({ data, selected, onSelect }: LinkListItemProps) {
           </div>
         </div>
       </div>
-      <LinkMenu>
+      <LinkMenu {...menu}>
         <IconButton 
           icon={{
             name: 'Ellipsis'
