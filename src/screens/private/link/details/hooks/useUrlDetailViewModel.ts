@@ -14,6 +14,7 @@ export function useUrlDetailViewModel() {
 
   return {
     data,
-    isPending
+    isPending,
+    hitsCountByLocation
   }
 }
