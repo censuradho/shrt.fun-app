@@ -59,11 +59,12 @@ export function MainLayout () {
             onSignOut={signOut}
           />
         </header>
-        <main className="flex-1 min-h-0 bg-card">
+        <main className="flex-1 min-h-0 bg-card relative">
           <div className="flex flex-col bg-background h-full rounded-tl-2xl overflow-hidden">
-            <div className="overflow-y-auto flex-1">
+            <div className="overflow-y-auto flex-1 pb-10">
               <Outlet />
             </div>
+            <div className="h-20 w-full absolute bottom-0 left-0 bg-linear-to-t from-background to-transparent" />
           </div>
         </main>
       </div>
