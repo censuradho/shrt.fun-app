@@ -52,6 +52,13 @@ export function CreateLinkScreen () {
               id="url"
             />
             <TextFieldHook 
+              label="Título (opcional)"
+              placeholder="Título do link"
+              register={form.register('title')}
+              errorMessage={errors.title?.message}
+              id="title"
+            />
+            <TextFieldHook 
               label="Slug (opcional)"
               headText={`${appConfig.name}/`}
               placeholder="seu-slug-personalizado"
