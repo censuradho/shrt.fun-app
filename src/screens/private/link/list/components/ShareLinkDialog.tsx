@@ -63,7 +63,7 @@ export function ShareLinkDialog({ open, onOpenChange, shortUrl }: ShareLinkDialo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md md:max-w-lg">
         <DialogHeader>
           <DialogTitle>Compartilhar seu link</DialogTitle>
         </DialogHeader>
