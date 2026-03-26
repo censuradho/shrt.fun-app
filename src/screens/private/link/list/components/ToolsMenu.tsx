@@ -76,7 +76,9 @@ export function ToolsMenu (props: ToolsMenuProps) {
           value={isActive}
         >
           <SelectTrigger className="w-full max-w-48">
-            <SelectValue placeholder="Selecione uma opção" />
+            <SelectValue placeholder="Selecione uma opção">
+              {isActive === 'true' ? 'Exibindo: ativo' : isActive === 'false' ? 'Exibindo: inativo' : 'Selecione uma opção'}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-card">
             <SelectItem value="true">Ativo</SelectItem>
