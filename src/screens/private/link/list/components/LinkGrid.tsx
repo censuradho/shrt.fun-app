@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
+import { LinkMenu } from "./LinkMenu"
 
 interface LinkGridProps {
   data: UrlNode
@@ -35,7 +36,9 @@ export function LinkGrid({ data, selected, onSelect }: LinkGridProps) {
         />
         <div className="flex items-center -mr-2 text-muted-foreground">
           <IconButton icon={{ name: "Share2", size: 15 }} />
-          <IconButton icon={{ name: "Ellipsis", size: 15 }} />
+          <LinkMenu>
+            <IconButton icon={{ name: "Ellipsis", size: 15 }} />
+          </LinkMenu>
         </div>
       </div>
 
