@@ -1,0 +1,5 @@
+# Welcome to shrt.fun =)
+# robots welcome;
+
+User-Agent: *
+Disallow: /app/*
