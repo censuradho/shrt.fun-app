@@ -85,7 +85,7 @@ export function LinkItemRich({ data, selected, onSelect }: LinkItemRichProps) {
             href={data.shortUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-primary-500 hover:underline truncate"
+            className="text-sm text-link hover:underline truncate"
           >
             {data.shortUrl.replace(/^https?:\/\//, '')}
           </a>
