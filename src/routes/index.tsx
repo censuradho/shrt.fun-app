@@ -6,6 +6,7 @@ import { SignUpScreen } from "@/screens/public/signUp";
 import { Route, Routes } from "react-router";
 import { PrivateRoute } from "./PrivateRoute";
 import { CreateLinkScreen } from "@/screens/private/link/create";
+import { DetailLinkScreen } from "@/screens/private/link/details";
 
 
 export function AppRoutes () {
@@ -19,6 +20,7 @@ export function AppRoutes () {
         <Route path={paths.private.root} element={<MainLayout />}>
           <Route path={paths.private.link.list} element={<LinkListScreen />} />
           <Route path={paths.private.link.create} element={<CreateLinkScreen />} />
+          <Route path={paths.private.link.details} element={<DetailLinkScreen />} />
         </Route>
       </Route>
     </Routes>
