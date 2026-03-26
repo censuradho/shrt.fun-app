@@ -13,7 +13,12 @@ export const createLinkValidation = z.object({
     .string()
     .optional()
     .transform(sanitizeString)
-    .refine(slug => !slug || slugValidation(slug), 'Slug inválido. Use apenas letras, números e hífens.')
+    .refine(slug => !slug || slugValidation(slug), 'Slug inválido. Use apenas letras, números e hífens.'),
+  title: z
+    .string()
+    .max(255, errorMessages.maxLength(255))
+    .optional()
+    .transform(sanitizeString)
 })
 
 export type CreateLinkFormData = z.infer<typeof createLinkValidation>
