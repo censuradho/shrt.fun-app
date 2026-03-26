@@ -11,7 +11,12 @@ function create (payload: CreateUrlRequestPayload) {
   return api.post<{ shortUrl: string }>('/url', payload)
 }
 
+function toggleIsActive (id: string) {
+  return api.patch(`/url/${id}/active`)
+}
+
 export const urlService = {
   findManyPaginated,
-  create
+  create,
+  toggleIsActive
 }
