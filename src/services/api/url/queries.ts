@@ -45,7 +45,11 @@ export function useCreateUrlMutation () {
     mutationFn: urlService.create,
     mutationKey: ['create-link'],
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['links'] })
+      queryClient.invalidateQueries({
+        queryKey: ['links'],
+        exact: false,
+        refetchType: 'all'
+      })
     },
     onError: (error) => {
       toastifyApiErrorMessage(error)
