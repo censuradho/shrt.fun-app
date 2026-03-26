@@ -9,7 +9,8 @@ import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
 import { LinkItemRich } from "./components/LinkItemRich";
 import { LinkGrid } from "./components/LinkGrid";
 import { cn } from "@/lib/utils";
-import { useWindowSize } from "@/hooks/useWindowSize";
+import { ShareLinkDialog } from "./components/ShareLinkDialog";
+import type { LinkMenuProps } from "./components/LinkMenu";
 
 export function LinkListScreen () {
   const { 
@@ -27,51 +28,70 @@ export function LinkListScreen () {
     handleToggleAllLinks,
     isSelectedAll,
     view, 
-    setView
+    setView,
+    sharing, 
+    setSharing
   } = useLinkListViewModel()
 
   const renderUrls = links?.pages?.flatMap(page => (
-    page.data?.data.map(link => (
-      <li
-        key={link.id}
-        className="overflow-hidden w-full"
-      >
-        <div className="hidden lg:block">
-          {view === 'richList' && (
-            <LinkItemRich
-              data={link}
-              selected={urlSelected.includes(link.id)}
-              onSelect={() => toggleUrlSelected(link.id)}
-            />
-          )}
-          {view === 'list' && (
-            <LinkListItem
-              data={link}
-              selected={urlSelected.includes(link.id)}
-              onSelect={() => toggleUrlSelected(link.id)}
-            />
-          )}
-          {view === 'grid' && (
+    page.data?.data.map(link => {
+      const menu: LinkMenuProps = {
+        onShare: () => setSharing({ shortUrl: link.shortUrl, id: link.id }),
+      }
+
+      return  (
+        <li
+          key={link.id}
+          className="overflow-hidden w-full"
+        >
+          <div className="hidden lg:block">
+            {view === 'richList' && (
+              <LinkItemRich
+                data={link}
+                selected={urlSelected.includes(link.id)}
+                onSelect={() => toggleUrlSelected(link.id)}
+                menu={menu}
+              />
+            )}
+            {view === 'list' && (
+              <LinkListItem
+                data={link}
+                selected={urlSelected.includes(link.id)}
+                onSelect={() => toggleUrlSelected(link.id)}
+                menu={menu}
+              />
+            )}
+            {view === 'grid' && (
+              <LinkGrid
+                data={link}
+                selected={urlSelected.includes(link.id)}
+                onSelect={() => toggleUrlSelected(link.id)}
+                menu={menu}
+              />
+            )}
+          </div>
+          <div className="lg:hidden">
             <LinkGrid
               data={link}
+              menu={menu}
               selected={urlSelected.includes(link.id)}
               onSelect={() => toggleUrlSelected(link.id)}
             />
-          )}
-        </div>
-        <div className="lg:hidden">
-          <LinkGrid
-            data={link}
-            selected={urlSelected.includes(link.id)}
-            onSelect={() => toggleUrlSelected(link.id)}
-          />
-        </div>
-      </li>
-    ))
+          </div>
+        </li>
+      )
+    })
   ))
+
+  console.log(sharing)
 
   return (
     <>
+      <ShareLinkDialog 
+        onOpenChange={() => setSharing(null)}
+        open={!!sharing}
+        shortUrl={sharing?.shortUrl || ''}
+      />
       <div className="container mt-10 ">
         <header className="border-b border-outline pb-4 flex flex-col gap-6">
           <div className="flex justify-between items-center">
