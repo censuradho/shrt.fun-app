@@ -6,12 +6,13 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
-import { LinkMenu } from "./LinkMenu"
+import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
 
 interface LinkItemRichProps {
   data: UrlNode
   selected?: boolean
   onSelect?: (selected: boolean) => void
+  menu?: Omit<LinkMenuProps, 'children'>
 }
 
 const getDomain = (url: string) =>
@@ -20,7 +21,8 @@ const getDomain = (url: string) =>
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(date))
 
-export function LinkItemRich({ data, selected, onSelect }: LinkItemRichProps) {
+export function LinkItemRich({ data, selected, onSelect, menu }: LinkItemRichProps) {
+
   return (
     <div className={cn(
       'bg-card rounded-md p-4 flex gap-4',
@@ -58,21 +60,24 @@ export function LinkItemRich({ data, selected, onSelect }: LinkItemRichProps) {
 
           <div className="flex items-center gap-3 shrink-0 text-muted-foreground">
             <IconButton 
+              onClick={menu?.onEdit}
               icon={{
-                name: 'Pencil'
+                name: 'Pencil',
               }}
             />
             <IconButton 
+              onClick={menu?.onShare}
               icon={{
                 name: 'Share2'
               }}
             />
             <IconButton 
+              onClick={menu?.onViewQrCode}
               icon={{
                 name: 'ChartColumn'
               }}
             />
-            <LinkMenu>
+            <LinkMenu {...menu}>
               <IconButton 
                 icon={{
                   name: 'Ellipsis'
