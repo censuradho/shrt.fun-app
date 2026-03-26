@@ -3,6 +3,16 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
+@keyframes linear-progress {
+  0%   { left: -40%; width: 40%; }
+  60%  { left: 100%; width: 40%; }
+  100% { left: 100%; width: 40%; }
+}
+
+.animate-linear-progress {
+  animation: linear-progress 1.6s ease-in-out infinite;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
