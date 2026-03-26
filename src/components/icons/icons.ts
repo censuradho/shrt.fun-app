@@ -33,9 +33,11 @@ import {
   MousePointerClick,
   Calendar,
   Tag,
+  Trash,
 } from 'lucide-react'
 
 export const icons = {
+  Trash,
   CircleCheck,
   Copy,
   ExternalLink,
