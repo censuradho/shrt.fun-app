@@ -30,7 +30,9 @@ export function LinkListScreen () {
     view, 
     setView,
     sharing, 
-    setSharing
+    setSharing,
+    handleChangeQueries,
+    queries
   } = useLinkListViewModel()
 
   const renderUrls = links?.pages?.flatMap(page => (
@@ -120,6 +122,8 @@ export function LinkListScreen () {
           onToggleView={setView}
           view={view}
           selectedCount={urlSelected.length}
+          isActive={queries.isActive}
+          onChangeIsActive={(value) => handleChangeQueries('isActive', value)}
         />
         <section className="mt-6 w-full flex-1 h-ful">
           {!isFetched && (
