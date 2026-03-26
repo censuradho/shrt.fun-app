@@ -6,10 +6,12 @@ import { getDomain, getLinkFavicon } from "@/utils/getDomain"
 import { CopyButton } from "@/components/CopyButton"
 import { copyToClipboard } from "@/utils/copyToClipboard"
 import { formatDate } from "@/lib/date"
+import { LocationChart } from "./components/LocationChart"
 
 export function DetailLinkScreen () {
   const {
     data,
+    hitsCountByLocation
   } = useUrlDetailViewModel()
   const navigate = useNavigate()
 
@@ -74,6 +76,9 @@ export function DetailLinkScreen () {
               })}
             </span>
           </div>
+        </section>
+        <section className="w-full mt-6 flex flex-col justify-center items-center">
+          <LocationChart data={hitsCountByLocation.data || []} />
         </section>
       </div>
     </>
