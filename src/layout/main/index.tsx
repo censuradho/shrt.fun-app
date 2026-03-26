@@ -5,18 +5,10 @@ import { cn } from "@/lib/utils";
 import { AccountMenu } from "./components/AccountMenu";
 import { useAuth } from "@/contexts/auth/auth.context";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { ExpandedNavigation } from "./components/ExpandedNavigation";
+import { IconNavigation } from "./components/IconNavigation";
+import { MobileNavigation } from "./components/MobileNavigation";
 
-const ExpandedNavigation = lazy(() => 
-  import("./components/ExpandedNavigation").then(module => ({ default: module.ExpandedNavigation }))
-)
-
-const IconNavigation = lazy(() =>
-  import('./components/IconNavigation').then(module => ({ default: module.IconNavigation }))
-);
-
-const MobileNavigation = lazy(() =>
-  import('./components/MobileNavigation').then(module => ({ default: module.MobileNavigation }))
-);
 
 export function MainLayout () {
   const [expanded, setExpanded] = useState(false)
@@ -37,15 +29,11 @@ export function MainLayout () {
           <div className="h-12 ">
 
           </div>
-          <Suspense>
-            {(expanded ? <ExpandedNavigation /> : <IconNavigation />)}
-          </Suspense>
+          {(expanded ? <ExpandedNavigation /> : <IconNavigation />)}
         </div>
       )}
       {isMobile && (
-        <Suspense>
-          <MobileNavigation open={expanded} onOpenChange={setExpanded} />
-        </Suspense>
+        <MobileNavigation open={expanded} onOpenChange={setExpanded} />
       )}
       <div className="flex-1 flex flex-col min-h-0 z-2">
         <header

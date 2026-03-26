@@ -10,7 +10,7 @@ export function ExpandedNavigation () {
   const renderNavigation = navigation.map((node, index) => (
     <li 
       key={index} 
-      className="border-l borer-outline ml-2 pl-2 relative pb-1"
+      className="relative pb-1"
     >
       <NavLink 
         end
@@ -21,7 +21,6 @@ export function ExpandedNavigation () {
           isActive && 'hover:bg-accent bg-accent text-foreground'
         )}
       >
-        <span className="absolute left-[-3px]">•</span>
         <Icon size={16} name={node.icon} />
         {node.label}
       </NavLink>
