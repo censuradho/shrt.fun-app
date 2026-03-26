@@ -11,7 +11,7 @@ export const navigation: NavigationNode[] = [
   {
     label: "Visão geral",
     path: paths.private.root,
-    icon: "LayoutGrid"
+    icon: "House"
   },
   {
     label: "Meus links",
