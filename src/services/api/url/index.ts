@@ -1,5 +1,5 @@
 import { api } from "..";
-import type { CreateUrlRequestPayload, FindManyLinksQueries, FindManyUrlPaginated } from "./types";
+import type { CreateUrlRequestPayload, FindManyLinksQueries, FindManyUrlPaginated, UrlNode } from "./types";
 
 function findManyPaginated (queries: FindManyLinksQueries) {
   return api.get<FindManyUrlPaginated>('/url', {
@@ -15,8 +15,14 @@ function toggleIsActive (id: string) {
   return api.patch(`/url/${id}/active`)
 }
 
+
+export function getById (id: string) {
+  return api.get<UrlNode>(`/url/${id}`)
+}
+
 export const urlService = {
   findManyPaginated,
   create,
-  toggleIsActive
+  toggleIsActive,
+  getById
 }

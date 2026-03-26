@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQueryClient, type InfiniteData } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient, type InfiniteData } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 import { urlService } from ".";
 import type { FindManyLinksQueries, FindManyUrlPaginated, UrlNode } from "./types";
@@ -28,6 +28,13 @@ export function useFindManyUrlPaginated (queries: FindManyLinksQueries) {
     queryFn: ({ pageParam }) => urlService.findManyPaginated({ ...queries, cursor: pageParam }),
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.data.nextCursor,
+  })
+}
+
+export function useFindUrlByIdQuery (id: string) {
+  return useQuery({
+    queryKey: ['link', id],
+    queryFn: () => urlService.getById(id)
   })
 }
 
