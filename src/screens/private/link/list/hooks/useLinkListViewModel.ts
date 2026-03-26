@@ -16,7 +16,9 @@ export type ViewEnumType = typeof ViewEnum[keyof typeof ViewEnum]
 export function useLinkListViewModel () {
   const [urlSelected, setUrlSelected] = useState<string[]>([])
   const [search, setSearch] = useState('')
-  const [queries, setQueries] = useState<FindManyLinksQueries>({})
+  const [queries, setQueries] = useState<FindManyLinksQueries>({
+    isActive: 'true'
+  })
   const [view, setView] = useState<ViewEnumType>(ViewEnum.LIST)
   const [sharing, setSharing] = useState<{ id: string, shortUrl: string } | null>(null)
 
