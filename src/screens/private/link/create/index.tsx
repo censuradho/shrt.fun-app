@@ -15,7 +15,8 @@ export function CreateLinkScreen () {
     setSuccessModal,
     successModal,
     isPending,
-    handleGenerateSlug
+    handleGenerateSlug,
+    handleSubmit
   } = useCreateLinkViewModel()
 
   const { errors } = useFormState({ control: form.control })
@@ -42,7 +43,7 @@ export function CreateLinkScreen () {
         <section className="bg-card rounded-md p-4 mt-6">
           <form 
             id="create-link-form" 
-            onSubmit={form.handleSubmit}
+            onSubmit={form.handleSubmit(handleSubmit) }
             className="flex flex-col gap-4"
           >
             <TextFieldHook 
