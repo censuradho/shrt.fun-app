@@ -1,7 +1,6 @@
 import { Icon } from "@/components/icons";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ToggleGroupItem, ToggleGroup } from "@/components/ui/toggle-group";
-import { toast } from "sonner";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { ViewEnum, type ViewEnumType } from "../hooks/useLinkListViewModel";
 
 interface ToolsMenuProps {
@@ -55,7 +54,6 @@ export function ToolsMenu (props: ToolsMenuProps) {
           value={ViewEnum.GRID} 
           aria-label="Exibir em lista completa"
           className="data-[state=on]:bg-accent"
-          onClick={() => toast.message(<span>TODO: Funcionalidade ainda não está pronta <span className="text-lg">😭</span></span>)}
         >
           <Icon size={20} name="LayoutGrid" />
         </ToggleGroupItem>
