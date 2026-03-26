@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { ShareLinkDialog } from "./components/ShareLinkDialog";
 import type { LinkMenuProps } from "./components/LinkMenu";
 import { useQueryClient } from "@tanstack/react-query";
+import { LinearProgress } from "@/components/LinearProgress";
 
 export function LinkListScreen () {
   const { 
@@ -26,8 +27,9 @@ export function LinkListScreen () {
     isFetched,
     isEmpty,
     isSearchValid,
-    handleToggleAllLinks,
+    isTogglingLinkActive,
     isSelectedAll,
+    handleToggleAllLinks,
     view, 
     setView,
     sharing, 
@@ -98,12 +100,12 @@ export function LinkListScreen () {
         shortUrl={sharing?.shortUrl || ''}
       />
       <div className="container mt-10 ">
-        <header className="border-b border-outline pb-4 flex flex-col gap-6">
+        <header className="border-b border-outline  flex flex-col gap-6 relative">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold mb-4">Meus links</h1>
             <LinkButton to={paths.private.link.create}>Criar link</LinkButton>
           </div>
-          <div className="w-full max-w-100">
+          <div className="w-full max-w-100 pb-4">
             <TextField
               id="search"
               name="search"
@@ -118,6 +120,8 @@ export function LinkListScreen () {
               errorMessage={!isSearchValid ? 'URL inválida' : undefined}
             />
           </div>
+          <LinearProgress  className="absolute bottom-0 left-0"/>
+          {(isTogglingLinkActive || isPending) && <LinearProgress  className="absolute bottom-0 left-0"/>}
         </header>
         <ToolsMenu 
           onSelectAll={handleToggleAllLinks}
