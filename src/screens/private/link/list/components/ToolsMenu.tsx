@@ -2,19 +2,19 @@ import { Icon } from "@/components/icons";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ToggleGroupItem, ToggleGroup } from "@/components/ui/toggle-group";
 import { toast } from "sonner";
+import { ViewEnum, type ViewEnumType } from "../hooks/useLinkListViewModel";
 
 interface ToolsMenuProps {
    onSelectAll: () => void;
    isSelectedAll: boolean;
-   onToggleView: (view: string) => void;
-   view: string
+   onToggleView: (view: ViewEnumType) => void;
+   view: ViewEnumType
    selectedCount?: number
 }
 
 export function ToolsMenu (props: ToolsMenuProps) {
   const { onSelectAll, isSelectedAll, onToggleView, view, selectedCount } = props
 
-  console.log(isSelectedAll)
   return (
     <div className="flex justify-between py-4 sticky top-0 z-10 bg-background/90 backdrop-blur-lg">
       <div className="flex items-center gap-2 pl-4">
@@ -33,28 +33,26 @@ export function ToolsMenu (props: ToolsMenuProps) {
       <ToggleGroup 
         size="lg" 
         type="single" 
-        defaultValue="list" 
+        defaultValue={ViewEnum.LIST}
         value={view} 
         onValueChange={onToggleView}
       >
         <ToggleGroupItem 
-          value="list" 
+          value={ViewEnum.LIST} 
           aria-label="Exibir em lista resumida"
           className="data-[state=on]:bg-accent"
-          onClick={() => toast.message(<span>TODO: Funcionalidade ainda não está pronta <span className="text-lg">😭</span></span>)}
         >
           <Icon size={20} name="List" />
         </ToggleGroupItem>
         <ToggleGroupItem 
-          value="list-complete" 
+          value={ViewEnum.RICH_LIST} 
           aria-label="Exibir em lista completa"
           className="data-[state=on]:bg-accent"
-          onClick={() => toast.message(<span>TODO: Funcionalidade ainda não está pronta <span className="text-lg">😭</span></span>)}
         >
           <Icon size={20} name="Columns3" className="rotate-90" />
         </ToggleGroupItem>
         <ToggleGroupItem 
-          value="grid" 
+          value={ViewEnum.GRID} 
           aria-label="Exibir em lista completa"
           className="data-[state=on]:bg-accent"
           onClick={() => toast.message(<span>TODO: Funcionalidade ainda não está pronta <span className="text-lg">😭</span></span>)}
