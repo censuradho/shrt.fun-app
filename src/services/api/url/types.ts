@@ -18,6 +18,7 @@ export interface UrlNode {
   shortUrl: string
   hitsCount: number
   isActive: boolean
+  title?: string
   description?: string
   expireAt?: string
   createdAt: string
