@@ -17,13 +17,13 @@ export function SignInScreen () {
   return (
     <main className="flex flex-col items-center justify-center h-full w-full min-h-dvh">
       <div
-        className="w-full max-w-[450px] mx-auto bg-card rounded-md border border-outline"
+        className="w-full lg:max-w-[450px] mx-auto bg-card flex-1 flex flex-col justify-center items-center lg:flex-none rounded-md border border-outline"
       >
-        <div className="mb-6 p-4">
+        <div className="mb-6 p-4 w-full max-w-[450px] lg:max-w-auto">
           <h1 className="text-xl font-semibold">Bem-vindo de volta</h1>
           <p className="text-sm text-card-foreground">Entre na sua conta para acessar seus links</p>
         </div>
-        <div className="flex flex-col gap-2 px-6 my-6">
+        <div className="flex flex-col gap-2 px-6 my-6 max-w-[450px] lg:max-w-auto w-full">
           <Button className="w-full" variant="ghost">
             <div className="flex gap-2 justify-center items-center w-full">
               <Google />
@@ -36,7 +36,7 @@ export function SignInScreen () {
             Continuar com Github
             </div>
           </Button>
-          <div className="flex gap-2 items-center mt-2">
+          <div className="flex gap-2 items-center mt-2 max-w-[450px] lg:max-w-auto">
             <hr className="border-outline bg-outline w-full" />
             <p className="text-center text-xs text-card-foreground whitespace-nowrap">ou continue com e-mail</p>
             <hr className="border-outline bg-outline w-full" />
@@ -44,7 +44,7 @@ export function SignInScreen () {
         </div>
         <form 
           onSubmit={viewModel.form.handleSubmit}
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-4 max-w-[450px] lg:max-w-auto w-full"
         >
           <div className="px-6 flex flex-col gap-4">
             <TextFieldHook 
