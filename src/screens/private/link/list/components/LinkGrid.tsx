@@ -6,12 +6,13 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
-import { LinkMenu } from "./LinkMenu"
+import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
 
 interface LinkGridProps {
   data: UrlNode
   selected?: boolean
   onSelect?: (selected: boolean) => void
+  menu: LinkMenuProps
 }
 
 const getDomain = (url: string) =>
@@ -20,7 +21,7 @@ const getDomain = (url: string) =>
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(date))
 
-export function LinkGrid({ data, selected, onSelect }: LinkGridProps) {
+export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
   return (
     <div className={cn(
       'bg-card rounded-md p-4 flex flex-col gap-3',
@@ -35,8 +36,11 @@ export function LinkGrid({ data, selected, onSelect }: LinkGridProps) {
           className="data-unchecked:bg-popover!"
         />
         <div className="flex items-center -mr-2 text-muted-foreground">
-          <IconButton icon={{ name: "Share2", size: 15 }} />
-          <LinkMenu>
+          <IconButton 
+            onClick={menu?.onShare}
+            icon={{ name: "Share2", size: 15 }} 
+          />
+          <LinkMenu {...menu}>
             <IconButton icon={{ name: "Ellipsis", size: 15 }} />
           </LinkMenu>
         </div>
