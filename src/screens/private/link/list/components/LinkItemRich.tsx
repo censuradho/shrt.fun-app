@@ -7,6 +7,9 @@ import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
 import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
+import { resolvePath } from "@/utils/resolvePath"
+import { paths } from "@/constants/routes"
+import { Link } from "react-router"
 
 interface LinkItemRichProps {
   data: UrlNode
@@ -48,16 +51,13 @@ export function LinkItemRich({ data, selected, onSelect, menu }: LinkItemRichPro
                 {getDomain(data.originalUrl).charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <a
-              href={data.originalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to={resolvePath(paths.private.link.details, { id: data.id })}
               className="font-semibold text-base hover:underline truncate"
             >
               {getDomain(data.originalUrl)} - {data.title ? data.title : 'Sem título'}
-            </a>
+            </Link>
           </div>
-
           <div className="flex items-center gap-3 shrink-0 text-muted-foreground">
             <IconButton 
               onClick={menu?.onEdit}

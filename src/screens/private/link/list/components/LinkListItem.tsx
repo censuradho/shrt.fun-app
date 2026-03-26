@@ -6,6 +6,9 @@ import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
 import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
+import { paths } from "@/constants/routes"
+import { resolvePath } from "@/utils/resolvePath"
+import { Link } from "react-router"
 
 interface LinkListItemProps {
   data: UrlNode
@@ -45,12 +48,11 @@ export function LinkListItem ({ data, selected, onSelect, menu }: LinkListItemPr
                 {cleanLink(data.originalUrl).charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <a
-              href={data.originalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to={resolvePath(paths.private.link.details, { id: data.id })}
               className="text-lg hover:underline font-semibold truncate"
-            >{cleanLink(data.originalUrl) + ' - ' + (data.title ? `${data.title}` : 'Sem título')}</a>
+            >{cleanLink(data.originalUrl) + ' - ' + (data.title ? `${data.title}` : 'Sem título')}
+            </Link>
           </div>
           <div className="grid grid-cols-[auto] lg:grid-cols-[auto_auto_1fr] items-center gap-2 min-w-0 mt-2">
             <div className="flex items-center gap-2 min-w-0 overflow-hidden">
