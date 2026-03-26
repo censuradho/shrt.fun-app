@@ -5,11 +5,19 @@ import type { FindManyLinksQueries } from "@/services/api/url/types";
 import { urlValidation } from "@/utils/validations";
 import { useEffect, useRef, useState } from "react";
 
+export const ViewEnum = {
+  LIST: 'list',
+  GRID: 'grid',
+  RICH_LIST: 'richList',
+} as const
+
+export type ViewEnumType = typeof ViewEnum[keyof typeof ViewEnum]
+
 export function useLinkListViewModel () {
   const [urlSelected, setUrlSelected] = useState<string[]>([])
   const [search, setSearch] = useState('')
   const [queries, setQueries] = useState<FindManyLinksQueries>({})
-  const [view, setView] = useState('')
+  const [view, setView] = useState<ViewEnumType>(ViewEnum.LIST)
 
   const isSearchValid = !search || urlValidation(search)
 
