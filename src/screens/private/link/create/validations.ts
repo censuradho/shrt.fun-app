@@ -12,7 +12,7 @@ export const createLinkValidation = z.object({
   slug: z
     .string()
     .optional()
-    .transform(sanitizeString)
+    .transform(value => value?.trim().toLocaleLowerCase())
     .refine(slug => !slug || slugValidation(slug), 'Slug inválido. Use apenas letras, números e hífens.'),
   title: z
     .string()
