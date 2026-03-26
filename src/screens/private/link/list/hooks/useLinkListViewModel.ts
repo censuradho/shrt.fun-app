@@ -20,7 +20,6 @@ export function useLinkListViewModel () {
   const [view, setView] = useState<ViewEnumType>(ViewEnum.LIST)
   const [sharing, setSharing] = useState<{ id: string, shortUrl: string } | null>(null)
 
-  
   const isSearchValid = !search || urlValidation(search)
 
   const {
@@ -87,7 +86,6 @@ export function useLinkListViewModel () {
 
   useDebounceCallback(() => {
     if (!isSearchValid) return;
-
     handleChangeQueries('search', search)
   }, 500)
   
@@ -110,6 +108,7 @@ export function useLinkListViewModel () {
     view, 
     setView,
     sharing, 
-    setSharing
+    setSharing,
+    queries
   }
 }
