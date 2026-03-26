@@ -9,6 +9,7 @@ export interface FindManyLinksQueries extends PaginationParams {
 export interface CreateUrlRequestPayload {
   url: string
   slug?: string | null
+  title?: string | null
 }
 
 export interface UrlNode {
