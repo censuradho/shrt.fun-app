@@ -1,6 +1,6 @@
 import { useDebounceCallback } from "@/hooks/useDebounceCallback";
 import { useIntersectionObserver } from "@/hooks/useIntersectObserver";
-import { useFindManyUrlPaginated } from "@/services/api/url/queries";
+import { useFindManyUrlPaginated, useToggleLinkIsActiveMutation } from "@/services/api/url/queries";
 import type { FindManyLinksQueries } from "@/services/api/url/types";
 import { urlValidation } from "@/utils/validations";
 import { useEffect, useRef, useState } from "react";
@@ -29,6 +29,10 @@ export function useLinkListViewModel () {
     fetchNextPage,
     isFetched,
   } = useFindManyUrlPaginated(queries)
+
+  const {
+    mutate: toggleLinkIsActive,
+  } = useToggleLinkIsActiveMutation()
 
   const isSelectedAll = links?.pages.flatMap(page => page.data.data.length)
     .reduce((acc, length) => acc + length, 0) === urlSelected.length
@@ -109,6 +113,7 @@ export function useLinkListViewModel () {
     setView,
     sharing, 
     setSharing,
-    queries
+    queries,
+    toggleLinkIsActive
   }
 }
