@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/icons";
 import type { IconNames } from "@/components/icons";
+import type { ReactNode } from "react";
 
 interface TextFieldIconProps {
   name?: IconNames
@@ -10,6 +11,7 @@ interface TextFieldIconProps {
 
 export type TextFieldProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string
+  tailLabel?: ReactNode
   renderLabel?: boolean
   headText?: string
   headIcon?: TextFieldIconProps
@@ -28,16 +30,21 @@ export function TextField(props: TextFieldProps) {
     id,
     renderLabel = true,
     errorMessage,
+    tailLabel,
     ...otherProps
   } = props
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      {renderLabel && (
-        <label
-          htmlFor={id}
-          className="text-xxs uppercase text-card-foreground cursor-pointer">{label}</label>
-      )}
+      <div className="flex items-center justify-between">
+        {renderLabel && (
+          <label
+            htmlFor={id}
+            className="text-xxs uppercase text-card-foreground cursor-pointer">{label}</label>
+        )}
+        {tailLabel}
+      </div>
+
       <div className="flex">
         {!!headText && (
           <span className="h-10 bg-background flex items-center px-2.5 border border-outline rounded-l-sm text-sm text-muted-foreground font-mono">{headText}</span>
