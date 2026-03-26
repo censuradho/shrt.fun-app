@@ -6,6 +6,10 @@ import { paths } from "@/constants/routes";
 import { LinkListItem } from "./components/LinkListItem";
 import { ToolsMenu } from "./components/ToolsMenu";
 import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
+import { LinkItemRich } from "./components/LinkItemRich";
+import { LinkGrid } from "./components/LinkGrid";
+import { cn } from "@/lib/utils";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 export function LinkListScreen () {
   const { 
@@ -32,11 +36,36 @@ export function LinkListScreen () {
         key={link.id}
         className="overflow-hidden w-full"
       >
-        <LinkListItem
-          data={link}
-          selected={urlSelected.includes(link.id)}
-          onSelect={() => toggleUrlSelected(link.id)}
-        />
+        <div className="hidden lg:block">
+          {view === 'richList' && (
+            <LinkItemRich
+              data={link}
+              selected={urlSelected.includes(link.id)}
+              onSelect={() => toggleUrlSelected(link.id)}
+            />
+          )}
+          {view === 'list' && (
+            <LinkListItem
+              data={link}
+              selected={urlSelected.includes(link.id)}
+              onSelect={() => toggleUrlSelected(link.id)}
+            />
+          )}
+          {view === 'grid' && (
+            <LinkGrid
+              data={link}
+              selected={urlSelected.includes(link.id)}
+              onSelect={() => toggleUrlSelected(link.id)}
+            />
+          )}
+        </div>
+        <div className="lg:hidden">
+          <LinkGrid
+            data={link}
+            selected={urlSelected.includes(link.id)}
+            onSelect={() => toggleUrlSelected(link.id)}
+          />
+        </div>
       </li>
     ))
   ))
@@ -86,7 +115,12 @@ export function LinkListScreen () {
               <p className="text-sm">Nenhum link foi encontrado</p>
             </div>
           )}
-          <ul className="flex flex-col gap-1 w-full">
+          <ul className={cn(
+            {
+              'flex flex-col gap-1 w-full': view !== 'grid',
+              'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4': view === 'grid'
+            }
+          )}>
             {renderUrls}
           </ul>
           {isPending && isFetched && (
