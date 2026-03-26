@@ -36,19 +36,24 @@ export function useCreateLinkViewModel () {
 
   const handleGenerateSlug = () => {
     const url = form.getValues('url')
-    if (!url) {
+    const title = form.getValues('title')
+
+    if (!url && !title) {
       form.setError('slug', {
-        message: 'Informe a URL de destino para gerar um slug'
+        message: 'Informe o título ou a URL para gerar o slug automaticamente'
       })
       return
     }
+
     const path = url
       .replace(/(^\w+:|^)\/\//, '')
       .split('/')
       .filter(Boolean)
       .slice(1)
 
-    const slug = slugify(path.join('-') + '-' + Math.random().toString(36).substring(2, 8))
+    const label = title?.toLocaleLowerCase() || path?.join('-')
+
+    const slug = slugify(label + '-' + Math.random().toString(36).substring(2, 8))
 
     form.setValue('slug', slug)
   }
