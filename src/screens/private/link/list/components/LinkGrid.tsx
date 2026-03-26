@@ -64,7 +64,7 @@ export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
           to={resolvePath(paths.private.link.details, { id: data.id })}
           className="font-semibold text-sm hover:underline truncate"
         >
-          {getDomain(data.originalUrl) + ' - ' + (data.title ? data.title : 'Sem título')}
+          {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
         </Link>
       </div>
 

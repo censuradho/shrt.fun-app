@@ -9,6 +9,7 @@ import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
 import { paths } from "@/constants/routes"
 import { resolvePath } from "@/utils/resolvePath"
 import { Link } from "react-router"
+import { getDomain } from "@/utils/getDomain"
 
 interface LinkListItemProps {
   data: UrlNode
@@ -51,7 +52,8 @@ export function LinkListItem ({ data, selected, onSelect, menu }: LinkListItemPr
             <Link
               to={resolvePath(paths.private.link.details, { id: data.id })}
               className="text-lg hover:underline font-semibold truncate"
-            >{cleanLink(data.originalUrl) + ' - ' + (data.title ? `${data.title}` : 'Sem título')}
+            >
+              {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
             </Link>
           </div>
           <div className="grid grid-cols-[auto] lg:grid-cols-[auto_auto_1fr] items-center gap-2 min-w-0 mt-2">

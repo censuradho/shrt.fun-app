@@ -10,6 +10,7 @@ import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
 import { resolvePath } from "@/utils/resolvePath"
 import { paths } from "@/constants/routes"
 import { Link } from "react-router"
+import { getDomain, getLinkFavicon } from "@/utils/getDomain"
 
 interface LinkItemRichProps {
   data: UrlNode
@@ -17,9 +18,6 @@ interface LinkItemRichProps {
   onSelect?: (selected: boolean) => void
   menu?: Omit<LinkMenuProps, 'children'>
 }
-
-const getDomain = (url: string) =>
-  url.replace(/^(https?:\/\/)?(www\.)?/, '').split('/')[0]
 
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(date))
@@ -44,7 +42,7 @@ export function LinkItemRich({ data, selected, onSelect, menu }: LinkItemRichPro
           <div className="flex items-center gap-2 min-w-0">
             <Avatar size="sm" className="rounded-sm">
               <AvatarImage
-                src={`https://www.google.com/s2/favicons?domain=${getDomain(data.originalUrl)}&sz=32`}
+                src={getLinkFavicon(data.originalUrl)}
                 alt=""
               />
               <AvatarFallback className="rounded-sm text-xs">
@@ -55,7 +53,7 @@ export function LinkItemRich({ data, selected, onSelect, menu }: LinkItemRichPro
               to={resolvePath(paths.private.link.details, { id: data.id })}
               className="font-semibold text-base hover:underline truncate"
             >
-              {getDomain(data.originalUrl)} - {data.title ? data.title : 'Sem título'}
+              {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
             </Link>
           </div>
           <div className="flex items-center gap-3 shrink-0 text-muted-foreground">
