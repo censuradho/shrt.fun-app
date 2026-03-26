@@ -32,6 +32,7 @@ export function useLinkListViewModel () {
 
   const {
     mutate: toggleLinkIsActive,
+    isPending: isTogglingLinkActive
   } = useToggleLinkIsActiveMutation()
 
   const isSelectedAll = links?.pages.flatMap(page => page.data.data.length)
@@ -107,6 +108,7 @@ export function useLinkListViewModel () {
     isFetched,
     isEmpty,
     isPending,
+    isTogglingLinkActive,
     isSearchValid,
     isSelectedAll,
     view, 
