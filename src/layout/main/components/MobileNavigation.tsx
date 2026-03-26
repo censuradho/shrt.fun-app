@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils"
 import type { PropsWithChildren } from "react"
 import { NavLink } from "react-router"
 import { navigation } from "../constants"
+import { LinkButton } from "@/components/LinkButton"
+import { paths } from "@/constants/routes"
 
 interface MobileNavigationProps {
   open: boolean
@@ -55,13 +57,14 @@ export function MobileNavigation (props: PropsWithChildren<MobileNavigationProps
           </ul>
         </nav>
         <div className="px-4 mt-auto">
-          <Button 
+          <LinkButton
+            to={paths.private.link.create}
             onClick={() => onOpenChange(false)}
             headIcon={{
               name: "Plus",
             }}
             className="w-full mb-6 justify-center"
-          >Criar novo</Button>
+          >Criar novo</LinkButton>
         </div>
       </DrawerContent>
     </Drawer>

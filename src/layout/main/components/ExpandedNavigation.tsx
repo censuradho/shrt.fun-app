@@ -3,6 +3,8 @@ import { Icon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { NavLink } from "react-router"
 import { navigation } from "../constants"
+import { LinkButton } from "@/components/LinkButton"
+import { paths } from "@/constants/routes"
 
 export function ExpandedNavigation () {
   const renderNavigation = navigation.map((node, index) => (
@@ -29,12 +31,13 @@ export function ExpandedNavigation () {
   return (
     <div className="w-full flex-col flex flex-1">
       <div className="px-4">
-        <Button 
+        <LinkButton 
+          to={paths.private.link.create}
           headIcon={{
             name: "Plus",
           }}
           className="w-full mb-6 justify-center"
-        >Criar novo</Button>
+        >Criar novo</LinkButton>
       </div>
       <nav className="w-full flex-1 px-4 my-10">
         <ul 
