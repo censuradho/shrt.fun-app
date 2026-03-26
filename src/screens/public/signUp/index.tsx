@@ -8,9 +8,9 @@ export function SignUpScreen () {
   const viewModel = useSignUpViewModel()
 
   return (
-    <main className="flex flex-col items-center justify-center h-full w-full min-h-dvh p-6">
+    <main className="flex flex-col items-center justify-center h-full w-full min-h-dvh lg:p-6">
       <div
-        className="w-full max-w-[450px] mx-auto bg-card rounded-md border border-outline"
+        className="w-full flex-1 lg:max-w-[650px] mx-auto  bg-card rounded-md border border-outline"
       >
         {viewModel.isSignUpSuccessful  && (
           <div className="p-6 flex flex-col gap-4 items-center justify-center min-h-[300px]">
@@ -46,11 +46,13 @@ export function SignUpScreen () {
           </div>
         )}
         {!viewModel.isSignUpSuccessful && (
-          <SignUpForm 
-            form={viewModel.form} 
-            onSubmit={viewModel.handleSubmit} 
-            isPending={viewModel.isPending} 
-          />
+          <div className="max-w-[650px] mx-auto">
+            <SignUpForm 
+              form={viewModel.form} 
+              onSubmit={viewModel.handleSubmit} 
+              isPending={viewModel.isPending} 
+            />
+          </div>
         )}
       </div>
     </main>
