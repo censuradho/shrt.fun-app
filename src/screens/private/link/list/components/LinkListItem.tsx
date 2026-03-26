@@ -5,12 +5,13 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
-import { LinkMenu } from "./LinkMenu"
+import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
 
 interface LinkListItemProps {
   data: UrlNode
   selected?: boolean
   onSelect?: (selected: boolean) => void
+  menu: LinkMenuProps
 }
 
 const cleanLink = (url: string) => {
@@ -27,7 +28,7 @@ export function LinkListItem ({ data, selected, onSelect }: LinkListItemProps) {
         'bg-accent': selected
       }
     )}>
-      <div className="flex flex-col lg:flex-row p-4 lg:items-center">
+      <div className="flex flex-col lg:flex-row p-4 lg:items-center gap-4">
         <Checkbox 
           checked={selected}
           onCheckedChange={onSelect}
@@ -51,7 +52,7 @@ export function LinkListItem ({ data, selected, onSelect }: LinkListItemProps) {
               className="text-lg hover:underline font-semibold truncate"
             >{cleanLink(data.originalUrl)}</a>
           </div>
-          <div className="grid grid-cols-[auto] lg:grid-cols-[auto_auto_1fr] items-center gap-2 min-w-0">
+          <div className="grid grid-cols-[auto] lg:grid-cols-[auto_auto_1fr] items-center gap-2 min-w-0 mt-2">
             <div className="flex items-center gap-2 min-w-0 overflow-hidden">
               <a
                 href={data.shortUrl}
