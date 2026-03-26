@@ -35,6 +35,7 @@ export function ToolsMenu (props: ToolsMenuProps) {
         defaultValue={ViewEnum.LIST}
         value={view} 
         onValueChange={onToggleView}
+        className="hidden lg:flex"
       >
         <ToggleGroupItem 
           value={ViewEnum.LIST} 
