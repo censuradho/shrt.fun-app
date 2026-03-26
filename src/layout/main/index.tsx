@@ -1,10 +1,10 @@
-import { Outlet } from "react-router";
 import { Icon } from "@/components/icons";
-import { lazy, Suspense, useState } from "react";
-import { cn } from "@/lib/utils";
-import { AccountMenu } from "./components/AccountMenu";
 import { useAuth } from "@/contexts/auth/auth.context";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { Outlet } from "react-router";
+import { AccountMenu } from "./components/AccountMenu";
 import { ExpandedNavigation } from "./components/ExpandedNavigation";
 import { IconNavigation } from "./components/IconNavigation";
 import { MobileNavigation } from "./components/MobileNavigation";
