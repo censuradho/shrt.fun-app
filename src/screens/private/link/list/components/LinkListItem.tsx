@@ -1,4 +1,5 @@
 import { CopyButton } from "@/components/CopyButton"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
@@ -30,12 +31,23 @@ export function LinkListItem ({ data, selected, onSelect }: LinkListItemProps) {
         className="data-unchecked:bg-popover!"
       />
       <div className="grid grid-cols-[1fr] min-w-0 flex-1">
-        <a
-          href={data.originalUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-lg hover:underline font-semibold truncate"
-        >{cleanLink(data.originalUrl)}</a>
+        <div className="flex items-center gap-2 min-w-0">
+          <Avatar size="sm" className="rounded-sm shrink-0">
+            <AvatarImage
+              src={`https://www.google.com/s2/favicons?domain=${cleanLink(data.originalUrl)}&sz=32`}
+              alt=""
+            />
+            <AvatarFallback className="rounded-sm text-xs">
+              {cleanLink(data.originalUrl).charAt(0).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+          <a
+            href={data.originalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lg hover:underline font-semibold truncate"
+          >{cleanLink(data.originalUrl)}</a>
+        </div>
         <div className="grid grid-cols-[auto] lg:grid-cols-[auto_auto_1fr] items-center gap-2 min-w-0">
           <div className="flex items-center gap-2 min-w-0 overflow-hidden">
             <a
