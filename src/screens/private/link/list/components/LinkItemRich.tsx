@@ -54,7 +54,7 @@ export function LinkItemRich({ data, selected, onSelect, menu }: LinkItemRichPro
               rel="noopener noreferrer"
               className="font-semibold text-base hover:underline truncate"
             >
-              {getDomain(data.originalUrl)}
+              {getDomain(data.originalUrl)} - {data.title ? data.title : 'Sem título'}
             </a>
           </div>
 

@@ -63,7 +63,7 @@ export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
           rel="noopener noreferrer"
           className="font-semibold text-sm hover:underline truncate"
         >
-          {getDomain(data.originalUrl)}
+          {getDomain(data.originalUrl) + ' - ' + (data.title ? data.title : 'Sem título')}
         </a>
       </div>
 

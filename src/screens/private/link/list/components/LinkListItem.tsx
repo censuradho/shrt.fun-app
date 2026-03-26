@@ -50,7 +50,7 @@ export function LinkListItem ({ data, selected, onSelect, menu }: LinkListItemPr
               target="_blank"
               rel="noopener noreferrer"
               className="text-lg hover:underline font-semibold truncate"
-            >{cleanLink(data.originalUrl)}</a>
+            >{cleanLink(data.originalUrl) + ' - ' + (data.title ? `${data.title}` : 'Sem título')}</a>
           </div>
           <div className="grid grid-cols-[auto] lg:grid-cols-[auto_auto_1fr] items-center gap-2 min-w-0 mt-2">
             <div className="flex items-center gap-2 min-w-0 overflow-hidden">
