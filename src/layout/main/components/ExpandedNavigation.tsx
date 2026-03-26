@@ -1,10 +1,9 @@
-import { Button } from "@/components/Button"
 import { Icon } from "@/components/icons"
+import { LinkButton } from "@/components/LinkButton"
+import { paths } from "@/constants/routes"
 import { cn } from "@/lib/utils"
 import { NavLink } from "react-router"
 import { navigation } from "../constants"
-import { LinkButton } from "@/components/LinkButton"
-import { paths } from "@/constants/routes"
 
 export function ExpandedNavigation () {
   const renderNavigation = navigation.map((node, index) => (
