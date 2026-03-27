@@ -1,11 +1,18 @@
 import { api } from "..";
-import type { FindHistCountByLocationResponse } from "./types";
+import type { FindLocationHitsResponse, FindHistCountByLocationResponse } from "./types";
 
-export async function findHistCountByLocation (id: string) {
-  const { data } = await api.get<FindHistCountByLocationResponse>(`/analytics/hits/url/${id}/locations`);
+async function findHistCountByLocation (id: string) {
+  const { data } = await api.get<FindHistCountByLocationResponse>(`/analytics/locations/hits/url/${id}`);
+  return data
+}
+
+async function findLocationHits () {
+  const { data } = await api.get<FindLocationHitsResponse>('/analytics/locations/hits/url')
+
   return data
 }
 
 export const analyticsService = {
-  findHistCountByLocation
+  findHistCountByLocation,
+  findLocationHits
 }
