@@ -20,7 +20,7 @@ export const navigation: NavigationNode[] = [
   },
   {
     label: "Analytics",
-    path: paths.public.signin,
+    path: paths.private.analytics,
     icon: "ChartSpline"
   }
 ]
