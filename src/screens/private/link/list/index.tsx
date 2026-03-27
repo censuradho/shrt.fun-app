@@ -109,7 +109,7 @@ export function LinkListScreen () {
         shortUrl={sharing?.shortUrl || ''}
       />
       <div className="container mt-10 ">
-        <header className="border-b border-outline  flex flex-col gap-6 relative">
+        <header className="border-b border-outline flex flex-col gap-6 relative">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold mb-4">Meus links</h1>
             <LinkButton to={paths.private.link.create}>Criar link</LinkButton>
