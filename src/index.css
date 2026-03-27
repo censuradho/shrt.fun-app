@@ -16,12 +16,12 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --card: oklch(1 0 0);
-  --input: oklch(0.922 0 0);
-  --outline: #222222;
+  --card: #FFFFFF;
+  --input: #F6F6F6;
+  --outline: #DFDFDF;
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: #8A8A8A;
 
   /* Primary — Apple Blue */
   --primary-100: rgba(0, 113, 227, 0.06);
@@ -44,8 +44,8 @@
   --warn-border: rgba(251, 191, 36, 0.2);
 
   /* Surfaces */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: #FCFCFC;
+  --foreground: #171717;
   --surface: #111111;
   --surface-raised: #1a1a1a;
   --surface-overlay: #1f1f1f;
