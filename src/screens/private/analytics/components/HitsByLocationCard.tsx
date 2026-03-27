@@ -93,6 +93,8 @@ export function HitsByLocationCard () {
     offset
   } = (key === keys.cities ? cities : countries) || {}
 
+  const totalOfItems = total || 0
+  
   const totalPages = (() => {
     if (!total) return 0
     const pageSize = limit || 10
@@ -157,8 +159,8 @@ export function HitsByLocationCard () {
   return (
     <section className="p-4 card w-full">
       <div>
-        <h2 className="text-xxs uppercase">Total de clicks por localização</h2>
-        <span className="text-lg font-medium">{total}</span>
+        <h2 className="text-xxs uppercase">Localizações por click</h2>
+        <span className="text-lg font-medium">{totalOfItems}</span>
       </div>
       <div className="w-full my-3.5">
         <ToggleGroup 
@@ -218,42 +220,40 @@ export function HitsByLocationCard () {
       {isPending && (
         <Skeleton className="w-full h-48" />
       )}
-      {isPending || totalPages > 1 && (
-        <div className="flex justify-end gap-1 mt-8">
-          <IconButton 
-            icon={{
-              name: 'ChevronLeft'
-            }}
-            onClick={handleBackPage}
-          />
-          {buildPageItems(currentPageIndex, totalPages).map((item, i) =>
-            item === dots ? (
-              <span key={`ellipsis-${i}`} className="w-8 h-8 flex items-center justify-center text-sm text-muted-foreground">
-                {dots}
-              </span>
-            ) : (
-              <button
-                key={item}
-                onClick={() => handlePageClick(item)}
-                className={cn(
-                  'w-8 h-8 rounded text-sm',
-                  currentPageIndex === item
-                    ? 'bg-primary-500 font-semibold'
-                    : 'hover:bg-accent/50'
-                )}
-              >
-                {item + 1}
-              </button>
-            )
-          )}
-          <IconButton
-            icon={{
-              name: 'ChevronRight'
-            }}
-            onClick={handleForwardPage}
-          />
-        </div>
-      )}
+      <div className="flex justify-end gap-1 mt-8 border-t border-outline/30 pt-4">
+        <IconButton 
+          icon={{
+            name: 'ChevronLeft'
+          }}
+          onClick={handleBackPage}
+        />
+        {buildPageItems(currentPageIndex, totalPages).map((item, i) =>
+          item === dots ? (
+            <span key={`ellipsis-${i}`} className="w-8 h-8 flex items-center justify-center text-sm text-muted-foreground">
+              {dots}
+            </span>
+          ) : (
+            <button
+              key={item}
+              onClick={() => handlePageClick(item)}
+              className={cn(
+                'w-8 h-8 rounded text-sm',
+                currentPageIndex === item
+                  ? 'bg-primary-500 font-semibold'
+                  : 'hover:bg-accent/50'
+              )}
+            >
+              {item + 1}
+            </button>
+          )
+        )}
+        <IconButton
+          icon={{
+            name: 'ChevronRight'
+          }}
+          onClick={handleForwardPage}
+        />
+      </div>
     </section>
   )
 }
