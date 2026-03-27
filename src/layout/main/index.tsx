@@ -52,7 +52,6 @@ export function MainLayout () {
             <div className="overflow-y-auto flex-1 pb-10">
               <Outlet />
             </div>
-            <div className="h-20 w-full absolute bottom-0 left-0 bg-linear-to-t from-background to-transparent" />
           </div>
         </main>
       </div>
