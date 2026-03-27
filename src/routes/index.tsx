@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router";
 import { PrivateRoute } from "./PrivateRoute";
 import { CreateLinkScreen } from "@/screens/private/link/create";
 import { DetailLinkScreen } from "@/screens/private/link/details";
+import { AnalyticsScreen } from "@/screens/private/analytics";
 
 
 export function AppRoutes () {
@@ -21,6 +22,7 @@ export function AppRoutes () {
           <Route path={paths.private.link.list} element={<LinkListScreen />} />
           <Route path={paths.private.link.create} element={<CreateLinkScreen />} />
           <Route path={paths.private.link.details} element={<DetailLinkScreen />} />
+          <Route path={paths.private.analytics} element={<AnalyticsScreen />} />
         </Route>
       </Route>
     </Routes>
