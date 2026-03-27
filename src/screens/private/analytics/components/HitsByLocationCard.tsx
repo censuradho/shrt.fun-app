@@ -155,7 +155,7 @@ export function HitsByLocationCard () {
   }
 
   return (
-    <section className="p-4 rounded-md bg-card w-full">
+    <section className="p-4 card w-full">
       <h2 className="text-lg font-semibold">Total de clicks por localização</h2>
       <div className="w-full my-3.5">
         <ToggleGroup 
