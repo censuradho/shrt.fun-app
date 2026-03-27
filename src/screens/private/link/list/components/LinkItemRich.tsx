@@ -6,11 +6,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
-import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
-import { resolvePath } from "@/utils/resolvePath"
-import { paths } from "@/constants/routes"
-import { Link } from "react-router"
 import { getDomain, getLinkFavicon } from "@/utils/getDomain"
+import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
 
 interface LinkItemRichProps {
   data: UrlNode
@@ -49,12 +46,15 @@ export function LinkItemRich({ data, selected, onSelect, menu }: LinkItemRichPro
                 {getDomain(data.originalUrl).charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <Link
+            <span className="font-semibold text-sm truncate">
+              {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
+            </span>
+            {/* <Link
               to={resolvePath(paths.private.link.details, { id: data.id })}
               className="font-semibold text-base hover:underline truncate"
             >
               {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
-            </Link>
+            </Link> */}
           </div>
           <div className="flex items-center gap-3 shrink-0 text-muted-foreground">
             <IconButton 
@@ -115,7 +115,7 @@ export function LinkItemRich({ data, selected, onSelect, menu }: LinkItemRichPro
         <div className="flex items-center gap-4 text-xs text-muted-foreground mt-1">
           <span className="flex items-center gap-1">
             <Icon name="MousePointerClick" size={13} />
-            Click data
+            Clicks {data.hitsCount}
           </span>
           <span className="flex items-center gap-1">
             <Icon name="Calendar" size={13} />

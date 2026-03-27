@@ -1,15 +1,12 @@
 import { CopyButton } from "@/components/CopyButton"
-import { Icon } from "@/components/icons"
 import { IconButton } from "@/components/IconButton"
+import { Icon } from "@/components/icons"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
 import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
-import { resolvePath } from "@/utils/resolvePath"
-import { paths } from "@/constants/routes"
-import { Link } from "react-router"
 
 interface LinkGridProps {
   data: UrlNode
@@ -60,12 +57,15 @@ export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
             {getDomain(data.originalUrl).charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <Link
+        <span className="font-semibold text-sm truncate">
+          {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
+        </span>
+        {/* <Link
           to={resolvePath(paths.private.link.details, { id: data.id })}
           className="font-semibold text-sm hover:underline truncate"
         >
           {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
-        </Link>
+        </Link> */}
       </div>
 
       {/* Short link */}
@@ -106,9 +106,9 @@ export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
 
       {/* Footer: click data + date */}
       <div className="flex items-center justify-between text-xs text-muted-foreground mt-1">
-        <span className="flex items-center gap-1">
-          <Icon name="Lock" size={12} />
-          Click data
+        <span className="flex items-center gap-1 text-xs text-muted-foreground">
+          <Icon name="MousePointerClick" size={13} />
+            Clicks {data.hitsCount}
         </span>
         <span>{formatDate(data.createdAt)}</span>
       </div>

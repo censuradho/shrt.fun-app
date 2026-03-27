@@ -5,11 +5,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import type { UrlNode } from "@/services/api/url/types"
 import { copyToClipboard } from "@/utils/copyToClipboard"
-import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
-import { paths } from "@/constants/routes"
-import { resolvePath } from "@/utils/resolvePath"
-import { Link } from "react-router"
 import { getDomain } from "@/utils/getDomain"
+import { LinkMenu, type LinkMenuProps } from "./LinkMenu"
+import { Icon } from "@/components/icons"
 
 interface LinkListItemProps {
   data: UrlNode
@@ -49,12 +47,15 @@ export function LinkListItem ({ data, selected, onSelect, menu }: LinkListItemPr
                 {cleanLink(data.originalUrl).charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <Link
+            <span className="font-semibold text-sm truncate">
+              {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
+            </span>
+            {/* <Link
               to={resolvePath(paths.private.link.details, { id: data.id })}
               className="text-lg hover:underline font-semibold truncate"
             >
               {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
-            </Link>
+            </Link> */}
           </div>
           <div className="grid grid-cols-[auto] lg:grid-cols-[auto_auto_1fr] items-center gap-2 min-w-0 mt-2">
             <div className="flex items-center gap-2 min-w-0 overflow-hidden">
@@ -80,6 +81,10 @@ export function LinkListItem ({ data, selected, onSelect, menu }: LinkListItemPr
               {data.originalUrl}
             </a>
           </div>
+          <span className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
+            <Icon name="MousePointerClick" size={13} />
+            Clicks {data.hitsCount}
+          </span>
         </div>
       </div>
       <LinkMenu {...menu}>
