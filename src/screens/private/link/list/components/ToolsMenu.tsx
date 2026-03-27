@@ -32,7 +32,6 @@ export function ToolsMenu (props: ToolsMenuProps) {
           checked={isSelectedAll}
           onCheckedChange={() => {
             onSelectAll()
-            console.log('clicou')
           }}
           id="select-all"
         />
