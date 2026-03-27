@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { analyticsService } from ".";
-import type { FindLocationHitsPaginationParamsDto } from "../dtos";
+import type { OffsetPaginationParams } from "../types";
 
 export function useFindHistCountByLocationQuery (urlId: string) {
   return useQuery({
@@ -9,9 +9,19 @@ export function useFindHistCountByLocationQuery (urlId: string) {
   })
 }
 
-export function useFindLocationHitsQuery (params: FindLocationHitsPaginationParamsDto) {
+
+export function useFindHitsByCityQuery (params?: OffsetPaginationParams, enabled?: boolean) {
   return useQuery({
-    queryKey: ['analytics', 'hits', 'location', 'url'],
-    queryFn: () => analyticsService.findLocationHits(params)
+    queryKey: ['analytics', 'hits', 'city', params],
+    queryFn: () => analyticsService.findHitsByCity(params),
+    enabled
+  })
+}
+
+export function useFindHitsByCountryQuery (params?: OffsetPaginationParams, enabled?: boolean) {
+  return useQuery({
+    queryKey: ['analytics', 'hits', 'country', params],
+    queryFn: () => analyticsService.findHitsByCountry(params),
+    enabled
   })
 }
