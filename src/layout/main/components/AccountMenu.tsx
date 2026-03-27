@@ -43,7 +43,7 @@ export function AccountMenu (props: AccountMenuProps) {
           <Icon name="User" />
           <div className="flex flex-col">
             <strong className="text-sm font-medium">{me.firstName} {me.lastName}</strong>
-            <span className="text-sm font-normal text-muted-foreground!">{me.email}</span>
+            <span className="text-xs font-normal text-muted-foreground!">{me.email}</span>
           </div>
         </div>
         <DropdownMenuSeparator />
