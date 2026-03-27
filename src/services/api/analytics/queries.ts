@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { analyticsService } from ".";
+import type { FindLocationHitsPaginationParamsDto } from "../dtos";
 
 export function useFindHistCountByLocationQuery (urlId: string) {
   return useQuery({
@@ -8,9 +9,9 @@ export function useFindHistCountByLocationQuery (urlId: string) {
   })
 }
 
-export function useFindLocationHitsQuery () {
+export function useFindLocationHitsQuery (params: FindLocationHitsPaginationParamsDto) {
   return useQuery({
     queryKey: ['analytics', 'hits', 'location', 'url'],
-    queryFn: analyticsService.findLocationHits
+    queryFn: () => analyticsService.findLocationHits(params)
   })
 }

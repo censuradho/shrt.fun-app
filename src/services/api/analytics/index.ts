@@ -1,4 +1,5 @@
 import { api } from "..";
+import type { FindLocationHitsPaginationParamsDto } from "../dtos";
 import type { FindLocationHitsResponse, FindHistCountByLocationResponse } from "./types";
 
 async function findHistCountByLocation (id: string) {
@@ -6,8 +7,10 @@ async function findHistCountByLocation (id: string) {
   return data
 }
 
-async function findLocationHits () {
-  const { data } = await api.get<FindLocationHitsResponse>('/analytics/locations/hits/url')
+async function findLocationHits (params: FindLocationHitsPaginationParamsDto) {
+  const { data } = await api.get<FindLocationHitsResponse>('/analytics/locations/hits/url', {
+    params
+  })
 
   return data
 }
