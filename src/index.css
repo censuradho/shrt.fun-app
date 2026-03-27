@@ -237,6 +237,9 @@
     padding-right: 1rem;
   }
 
+  .card {
+    @apply bg-card dark:border-none border border-outline rounded-md;
+  }
   .card-icon {
     @apply w-8 h-8 text-foreground bg-popover border border-outline rounded-md flex items-center justify-center;
   }
