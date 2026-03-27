@@ -12,7 +12,6 @@ export interface LocationClicksItem {
   clicks: number
 }
 
-export interface FindLocationHitsResponse {
-  countries: OffsetPaginationResult<LocationClicksItem>
-  cities: OffsetPaginationResult<LocationClicksItem>
-}
+
+export type FindHitsByCityResponse = OffsetPaginationResult<LocationClicksItem>
+export type FindHitsByCountryResponse = OffsetPaginationResult<LocationClicksItem>
