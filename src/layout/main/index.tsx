@@ -48,7 +48,7 @@ export function MainLayout () {
           />
         </header>
         <main className="flex-1 min-h-0 bg-card relative">
-          <div className="flex flex-col bg-background border border-outline h-full rounded-tl-2xl overflow-hidden">
+          <div className="flex flex-col bg-background border dark:border-none border-outline h-full rounded-tl-2xl overflow-hidden">
             <div className="overflow-y-auto flex-1 pb-10">
               <Outlet />
             </div>
