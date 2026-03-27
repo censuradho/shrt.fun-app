@@ -6,6 +6,7 @@ export const paths = {
   },
   private: {
     root: '/app',
+    analytics: 'analytics',
     link: {
       list: "/app/links",
       create: "/app/links/create",
