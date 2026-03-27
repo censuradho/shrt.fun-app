@@ -25,7 +25,7 @@ export function LinkListItem ({ data, selected, onSelect, menu }: LinkListItemPr
 
   return (
     <div className={cn(
-      'bg-card rounded-md flex  p-4 justify-between items-center gap-4',
+      'card flex  p-4 justify-between items-center gap-4',
       {
         'bg-accent': selected
       }

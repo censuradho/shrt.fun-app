@@ -23,7 +23,7 @@ export function LinkItemRich({ data, selected, onSelect, menu }: LinkItemRichPro
 
   return (
     <div className={cn(
-      'bg-card rounded-md p-4 flex gap-4',
+      'card p-4 flex gap-4',
       { 'bg-accent': selected }
     )}>
       <Checkbox

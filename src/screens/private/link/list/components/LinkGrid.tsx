@@ -24,7 +24,7 @@ const formatDate = (date: string) =>
 export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
   return (
     <div className={cn(
-      'bg-card rounded-md p-4 flex flex-col gap-3',
+      'card rounded-md p-4 flex flex-col gap-3',
       { 'bg-accent': selected }
     )}>
 
