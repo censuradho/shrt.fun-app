@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuLabel
 } from "@/components/ui/dropdown-menu"
+import { useTheme } from "@/contexts/theme.context"
 import type { Me } from "@/services/api/auth/types"
 
 interface AccountMenuProps {
@@ -17,9 +18,17 @@ interface AccountMenuProps {
 
 export function AccountMenu (props: AccountMenuProps) {
   const { me, onSignOut } = props
+  const { setTheme, theme } = useTheme()
 
   if (!me) return null
 
+  const renderThemeIndicator = (option: string) => {
+    if (theme === option) {
+      return <span className="text-lg">•</span>
+    }
+    return <span className="text-lg opacity-0">•</span>
+  }
+  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="hover:bg-popover p-1 rounded">
@@ -39,16 +48,17 @@ export function AccountMenu (props: AccountMenuProps) {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuLabel className="uppercase text-xxs font-semibold text-card-foreground">Tema</DropdownMenuLabel>
-        <DropdownMenuItem className="gap-4 text-card-foreground cursor-pointer">
-          <span className="text-lg">•</span>
+        <DropdownMenuItem 
+          className="gap-4 text-card-foreground cursor-pointer" onClick={() => setTheme("dark")}>
+          {renderThemeIndicator("dark")}
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem className="gap-4 text-card-foreground cursor-pointer">
-          <span className="text-lg">•</span>
+        <DropdownMenuItem className="gap-4 text-card-foreground cursor-pointer" onClick={() => setTheme("light")}>
+          {renderThemeIndicator("light")}
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem className="gap-4 text-card-foreground cursor-pointer">
-          <span className="text-lg">•</span>
+        <DropdownMenuItem className="gap-4 text-card-foreground cursor-pointer" onClick={() => setTheme("system")}>
+          {renderThemeIndicator("system")}
           Sistema
         </DropdownMenuItem >
         <DropdownMenuSeparator />
