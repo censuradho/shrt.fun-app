@@ -8,11 +8,11 @@ interface NavigationNode {
 }
 
 export const navigation: NavigationNode[] = [
-  {
-    label: "Visão geral",
-    path: paths.private.root,
-    icon: "House"
-  },
+  // {
+  //   label: "Visão geral",
+  //   path: paths.private.root,
+  //   icon: "House"
+  // },
   {
     label: "Meus links",
     path: paths.private.link.list,
