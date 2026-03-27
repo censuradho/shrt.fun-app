@@ -3,7 +3,7 @@ export interface IApiErrorMessage {
   description: string
 }
 
-export interface PaginationParams {
+export interface CursorPaginationParams {
   cursor?: string | null
   limit?: number | null
 }

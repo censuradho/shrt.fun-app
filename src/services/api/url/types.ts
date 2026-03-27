@@ -1,6 +1,6 @@
-import type { PaginationParams, CursorPaginationResult } from "../types";
+import type { CursorPaginationParams, CursorPaginationResult } from "../types";
 
-export interface FindManyLinksQueries extends PaginationParams {
+export interface FindManyLinksQueries extends CursorPaginationParams {
   isActive?: string
   search?: string
 }
