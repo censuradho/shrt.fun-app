@@ -21,4 +21,6 @@ export interface OffsetPaginationParams {
 export interface OffsetPaginationResult<T> {
   data: T[]
   total: number
+  limit: number
+  offset: number
 }
