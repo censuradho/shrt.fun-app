@@ -23,7 +23,7 @@ export function useSignInViewModel () {
   const handleSubmit = async (data: SignInFormData) => {
     try {
       await signIn(data.email, data.password)
-      navigate(paths.private.root)
+      navigate(paths.private.link.list)
     } catch (error) {
       if (isApiError(error)) {
         if (error.message === SUPABASE_ERROR_MESSAGES.EMAIL_NOT_CONFIRMED) {
