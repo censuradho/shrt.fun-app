@@ -40,7 +40,7 @@ export function CreateLinkScreen () {
             <h1 className="text-2xl font-bold">Criar link</h1>
           </div>
         </header>
-        <section className="bg-card rounded-md p-4 mt-6">
+        <section className="card p-4 mt-6">
           <form 
             id="create-link-form" 
             onSubmit={form.handleSubmit(handleSubmit) }
