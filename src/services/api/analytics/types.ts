@@ -1,3 +1,5 @@
+import type { OffsetPaginationResult } from "../types"
+
 export interface HitsCountByLocation {
   clicks: number
   country?: string | null
@@ -11,6 +13,6 @@ export interface LocationClicksItem {
 }
 
 export interface FindLocationHitsResponse {
-  countries: LocationClicksItem[]
-  cities: LocationClicksItem[]
+  countries: OffsetPaginationResult<LocationClicksItem>
+  cities: OffsetPaginationResult<LocationClicksItem>
 }
