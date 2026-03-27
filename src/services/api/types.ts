@@ -8,7 +8,7 @@ export interface PaginationParams {
   limit?: number | null
 }
 
-export interface PaginationResult<T> {
+export interface CursorPaginationResult<T> {
   data: T[]
   nextCursor: string | null
 }

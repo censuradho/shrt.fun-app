@@ -1,4 +1,4 @@
-import type { PaginationParams, PaginationResult } from "../types";
+import type { PaginationParams, CursorPaginationResult } from "../types";
 
 export interface FindManyLinksQueries extends PaginationParams {
   isActive?: string
@@ -25,4 +25,4 @@ export interface UrlNode {
   updatedAt: string
 }
 
-export type FindManyUrlPaginated = PaginationResult<UrlNode>
+export type FindManyUrlPaginated = CursorPaginationResult<UrlNode>
