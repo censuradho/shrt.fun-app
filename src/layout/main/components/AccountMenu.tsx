@@ -6,6 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuLabel
 } from "@/components/ui/dropdown-menu"
 import type { Me } from "@/services/api/auth/types"
 
@@ -36,6 +37,20 @@ export function AccountMenu (props: AccountMenuProps) {
             <span className="text-sm font-normal text-muted-foreground!">{me.email}</span>
           </div>
         </div>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel className="uppercase text-xxs font-semibold text-card-foreground">Tema</DropdownMenuLabel>
+        <DropdownMenuItem className="gap-4 text-card-foreground cursor-pointer">
+          <span className="text-lg">•</span>
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem className="gap-4 text-card-foreground cursor-pointer">
+          <span className="text-lg">•</span>
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem className="gap-4 text-card-foreground cursor-pointer">
+          <span className="text-lg">•</span>
+          Sistema
+        </DropdownMenuItem >
         <DropdownMenuSeparator />
         <DropdownMenuItem 
           onClick={onSignOut}
