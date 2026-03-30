@@ -224,7 +224,7 @@ export function HitsByLocationCard () {
           type="single"
           value={key}
           onValueChange={value => value && setKey(value as keyof typeof keys)}
-          className="w-full bg-background p-1 rounded-2xl"
+          className="w-full bg-background p-1 rounded-2xl gap-2"
         >
           {Object.values(keys).map(value => (
             <ToggleGroupItem
