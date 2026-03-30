@@ -206,11 +206,18 @@ export function HitsByLocationCard () {
     )
   }
 
+  const renderTotalOfItems = () => {
+    if (isPending) return <Skeleton className="w-16 h-6" />
+    return (
+      <span className="text-lg font-medium">{totalOfItems}</span>
+    )
+  }
+
   return (
     <section className="p-4 card w-full">
       <div>
         <h2 className="text-xxs uppercase">Localizações por click</h2>
-        <span className="text-lg font-medium">{totalOfItems}</span>
+        {renderTotalOfItems()}
       </div>
       <div className="w-full my-3.5">
         <ToggleGroup 
