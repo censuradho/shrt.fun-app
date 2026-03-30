@@ -30,3 +30,7 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 )
+
+export function ping () {
+  return api.get('/health')
+}
