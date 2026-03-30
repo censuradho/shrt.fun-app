@@ -1,16 +1,12 @@
-import { useForm } from "react-hook-form"
-import { signInValidation, type SignInFormData } from "../validations"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useAuth } from "@/contexts/auth/auth.context"
 import { isApiError, SUPABASE_ERROR_MESSAGES } from "@/lib/supabase"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import { useNavigate } from "react-router"
-import { paths } from "@/constants/routes"
+import { signInValidation, type SignInFormData } from "../validations"
 
 export function useSignInViewModel () {
-  const navigate = useNavigate()
-  
-  const { 
+  const {
     signIn,
     isLoading
   } = useAuth()
@@ -22,8 +18,11 @@ export function useSignInViewModel () {
 
   const handleSubmit = async (data: SignInFormData) => {
     try {
-      await signIn(data.email, data.password)
-      navigate(paths.private.link.list)
+      await signIn(
+        data.email, 
+        data.password,
+      )
+      
     } catch (error) {
       if (isApiError(error)) {
         if (error.message === SUPABASE_ERROR_MESSAGES.EMAIL_NOT_CONFIRMED) {
