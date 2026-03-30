@@ -4,12 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { signInValidation, type SignInFormData } from "../validations"
+import { useNavigate } from "react-router"
+import { paths } from "@/constants/routes"
 
 export function useSignInViewModel () {
   const {
     signIn,
-    isLoading
+    isLoading,
   } = useAuth()
+
+  const navigate = useNavigate()
 
   const form = useForm<SignInFormData>({
     resolver: zodResolver(signInValidation),
@@ -22,7 +26,9 @@ export function useSignInViewModel () {
         data.email, 
         data.password,
       )
-      
+        .then(() => {
+          navigate(paths.private.link.list)
+        })
     } catch (error) {
       if (isApiError(error)) {
         if (error.message === SUPABASE_ERROR_MESSAGES.EMAIL_NOT_CONFIRMED) {

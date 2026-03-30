@@ -4,7 +4,7 @@ import { authGateway } from "@/lib/supabase";
 import { setApiToken } from "@/services/api";
 import { useMeQuery } from "@/services/api/auth/queries";
 import type { Me } from "@/services/api/auth/types";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, type QueryObserverResult, type RefetchOptions } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -14,6 +14,7 @@ interface AuthContextValue {
   signIn: (email: string, password: string) => Promise<void>
   signOut: () => Promise<void>
   me?: Me | null
+  refetchMe?: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<Me, Error>>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -28,14 +29,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const {
     data: me,
     isLoading: isMeLoading,
-    refetch
+    refetch: refetchMe
   } = useMeQuery(!!supabaseUser);
 
   useEffect(() => {
     authGateway.getUser()
       .then(user => setSupabaseUser(user))
       .finally(() => setIsLoading(false));
-
     const unsubscribe = authGateway.onAuthStateChange((event, session) => {
       setApiToken(session?.accessToken ?? null);
       
@@ -51,9 +51,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const session = await authGateway.signInWithPassword(email, password);
       setSupabaseUser(session?.user ?? null);
       setApiToken(session?.accessToken ?? null);
-      refetch().then(() => {
-        navigate(paths.private.link.list)
-      })
+      refetchMe()
     }  finally {
       setIsLoading(false);
     }
@@ -79,7 +77,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isLoading: isLoading || (!!supabaseUser && isMeLoading),
         signIn, 
         signOut,
-        me
+        me,
+        refetchMe
       }}
     >
       {children}
