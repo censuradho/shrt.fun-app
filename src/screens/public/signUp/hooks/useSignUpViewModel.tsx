@@ -27,7 +27,7 @@ export function useSignUpViewModel () {
   const handleSubmit = async (data: SignUpFormData) => {
     mutate(data, {
       onError: (error) => toastifyApiErrorMessage(error),
-      onSuccess: () => setIsSignUpSuccessful(true)
+      // onSuccess: () => setIsSignUpSuccessful(true)
     })
   }
 
