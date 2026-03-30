@@ -7,6 +7,7 @@ import {
   DialogHeader
 } from "@/components/ui/dialog"
 import { copyToClipboard } from "@/utils/copyToClipboard"
+import { getDomain } from "@/utils/getDomain"
 
 interface SuccessCreateDialogProps {
   open: boolean
@@ -28,12 +29,11 @@ export function SuccessCreateDialog ({ open, onOpenChange, link }: SuccessCreate
             target="_blank" 
             rel="noopener noreferrer"
             className="text-link hover:underline flex items-center gap-1"
-          > <Icon size={14} name="ExternalLink" />{link} </a>
+          > <Icon size={14} name="ExternalLink" />{getDomain(link)} </a>
           <CopyButton 
             onClick={() => copyToClipboard(link)}
             className="hover:bg-card"
           />
-   
         </div>
       </DialogContent>
     </Dialog>
