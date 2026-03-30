@@ -1,3 +1,4 @@
+import { paths } from "@/constants/routes";
 import type { AuthUser } from "@/lib/supabase";
 import { authGateway } from "@/lib/supabase";
 import { setApiToken } from "@/services/api";
@@ -5,6 +6,7 @@ import { useMeQuery } from "@/services/api/auth/queries";
 import type { Me } from "@/services/api/auth/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 interface AuthContextValue {
   supabaseUser: AuthUser | null
@@ -17,6 +19,7 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate()
   const [supabaseUser, setSupabaseUser] = useState<AuthUser | null>(null);
   const queryClient = useQueryClient()
   
@@ -25,6 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const {
     data: me,
     isLoading: isMeLoading,
+    refetch
   } = useMeQuery(!!supabaseUser);
 
   useEffect(() => {
@@ -47,7 +51,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const session = await authGateway.signInWithPassword(email, password);
       setSupabaseUser(session?.user ?? null);
       setApiToken(session?.accessToken ?? null);
-    } finally {
+      refetch();
+    }  finally {
       setIsLoading(false);
     }
   }
@@ -58,6 +63,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setApiToken(null);
     queryClient.clear();
   }
+
+  useEffect(() => {
+    if (!me?.id) return
+
+    navigate(paths.private.link.list)
+  }, [me?.id])
 
   return (
     <AuthContext.Provider 
