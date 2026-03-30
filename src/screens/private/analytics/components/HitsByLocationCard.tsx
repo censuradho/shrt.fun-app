@@ -70,7 +70,8 @@ export function HitsByLocationCard () {
   
   const {
     data: cities,
-    isPending: isCitiesPending
+    isPending: isCitiesPending,
+    isFetched: isCitiesFetched
   } = useFindHitsByCityQuery(
     cityPagination,
     key === keys.cities
@@ -78,6 +79,7 @@ export function HitsByLocationCard () {
 
   const { 
     data: countries,
+    isFetched: isCountriesFetched,
     isPending: isCountriesPending
   } = useFindHitsByCountryQuery(
     countryPagination,
@@ -85,6 +87,7 @@ export function HitsByLocationCard () {
   )
 
   const isPending = key === keys.cities ? isCitiesPending : isCountriesPending
+  const isFetched = key === keys.cities ? isCitiesFetched : isCountriesFetched
 
   const {
     data,
@@ -156,33 +159,16 @@ export function HitsByLocationCard () {
     handleChangeParams('offset', pageIndex * pageSize, currentDispatcher)
   }
 
-  return (
-    <section className="p-4 card w-full">
-      <div>
-        <h2 className="text-xxs uppercase">Localizações por click</h2>
-        <span className="text-lg font-medium">{totalOfItems}</span>
-      </div>
-      <div className="w-full my-3.5">
-        <ToggleGroup 
-          type="single"
-          value={key}
-          onValueChange={value => value && setKey(value as keyof typeof keys)}
-          className="w-full bg-background p-1 rounded-2xl"
-        >
-          {Object.values(keys).map(value => (
-            <ToggleGroupItem
-              key={value}
-              value={value}
-              onClick={() => setKey(value)}
-              // className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
-              className="flex-1 data-[state=on]:bg-accent rounded-2xl!"
-            >
-              {keyLabels[value]}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
-      </div>
+  const renderTable = () => {
+    if (!isFetched) return null
 
+    if (isFetched && tableData.length === 0) return (
+      <div className="w-full h-48 flex items-center justify-center">
+        <p className="text-sm text-muted-foreground">Não há dados disponíveis.</p>
+      </div>
+    )
+
+    return (
       <Table className="mt-6">
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
@@ -217,6 +203,36 @@ export function HitsByLocationCard () {
           ))}
         </TableBody>
       </Table>
+    )
+  }
+
+  return (
+    <section className="p-4 card w-full">
+      <div>
+        <h2 className="text-xxs uppercase">Localizações por click</h2>
+        <span className="text-lg font-medium">{totalOfItems}</span>
+      </div>
+      <div className="w-full my-3.5">
+        <ToggleGroup 
+          type="single"
+          value={key}
+          onValueChange={value => value && setKey(value as keyof typeof keys)}
+          className="w-full bg-background p-1 rounded-2xl"
+        >
+          {Object.values(keys).map(value => (
+            <ToggleGroupItem
+              key={value}
+              value={value}
+              onClick={() => setKey(value)}
+              // className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
+              className="flex-1 data-[state=on]:bg-accent rounded-2xl!"
+            >
+              {keyLabels[value]}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
+      </div>
+      {renderTable()}
       {isPending && (
         <Skeleton className="w-full h-48" />
       )}
