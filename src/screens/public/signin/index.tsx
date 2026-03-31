@@ -8,6 +8,7 @@ import Google from '@/assets/google.svg?react'
 import Github from '@/assets/github.svg?react'
 import { paths } from "@/constants/routes"
 import { useFormState } from "react-hook-form"
+import { toastyComingSoon } from "@/utils/toastyComingSoon"
 
 export function SignInScreen () {
   const viewModel = useSignInViewModel()
@@ -24,13 +25,13 @@ export function SignInScreen () {
           <p className="text-sm text-card-foreground">Entre na sua conta para acessar seus links</p>
         </div>
         <div className="flex flex-col gap-2 px-6 my-6 max-w-[450px] lg:max-w-auto w-full">
-          <Button className="w-full" variant="ghost">
+          <Button className="w-full" variant="ghost" onClick={toastyComingSoon}>
             <div className="flex gap-2 justify-center items-center w-full">
               <Google />
             Continuar com Google
             </div>
           </Button>
-          <Button className="w-full" variant="ghost">
+          <Button className="w-full" variant="ghost" onClick={toastyComingSoon}>
             <div className="flex gap-2 justify-center items-center w-full">
               <Github />
             Continuar com Github

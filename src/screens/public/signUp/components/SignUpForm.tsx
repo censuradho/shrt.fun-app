@@ -10,6 +10,7 @@ import { TextFieldHook } from "@/components/hook/TextFieldHook";
 import { PasswordStrongIndicator } from "@/components/PasswordStrongerIndicator";
 import { appConfig } from "@/config/app";
 import { paths } from "@/constants/routes";
+import { toastyComingSoon } from "@/utils/toastyComingSoon";
 import { useFormState, useWatch } from "react-hook-form";
 import { Link } from "react-router";
 
@@ -35,13 +36,13 @@ export function SignUpForm ({ form, onSubmit, isPending }: SignUpFormProps) {
         <p className="text-sm text-card-foreground">Comece hoje. Sem cartão de crédito.</p>
       </div>
       <div className="flex flex-col gap-2 px-6 my-6">
-        <Button className="w-full" variant="ghost">
+        <Button className="w-full" variant="ghost" onClick={toastyComingSoon}>
           <div className="flex gap-2 justify-center items-center w-full">
             <Google />
             Continuar com Google
           </div>
         </Button>
-        <Button className="w-full" variant="ghost">
+        <Button className="w-full" variant="ghost" onClick={toastyComingSoon}>
           <div className="flex gap-2 justify-center items-center w-full">
             <Github />
             Continuar com Github
