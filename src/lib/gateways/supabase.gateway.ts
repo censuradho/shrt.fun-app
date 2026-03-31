@@ -72,7 +72,9 @@ class SupabaseGateway implements AuthGateway {
   }
 
   async resetPasswordForEmail(email: string, options?: { redirectTo?: string }): Promise<void> {
-    const { error } = await client.auth.resetPasswordForEmail(email, options);
+    const { error } = await client.auth.resetPasswordForEmail(email, {
+      redirectTo: options?.redirectTo ?? import.meta.env.VITE_APP_URL,
+    });
     if (error) throw error;
   }
 }
