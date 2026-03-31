@@ -28,3 +28,10 @@ export const useResetPasswordMutation = () => {
     }) => authGateway.resetPasswordForEmail(email, options),
   })
 }
+
+export const useUpdatePasswordMutation = () => {
+  return useMutation({
+    mutationKey: ["auth", "update-password"],
+    mutationFn: authGateway.updatePassword,
+  })
+}
