@@ -14,7 +14,6 @@ export function ForgotPasswordScreen() {
   const {
     mutate,
     isPending,
-    isSuccess
   } = useResetPasswordMutation()
 
   const form = useForm({
