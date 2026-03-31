@@ -1,25 +1,21 @@
 import { TextField } from "@/components/form/TextField";
+import { LinearProgress } from "@/components/LinearProgress";
 import { LinkButton } from "@/components/LinkButton";
 import { Spinner } from "@/components/spinner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { paths } from "@/constants/routes";
+import { cn } from "@/lib/utils";
+import { toastyComingSoon } from "@/utils/toastyComingSoon";
+import { useQueryClient } from "@tanstack/react-query";
+import { LinkGrid } from "./components/LinkGrid";
+import { LinkItemRich } from "./components/LinkItemRich";
 import { LinkListItem } from "./components/LinkListItem";
+import type { LinkMenuProps } from "./components/LinkMenu";
+import { ShareLinkDialog } from "./components/ShareLinkDialog";
 import { ToolsMenu } from "./components/ToolsMenu";
 import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
-import { LinkItemRich } from "./components/LinkItemRich";
-import { LinkGrid } from "./components/LinkGrid";
-import { cn } from "@/lib/utils";
-import { ShareLinkDialog } from "./components/ShareLinkDialog";
-import type { LinkMenuProps } from "./components/LinkMenu";
-import { useQueryClient } from "@tanstack/react-query";
-import { LinearProgress } from "@/components/LinearProgress";
-import { toast } from "sonner";
-import { useNavigate } from "react-router";
-import { resolvePath } from "@/utils/resolvePath";
-import { toastyComingSoon } from "@/utils/toastyComingSoon";
 
 export function LinkListScreen () {
-  const navigate = useNavigate()
   
   const { 
     sentinelRef, 
