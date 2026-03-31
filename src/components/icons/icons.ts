@@ -35,10 +35,12 @@ import {
   Tag,
   Trash,
   House,
-  RefreshCw
+  RefreshCw,
+  Settings
 } from 'lucide-react'
 
 export const icons = {
+  Settings,
   RefreshCw,
   Trash,
   CircleCheck,
