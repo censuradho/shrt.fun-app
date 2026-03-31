@@ -67,7 +67,7 @@ export function ForgotPasswordScreen() {
         <p className="text-sm text-card-foreground">
           Um email foi enviado para <strong className="text-foreground">{form.getValues('email')} </strong>.
           Verifique sua caixa de entrada e siga as instruções para criar uma nova senha.  
-          Se não encontrar o email, confira também a pasta de spam ou lixeira.
+          Se não encontrar o email, confira também a pasta de <strong className="text-foreground">spam</strong> ou <strong className="text-foreground">lixeira</strong>.
         </p>
         <div className="justify-end">
           <Button 
