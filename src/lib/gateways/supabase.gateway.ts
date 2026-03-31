@@ -70,6 +70,11 @@ class SupabaseGateway implements AuthGateway {
 
     return () => data.subscription.unsubscribe();
   }
+
+  async resetPasswordForEmail(email: string, options?: { redirectTo?: string }): Promise<void> {
+    const { error } = await client.auth.resetPasswordForEmail(email, options);
+    if (error) throw error;
+  }
 }
 
 export const authGateway: AuthGateway = new SupabaseGateway();
