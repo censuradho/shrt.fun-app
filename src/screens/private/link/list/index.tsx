@@ -16,6 +16,7 @@ import { LinearProgress } from "@/components/LinearProgress";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import { resolvePath } from "@/utils/resolvePath";
+import { toastyComingSoon } from "@/utils/toastyComingSoon";
 
 export function LinkListScreen () {
   const navigate = useNavigate()
@@ -50,10 +51,10 @@ export function LinkListScreen () {
       const menu: LinkMenuProps = {
         onShare: () => setSharing({ shortUrl: link.shortUrl, id: link.id }),
         onToggleActive: () => toggleLinkIsActive(link.id),
-        onDelete: () => toast.message(<span>TODO: Essa funcionalidade ainda não foi implementada<span className="text-lg">😭</span></span>), 
-        onEdit: () => toast.message(<span>TODO: Essa funcionalidade ainda não foi implementada<span className="text-lg">😭</span></span>), 
-        onViewQrCode: () => toast.message(<span>TODO: Essa funcionalidade ainda não foi implementada<span className="text-lg">😭</span></span>), 
-        onDetails: () => navigate(resolvePath(paths.private.link.details, { id: link.id })),
+        onDelete: toastyComingSoon, 
+        onEdit: toastyComingSoon, 
+        onViewQrCode: toastyComingSoon, 
+        onDetails: toastyComingSoon,
         isActive: link.isActive
       }
 
