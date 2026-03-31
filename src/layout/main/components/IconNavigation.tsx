@@ -21,7 +21,7 @@ export function IconNavigation() {
     </li>
   ))
   return (
-    <div className="w-full flex-col flex flex-1 px-2">
+    <div className="w-full flex-col flex flex-1 px-2 pt-6">
       <Link to={paths.private.link.create} className="bg-primary-500 rounded text-primary-foreground p-2 mb-6 flex items-center justify-center cursor-pointer hover:bg-primary-600">
         <Icon name="Plus" size={20} />
       </Link>

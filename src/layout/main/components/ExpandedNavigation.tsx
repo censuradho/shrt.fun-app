@@ -28,7 +28,7 @@ export function ExpandedNavigation () {
 
   return (
     <div className="w-full flex-col flex flex-1">
-      <div className="px-4">
+      <div className="px-4 pt-6">
         <LinkButton 
           to={paths.private.link.create}
           headIcon={{
