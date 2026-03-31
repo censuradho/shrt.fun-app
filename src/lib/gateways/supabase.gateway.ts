@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import type { AuthClaims, AuthGateway, AuthSession, AuthStateChangeCallback, AuthStateEvent, AuthUser, Unsubscribe } from "./auth.gateway";
+import { paths } from "@/constants/routes";
 
 const client = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -73,7 +74,7 @@ class SupabaseGateway implements AuthGateway {
 
   async resetPasswordForEmail(email: string, options?: { redirectTo?: string }): Promise<void> {
     const { error } = await client.auth.resetPasswordForEmail(email, {
-      redirectTo: options?.redirectTo ?? import.meta.env.VITE_APP_URL,
+      redirectTo: options?.redirectTo ?? `${import.meta.env.VITE_APP_URL}${paths.public.resetPassword}`,
     });
     if (error) throw error;
   }
