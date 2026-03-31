@@ -104,7 +104,7 @@ export function SignUpForm ({ form, onSubmit, isPending }: SignUpFormProps) {
               name="terms"
               label="Aceito os termos e condições"
             />
-            <p className="text-sm text-card-foreground">Li e aceito os <a href="/terms-of-use" className="text-link">Termos de uso</a> e a <a href="/privacy-policy" className="text-link">Política de privacidade</a> do {appConfig.name}</p>
+            <p className="text-sm text-card-foreground">Li e aceito os <a href="/terms-of-use" className="text-link">Termos de uso</a> e a <a href="https://site.shrt.fun/politicas-privacidade" target="_blank" className="text-link">Política de privacidade</a> do {appConfig.name}</p>
           </div>
           <Button
             className="w-full justify-center"
