@@ -62,4 +62,5 @@ export interface AuthGateway {
   getUser(): Promise<AuthUser | null>
   onAuthStateChange(callback: AuthStateChangeCallback): Unsubscribe
   resendConfirmationEmail(email: string): Promise<void>
+  resetPasswordForEmail(email: string, options?: { redirectTo?: string }): Promise<void>
 }
