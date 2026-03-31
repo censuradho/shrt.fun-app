@@ -3,6 +3,7 @@ export const paths = {
     signin: "/",
     forgotPassword: '/forgot-password',
     signUp: '/signup',
+    resetPassword: '/reset-password'
   },
   private: {
     root: '/app',
