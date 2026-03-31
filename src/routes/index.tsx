@@ -8,6 +8,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { CreateLinkScreen } from "@/screens/private/link/create";
 import { DetailLinkScreen } from "@/screens/private/link/details";
 import { AnalyticsScreen } from "@/screens/private/analytics";
+import { ForgotPasswordScreen } from "@/screens/public/forgotPassword";
 
 
 export function AppRoutes () {
@@ -15,7 +16,7 @@ export function AppRoutes () {
     <Routes>
       <Route path={paths.public.signin} element={<SignInScreen />} />
       <Route path={paths.public.signUp} element={<SignUpScreen />} />
-
+      <Route path={paths.public.forgotPassword} element={<ForgotPasswordScreen />} />
 
       <Route element={<PrivateRoute  />}>
         <Route path={paths.private.root} element={<MainLayout />}>
