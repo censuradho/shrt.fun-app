@@ -63,4 +63,5 @@ export interface AuthGateway {
   onAuthStateChange(callback: AuthStateChangeCallback): Unsubscribe
   resendConfirmationEmail(email: string): Promise<void>
   resetPasswordForEmail(email: string, options?: { redirectTo?: string }): Promise<void>
+  updatePassword(data: { password?: string }): Promise<void>
 }
