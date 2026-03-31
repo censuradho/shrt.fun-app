@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { analyticsService } from ".";
 import type { OffsetPaginationParams } from "../types";
+import type { TopMostAccessedUrlsQuery } from "./types";
 
 export function useFindHistCountByLocationQuery (urlId: string) {
   return useQuery({
@@ -23,5 +24,12 @@ export function useFindHitsByCountryQuery (params?: OffsetPaginationParams, enab
     queryKey: ['analytics', 'hits', 'country', params],
     queryFn: () => analyticsService.findHitsByCountry(params),
     enabled
+  })
+}
+
+export function useTopMostAccessedUrlsQuery (params?: TopMostAccessedUrlsQuery) {
+  return useQuery({
+    queryKey: ['analytics', 'url', 'ranking', params],
+    queryFn: () => analyticsService.topMostAccessedUrls(params)
   })
 }

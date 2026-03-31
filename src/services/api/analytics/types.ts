@@ -12,6 +12,15 @@ export interface LocationClicksItem {
   clicks: number
 }
 
+export type  TopMostAccessedUrlResponse = Array<{
+  shortUrl: string;
+  hitsCount: number;
+}>
+
+export interface TopMostAccessedUrlsQuery {
+  limit?: number
+  isActive?: boolean
+}
 
 export type FindHitsByCityResponse = OffsetPaginationResult<LocationClicksItem>
 export type FindHitsByCountryResponse = OffsetPaginationResult<LocationClicksItem>
