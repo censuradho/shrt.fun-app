@@ -7,6 +7,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { useEffect } from "react";
 import { ping } from "./services/api/index.ts";
+import ReactGA from "react-ga4";
 
 function App() {
 
@@ -14,6 +15,10 @@ function App() {
     ping()
       .then(() => console.log('API is healthy'))
       .catch(() => console.error('API is not healthy'))
+  }, [])
+
+  useEffect(() => {
+    ReactGA.initialize(import.meta.env.VITE_GA_TRACKING_ID || "")
   }, [])
 
   return (
