@@ -29,7 +29,7 @@ export function TopMostAccessedUrlsCard ({ className }: BaseCardProps) {
     <li key={index} className="flex items-center bg-popover rounded-md border border-outline py-1 px-2 justify-between gap-4">
       <div className="flex flex-col flex-1">
         <div className="grid grid-cols-[auto_1fr] gap-2 items-center">
-          <span className="text-xs text-card-foreground">{item.title || `${getDomain(item.originalUrl)} - Sem título`}</span>
+          <span className="text-xs text-foreground">{item.title || `${getDomain(item.originalUrl)} - Sem título`}</span>
           <span className="text-xs font-semibold text-card-foreground whitespace-nowrap">{formatClicks(item.hitsCount)} clicks</span>
         </div>
         <div className="grid grid-cols-[auto_1fr] items-center gap-1">
