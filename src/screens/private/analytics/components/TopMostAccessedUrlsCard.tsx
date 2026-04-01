@@ -5,9 +5,9 @@ import { URL_ACTIVE_OPTIONS } from "@/constants/url"
 import { useTopMostAccessedUrlsQuery } from "@/services/api/analytics/queries"
 import { clearHttp } from "@/utils/getDomain"
 import { useState } from "react"
+import type { BaseCardProps } from "./types"
 
-
-export function TopMostAccessedUrlsCard () {
+export function TopMostAccessedUrlsCard ({ className }: BaseCardProps) {
   const [isActive, setIsActive] = useState<string>('true')
 
   const { 
@@ -31,7 +31,7 @@ export function TopMostAccessedUrlsCard () {
   ))
 
   return (
-    <section className="p-4 card w-full flex flex-col gap-8">
+    <section className={`p-4 card w-full flex flex-col gap-8 ${className}`}>
       <div className="flex justify-between items-center">
         <h2 className="text-xxs uppercase">URLs mais acessadas</h2>
         <Select 
