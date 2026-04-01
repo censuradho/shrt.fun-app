@@ -40,3 +40,10 @@ export function useTopMostAccessedUrlsDetailQuery (params?: TopMostAccessedUrlsQ
     queryFn: () => analyticsService.topMostAccessedUrlsDetail(params)
   })
 }
+
+export function useReferrerDistributionQuery () {
+  return useQuery({
+    queryKey: ['analytics', 'url', 'referrer-distribution'],
+    queryFn: analyticsService.referrerDistribution
+  })
+}

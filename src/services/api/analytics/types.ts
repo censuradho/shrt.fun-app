@@ -30,5 +30,10 @@ export interface TopMostAccessedUrlsQuery {
   isActive?: boolean
 }
 
+export type ReferrerDistributionResponse = Array<{
+  referrer: string | null;
+  hitsCount: number;
+}>
+
 export type FindHitsByCityResponse = OffsetPaginationResult<LocationClicksItem>
 export type FindHitsByCountryResponse = OffsetPaginationResult<LocationClicksItem>
