@@ -55,12 +55,14 @@ export function SignInScreen () {
               id="email"
               errorMessage={errors.email?.message}
               placeholder="voce@email.com"
+              autoComplete="email"
             />
             <PasswordFieldHook 
               label="Senha"
               register={viewModel.form.register('password')}
               id="password"
               type="password"
+              autoComplete="current-password"
               errorMessage={errors.password?.message}
             />
             <div className="flex flex-col items-end gap-2">
