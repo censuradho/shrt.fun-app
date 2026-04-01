@@ -32,7 +32,10 @@ export function TopMostAccessedUrlsDetailCard ({ className }: BaseCardProps) {
 
     return (
       <li key={index} className="flex flex-col md:flex-row md:items-center bg-popover rounded-md border border-outline px-2 py-4 md:py-1 md:px-2 justify-between gap-2 md:gap-4">
-        <strong className="text-xs text-foreground truncate flex-1">{index + 1}. {clearHttp(item.shortUrl)}</strong>
+        <div className="flex flex-col flex-1">
+          <span className="text-xs text-card-foreground">{item.title}</span>
+          <strong className="text-xs text-foreground truncate flex-1">{index + 1}. {clearHttp(item.shortUrl)}</strong>
+        </div>
         <span className="text-xs text-card-foreground">{`${country} - ${city} (${os} - ${device})`}</span>
         <span className="text-sm text-card-foreground whitespace-nowrap">{formatClicks(item.hitsCount)} cliques</span>
       </li>

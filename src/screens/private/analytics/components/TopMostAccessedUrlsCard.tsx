@@ -25,7 +25,10 @@ export function TopMostAccessedUrlsCard ({ className }: BaseCardProps) {
 
   const renderItems = data?.map((item, index) => (
     <li key={index} className="flex items-center bg-popover rounded-md border border-outline py-1 px-2 justify-between gap-4">
-      <strong className="text-xs text-foreground truncate">{index + 1}. {clearHttp(item.shortUrl)}</strong>
+      <div className="flex flex-col flex-1">
+        <span className="text-xs text-card-foreground">{item.title}</span>
+        <strong className="text-xs text-foreground truncate">{index + 1}. {clearHttp(item.shortUrl)}</strong>
+      </div>
       <span className="text-sm text-card-foreground whitespace-nowrap">{formatClicks(item.hitsCount)} clicks</span>
     </li>
   ))
