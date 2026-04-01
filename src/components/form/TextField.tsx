@@ -36,14 +36,14 @@ export function TextField(props: TextFieldProps) {
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <div className="flex items-center justify-between">
-        {renderLabel && (
+      {renderLabel && (
+        <div className="flex items-center justify-between">
           <label
             htmlFor={id}
             className="text-xxs uppercase text-card-foreground cursor-pointer">{label}</label>
-        )}
-        {tailLabel}
-      </div>
+          {tailLabel}
+        </div>
+      )}
 
       <div className="flex">
         {!!headText && (
