@@ -28,7 +28,7 @@ export function QueryMenu(props: QueryMenuProps) {
   } = props
 
   return (
-    <div className="grid grid-cols-1 md:items-center md:grid-cols-[15rem_1fr] gap-4 pb-4">
+    <div className="grid grid-cols-1 md:items-start md:grid-cols-[15rem_1fr] gap-4 pb-4">
       <div className="w-full md:max-w-100">
         <TextField
           id="search"
