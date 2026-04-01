@@ -37,7 +37,7 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
       referrer: item.referrer ?? 'Direto',
       hitsCount: item.hitsCount,
       percentage: total > 0 ? parseFloat(((item.hitsCount / total) * 100).toFixed(1)) : 0,
-      fill: CHART_COLORS[index % CHART_COLORS.length],
+      fill: item.referrer === 'Other' ? 'var(--accent)' : CHART_COLORS[index % CHART_COLORS.length],
     }))
   }, [data])
 
