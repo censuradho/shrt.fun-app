@@ -31,17 +31,21 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
     isPending
   } = useReferrerDistributionQuery()
 
-  const chartData = useMemo(() =>
-    (data || []).map((item, index) => ({
+  const chartData = useMemo(() => {
+    const total = (data || []).reduce((sum, item) => sum + item.hitsCount, 0)
+    return (data || []).map((item, index) => ({
       referrer: item.referrer ?? 'Direto',
       hitsCount: item.hitsCount,
+      percentage: total > 0 ? parseFloat(((item.hitsCount / total) * 100).toFixed(1)) : 0,
       fill: CHART_COLORS[index % CHART_COLORS.length],
-    })),
-  [data]
-  )
+    }))
+  }, [data])
 
   const chartConfig = useMemo(() => {
-    const config: ChartConfig = { hitsCount: { label: "Cliques" } }
+    const config: ChartConfig = {
+      percentage: { label: "%" },
+      hitsCount: { label: "Cliques" },
+    }
     chartData.forEach((item, index) => {
       config[item.referrer] = {
         label: item.referrer,
@@ -54,12 +58,12 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
   const renderLegend = chartData.map((entry, index) => (
     <li key={index} className="text-sm flex items-center justify-between gap-6 w-full">
       <div>
-        <span className={`inline-block w-3 h-3 mr-2 rounded-full`} style={{ backgroundColor: entry.fill }} />
+        <span className="inline-block w-3 h-3 mr-2 rounded-full" style={{ backgroundColor: entry.fill }} />
         <span className="text-card-foreground">
           {entry.referrer}
         </span>
       </div>
-      <span>{entry.hitsCount}</span>
+      <span>{entry.percentage}%</span>
     </li>
   ))
 
@@ -84,7 +88,7 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
               <ChartTooltip
                 content={<ChartTooltipContent nameKey="referrer" hideLabel />}
               />
-              <Pie data={chartData} dataKey="hitsCount" innerRadius={60}>
+              <Pie data={chartData} dataKey="percentage" innerRadius={60}>
                 <Label
                   content={({ viewBox }) => {
                     if (viewBox && "cx" in viewBox && "cy" in viewBox) {
