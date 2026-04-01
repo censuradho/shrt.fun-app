@@ -36,11 +36,11 @@ export function TopMostAccessedUrlsDetailCard ({ className }: BaseCardProps) {
       <li key={index} className="flex flex-col md:flex-row md:items-start bg-popover rounded-md border border-outline px-2 py-4 md:py-1 md:px-2 justify-between gap-2 md:gap-6">
         <div className="flex flex-col flex-1 gap-1">
           <div className="grid grid-cols-1 gap-1">
-            <span className="text-xs text-card-foreground">{item.title || `${getDomain(item.originalUrl)} - Sem título`}</span>
-            <div className="flex items-center gap-4">
-              <span className="text-xs text-card-foreground">{`${country} - ${city} (${os} - ${device})`}</span>
+            <div className="grid grid-cols-[auto_1fr] gap-2">
+              <span className="text-xs text-foreground">{item.title || `${getDomain(item.originalUrl)} - Sem título`}</span>
               <span className="text-xs font-semibold text-card-foreground whitespace-nowrap">{formatClicks(item.hitsCount)} cliques</span>
             </div>
+            <span className="text-xs text-card-foreground">{`${country} - ${city} (${os} - ${device})`}</span>
           </div>
           <div className="grid grid-cols-[auto_1fr] items-center gap-1">
             <strong className="text-xs text-foreground truncate flex-1">{index + 1}. {clearHttp(item.shortUrl)}</strong>
