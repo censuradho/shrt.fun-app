@@ -18,6 +18,7 @@ import { IconButton } from "@/components/IconButton"
 import type { OffsetPaginationParams } from "@/services/api/types"
 import { useFindHitsByCityQuery, useFindHitsByCountryQuery } from "@/services/api/analytics/queries"
 import { Skeleton } from "@/components/ui/skeleton"
+import type { BaseCardProps } from "./types"
 
 
 const keys = {
@@ -51,8 +52,10 @@ function buildPageItems (current: number, total: number): (number | '...')[] {
   return items
 }
 
-export function HitsByLocationCard () {
+
+export function HitsByLocationCard (props: BaseCardProps) {
   "use no memo"
+  const { className } = props
 
   const [countryPagination, setCountryPagination] = useState<OffsetPaginationParams>({})
   const [cityPagination, setCityPagination] = useState<OffsetPaginationParams>({})
@@ -214,7 +217,7 @@ export function HitsByLocationCard () {
   }
 
   return (
-    <section className="p-4 card w-full">
+    <section className={`p-4 card w-full ${className}`}>
       <div>
         <h2 className="text-xxs uppercase">Localizações por click</h2>
         {renderTotalOfItems()}
