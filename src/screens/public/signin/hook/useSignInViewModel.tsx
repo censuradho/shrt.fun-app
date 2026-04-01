@@ -8,12 +8,14 @@ import { useNavigate } from "react-router"
 import { paths } from "@/constants/routes"
 
 export function useSignInViewModel () {
+  const navigate = useNavigate()
+
   const {
     signIn,
     isLoading,
+    refetchMe
   } = useAuth()
 
-  const navigate = useNavigate()
 
   const form = useForm<SignInFormData>({
     resolver: zodResolver(signInValidation),
@@ -26,9 +28,10 @@ export function useSignInViewModel () {
         data.email, 
         data.password,
       )
-        .then(() => {
-          navigate(paths.private.link.list)
-        })
+      refetchMe?.().then(() => {
+        navigate(paths.private.link.list)
+      })
+
     } catch (error) {
       if (isApiError(error)) {
         if (error.message === SUPABASE_ERROR_MESSAGES.EMAIL_NOT_CONFIRMED) {

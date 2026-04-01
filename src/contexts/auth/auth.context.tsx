@@ -48,7 +48,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const session = await authGateway.signInWithPassword(email, password);
       setSupabaseUser(session?.user ?? null);
       setApiToken(session?.accessToken ?? null);
-      refetchMe()
     }  finally {
       setIsLoading(false);
     }
