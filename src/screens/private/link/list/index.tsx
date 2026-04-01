@@ -14,6 +14,9 @@ import type { LinkMenuProps } from "./components/LinkMenu";
 import { ShareLinkDialog } from "./components/ShareLinkDialog";
 import { ToolsMenu } from "./components/ToolsMenu";
 import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
+import { ConfirmationDialog } from "@/components/ConfirmationDialog";
+import { Banner } from "@/components/Banner";
+import { Icon } from "@/components/icons";
 
 export function LinkListScreen () {
   
@@ -38,7 +41,11 @@ export function LinkListScreen () {
     setSharing,
     handleChangeQueries,
     queries,
-    toggleLinkIsActive
+    toggleLinkIsActive,
+    confirmationModal,
+    setConfirmationModal,
+    isDeletingLink,
+    deleteLinkMutation
   } = useLinkListViewModel()
   const queryClient = useQueryClient()
 
@@ -47,8 +54,8 @@ export function LinkListScreen () {
       const menu: LinkMenuProps = {
         onShare: () => setSharing({ shortUrl: link.shortUrl, id: link.id }),
         onToggleActive: () => toggleLinkIsActive(link.id),
-        onDelete: toastyComingSoon, 
-        onEdit: toastyComingSoon, 
+        onDelete: () => setConfirmationModal(link), 
+        onEdit: () => toastyComingSoon, 
         onViewQrCode: toastyComingSoon, 
         onDetails: toastyComingSoon,
         isActive: link.isActive
@@ -100,6 +107,29 @@ export function LinkListScreen () {
 
   return (
     <>
+      <ConfirmationDialog 
+        open={!!confirmationModal}
+        onOpenChange={() => setConfirmationModal(null)}
+        title="Atenção"
+        description={(
+          <div className="flex flex-col gap-4 mt-6">
+            <span className="text-md">Tem certeza que deseja excluir o link <strong className="text-foreground">{confirmationModal?.title}</strong>? Isso removera todas as informações associadas a ele.</span>
+            <Banner variant="alert">
+              <Icon name="TriangleAlert" />
+              <span>Deletar <strong>{confirmationModal?.shortUrl}</strong> é uma ação irreversível.</span>
+            </Banner>
+          </div>
+        )}
+        confirm={{
+          loading: isDeletingLink,
+          variant: 'destructive',
+          onClick: () => {
+            deleteLinkMutation(confirmationModal!.id, {
+              onSuccess: () => setConfirmationModal(null)
+            })
+          }
+        }}
+      />
       <ShareLinkDialog 
         onOpenChange={() => setSharing(null)}
         open={!!sharing}
