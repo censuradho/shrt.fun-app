@@ -40,8 +40,6 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
   [data]
   )
 
-  console.log(chartData)
-
   const chartConfig = useMemo(() => {
     const config: ChartConfig = { hitsCount: { label: "Cliques" } }
     chartData.forEach((item, index) => {
@@ -52,6 +50,18 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
     })
     return config
   }, [chartData])
+
+  const renderLegend = chartData.map((entry, index) => (
+    <li key={index} className="text-sm flex items-center justify-between gap-6 w-full">
+      <div>
+        <span className={`inline-block w-3 h-3 mr-2 rounded-full`} style={{ backgroundColor: entry.fill }} />
+        <span className="text-card-foreground">
+          {entry.referrer}
+        </span>
+      </div>
+      <span>{entry.hitsCount}</span>
+    </li>
+  ))
 
   return (
     <section className={`p-4 card w-full flex flex-col gap-8 ${className}`}>
@@ -65,47 +75,50 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
         <p className="text-center text-muted-foreground">Nenhum dado disponível</p>
       )}
       {!isPending && !!data?.length && (
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square h-60 [&_.recharts-text]:fill-background"
-        >
-          <PieChart>
-            <ChartTooltip
-              content={<ChartTooltipContent nameKey="referrer" hideLabel />}
-            />
-            <Pie data={chartData} dataKey="hitsCount" innerRadius={60}>
-              <Label
-                content={({ viewBox }) => {
-                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                    return (
-                      <text
-                        x={viewBox.cx}
-                        y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                      >
-                        <tspan
+        <div className="flex flex-col lg:flex-row justify-between gap-6">
+          <ChartContainer
+            config={chartConfig}
+            className="aspect-square h-60 [&_.recharts-text]:fill-background"
+          >
+            <PieChart>
+              <ChartTooltip
+                content={<ChartTooltipContent nameKey="referrer" hideLabel />}
+              />
+              <Pie data={chartData} dataKey="hitsCount" innerRadius={60}>
+                <Label
+                  content={({ viewBox }) => {
+                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                      return (
+                        <text
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-3xl font-bold"
+                          textAnchor="middle"
+                          dominantBaseline="middle"
                         >
-                          {data?.reduce((sum, item) => sum + item.hitsCount, 0) || 0}
-                        </tspan>
-                        <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
-                        >
+                          <tspan
+                            x={viewBox.cx}
+                            y={viewBox.cy}
+                            className="fill-foreground text-3xl font-bold"
+                          >
+                            {data?.reduce((sum, item) => sum + item.hitsCount, 0) || 0}
+                          </tspan>
+                          <tspan
+                            x={viewBox.cx}
+                            y={(viewBox.cy || 0) + 24}
+                            className="fill-muted-foreground"
+                          >
                           Visitantes
-                        </tspan>
-                      </text>
-                    )
-                  }
-                }}
-              />
-            </Pie>
-          </PieChart>
-        </ChartContainer>
+                          </tspan>
+                        </text>
+                      )
+                    }
+                  }}
+                />
+              </Pie>
+            </PieChart>
+          </ChartContainer>
+          <ul className="w-full">{renderLegend}</ul>
+        </div>
       )}
 
     </section>
