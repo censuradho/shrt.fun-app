@@ -60,6 +60,7 @@ export function SignInScreen () {
               label="Senha"
               register={viewModel.form.register('password')}
               id="password"
+              type="password"
               errorMessage={errors.password?.message}
             />
             <div className="flex flex-col items-end gap-2">
