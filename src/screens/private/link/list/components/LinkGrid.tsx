@@ -24,7 +24,7 @@ const formatDate = (date: string) =>
 export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
   return (
     <div className={cn(
-      'card rounded-md p-4 flex flex-col gap-3',
+      'card rounded-md p-4 flex flex-col gap-3 overflow-hidden w-full max-w-full',
       { 'bg-accent': selected }
     )}>
 
@@ -57,7 +57,7 @@ export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
             {getDomain(data.originalUrl).charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <span className="font-semibold text-sm truncate">
+        <span className="font-semibold text-sm truncate flex-1 min-w-0">
           {data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'}
         </span>
         {/* <Link
@@ -69,12 +69,12 @@ export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
       </div>
 
       {/* Short link */}
-      <div className="flex items-center gap-2 min-w-0">
+      <div className="grid grid-cols-[1fr_auto] items-center gap-2">
         <a
           href={data.shortUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-link text-sm hover:underline truncate"
+          className="text-link text-sm hover:underline truncate overflow-hidden"
         >
           {data.shortUrl.replace(/^https?:\/\//, '')}
         </a>
@@ -82,13 +82,13 @@ export function LinkGrid({ data, selected, onSelect, menu }: LinkGridProps) {
       </div>
 
       {/* Original URL */}
-      <div className="flex items-center gap-1 text-muted-foreground min-w-0">
+      <div className="grid grid-cols-[auto_1fr] items-center gap-1 text-muted-foreground">
         <Icon name="CornerDownRight" size={13} className="shrink-0" />
         <a
           href={data.originalUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs hover:underline truncate"
+          className="text-xs hover:underline truncate overflow-hidden"
         >
           {data.originalUrl}
         </a>
