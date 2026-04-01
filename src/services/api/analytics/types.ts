@@ -14,6 +14,7 @@ export interface LocationClicksItem {
 
 export type  TopMostAccessedUrlResponse = Array<{
   shortUrl: string;
+  originalUrl: string;
   hitsCount: number;
   title?: string
 }>
