@@ -15,13 +15,15 @@ export function AnalyticsScreen () {
         <HitsByLocationCard 
           className="col-span-2 md:col-span-1"
         />
-        <TopMostAccessedUrlsCard 
+        <ReferrerDistributionCard 
           className="col-span-2 md:col-span-1"
+        />
+        <TopMostAccessedUrlsCard 
+          className="col-span-2"
         />
         <TopMostAccessedUrlsDetailCard  
           className="col-span-2"
         />
-        <ReferrerDistributionCard />
       </div>
     </div>
   )
