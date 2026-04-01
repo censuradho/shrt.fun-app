@@ -1,10 +1,9 @@
 import { useDebounceCallback } from "@/hooks/useDebounceCallback";
 import { useIntersectionObserver } from "@/hooks/useIntersectObserver";
 import { useDeleteLinkMutation, useFindManyUrlPaginated, useToggleLinkIsActiveMutation } from "@/services/api/url/queries";
-import { type UrlNode, type FindManyLinksQueries } from "@/services/api/url/types";
+import { type FindManyLinksQueries, type UrlNode } from "@/services/api/url/types";
 import { urlValidation } from "@/utils/validations";
 import { useEffect, useRef, useState } from "react";
-import { format } from 'date-fns'
 
 export const ViewEnum = {
   LIST: 'list',
@@ -37,10 +36,10 @@ export function useLinkListViewModel () {
   } = useFindManyUrlPaginated({
     ...queries,
     ...(queries.createdAfter && ({
-      createdAfter: format(new Date(queries.createdAfter), 'yyyy-MM-dd')
+      createdAfter: new Date(queries.createdAfter).toISOString()
     })),
     ...(queries.createdBefore && ({
-      createdBefore: format(new Date(queries.createdBefore), 'yyyy-MM-dd')
+      createdBefore: new Date(queries.createdBefore).toISOString()
     }))
   })
 
