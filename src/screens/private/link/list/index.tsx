@@ -17,6 +17,7 @@ import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
 import { ConfirmationDialog } from "@/components/ConfirmationDialog";
 import { Banner } from "@/components/Banner";
 import { Icon } from "@/components/icons";
+import { DateRangePicker } from "./components/DateRangePicker";
 
 export function LinkListScreen () {
   
@@ -141,20 +142,32 @@ export function LinkListScreen () {
             <h1 className="text-2xl font-bold mb-4">Meus links</h1>
             <LinkButton to={paths.private.link.create}>Criar link</LinkButton>
           </div>
-          <div className="w-full max-w-100 pb-4">
-            <TextField
-              id="search"
-              name="search"
-              placeholder="Buscar links"
-              label="Buscar links"
-              renderLabel={false}
-              inputMode="url"
-              headIcon={{
-                name: 'Search'
+          <div className="flex flex-row flex-wrap md:items-center gap-4  pb-4">
+            <div className="w-full md:max-w-100">
+              <TextField
+                id="search"
+                name="search"
+                placeholder="Buscar links"
+                label="Buscar links"
+                renderLabel={false}
+                inputMode="url"
+                headIcon={{
+                  name: 'Search'
+                }}
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                errorMessage={!isSearchValid ? 'URL inválida' : undefined}
+              />
+            </div>
+            <DateRangePicker
+              createdAfter={queries.createdAfter}
+              createdBefore={queries.createdBefore}
+              placeholder="Filtrar pela data de criação"
+              onApply={({ createdAfter, createdBefore }) => {
+                handleChangeQueries('createdAfter', createdAfter)
+                handleChangeQueries('createdBefore', createdBefore)
+                queryClient.invalidateQueries({ queryKey: ['links'] })
               }}
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              errorMessage={!isSearchValid ? 'URL inválida' : undefined}
             />
           </div>
           {(isTogglingLinkActive || isPending) && <LinearProgress  className="absolute bottom-0 left-0"/>}
