@@ -1,7 +1,7 @@
 import { useDebounceCallback } from "@/hooks/useDebounceCallback";
 import { useIntersectionObserver } from "@/hooks/useIntersectObserver";
-import { useFindManyUrlPaginated, useToggleLinkIsActiveMutation } from "@/services/api/url/queries";
-import type { FindManyLinksQueries } from "@/services/api/url/types";
+import { useDeleteLinkMutation, useFindManyUrlPaginated, useToggleLinkIsActiveMutation } from "@/services/api/url/queries";
+import { type UrlNode, type FindManyLinksQueries } from "@/services/api/url/types";
 import { urlValidation } from "@/utils/validations";
 import { useEffect, useRef, useState } from "react";
 
@@ -22,6 +22,8 @@ export function useLinkListViewModel () {
   const [view, setView] = useState<ViewEnumType>(ViewEnum.LIST)
   const [sharing, setSharing] = useState<{ id: string, shortUrl: string } | null>(null)
 
+  const [confirmationModal, setConfirmationModal] = useState<UrlNode | null>(null)
+
   const isSearchValid = !search || urlValidation(search)
 
   const {
@@ -36,6 +38,11 @@ export function useLinkListViewModel () {
     mutate: toggleLinkIsActive,
     isPending: isTogglingLinkActive
   } = useToggleLinkIsActiveMutation()
+
+  const {
+    mutate: deleteLinkMutation,
+    isPending: isDeletingLink
+  } = useDeleteLinkMutation()
 
   const isSelectedAll = links?.pages.flatMap(page => page.data.data.length)
     .reduce((acc, length) => acc + length, 0) === urlSelected.length
@@ -91,6 +98,7 @@ export function useLinkListViewModel () {
     setUrlSelected(allLinkIds)
   }
 
+
   useDebounceCallback(() => {
     if (!isSearchValid) return;
     handleChangeQueries('search', search)
@@ -118,6 +126,10 @@ export function useLinkListViewModel () {
     sharing, 
     setSharing,
     queries,
-    toggleLinkIsActive
+    toggleLinkIsActive,
+    confirmationModal, 
+    setConfirmationModal,
+    isDeletingLink,
+    deleteLinkMutation
   }
 }
