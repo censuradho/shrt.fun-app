@@ -3,8 +3,9 @@ import type { CursorPaginationParams, CursorPaginationResult } from "../types";
 export interface FindManyLinksQueries extends CursorPaginationParams {
   isActive?: string
   search?: string
+  createdBefore?: string
+  createdAfter?: string
 }
-
 
 export interface CreateUrlRequestPayload {
   url: string
