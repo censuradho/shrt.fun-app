@@ -105,7 +105,7 @@ export function LinkListScreen () {
         open={!!sharing}
         shortUrl={sharing?.shortUrl || ''}
       />
-      <div className="container mt-10 ">
+      <div className="container mt-10 w-full">
         <header className="border-b border-outline flex flex-col gap-6 relative">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold mb-4">Meus links</h1>
@@ -140,7 +140,7 @@ export function LinkListScreen () {
             queryClient.invalidateQueries({ queryKey: ['links', queries] })
           }}
         />
-        <section className="mt-6 w-full flex-1 h-ful">
+        <section className="mt-6 w-full flex-1 h-full">
           {!isFetched && (
             <div className="flex flex-col gap-1">
               <Skeleton className="h-[84px] w-full rounded-md" />
@@ -155,8 +155,9 @@ export function LinkListScreen () {
             </div>
           )}
           <ul className={cn(
+            'w-full',
             {
-              'flex flex-col gap-1 w-full': view !== 'grid',
+              'flex flex-col gap-1': view !== 'grid',
               'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4': view === 'grid'
             }
           )}>
