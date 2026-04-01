@@ -16,14 +16,19 @@ function toggleIsActive (id: string) {
 }
 
 
-export async function getById (id: string) {
+async function getById (id: string) {
   const { data } = await api.get<UrlNode>(`/url/${id}`)
   return data
+}
+
+function deleteById (id: string) {
+  return api.delete(`/url/${id}`)
 }
 
 export const urlService = {
   findManyPaginated,
   create,
   toggleIsActive,
-  getById
+  getById,
+  deleteById
 }

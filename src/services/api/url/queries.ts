@@ -86,3 +86,22 @@ export function useToggleLinkIsActiveMutation () {
     }
   })
 }
+
+export function useDeleteLinkMutation () {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: urlService.deleteById,
+    mutationKey: ['delete-link'],
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['links'],
+        exact: false,
+        refetchType: 'all'
+      })
+    },
+    onError: (error) => {
+      toastifyApiErrorMessage(error)
+    }
+  })
+}
