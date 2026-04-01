@@ -7,6 +7,7 @@ const variants = {
   primary: 'bg-primary-500 text-primary-foreground hover:bg-primary-600',
   ghost: 'bg-card border border-outline text-card-foreground hover:text-foreground hover:bg-accent/30',
   text: 'text-card-foreground hover:text-foreground',
+  destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/70'
 }
 
 const sizes = {
@@ -19,7 +20,7 @@ const sizes = {
     icon: 12
   },
 }
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: keyof typeof variants
   size?: keyof typeof sizes
   loading?: boolean
