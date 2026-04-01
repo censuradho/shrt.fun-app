@@ -119,7 +119,7 @@ export function DateRangePicker(props: DateRangePickerProps) {
       <DialogTrigger asChild>
         <button
           className={cn(
-            'flex justify-start items-center gap-3.5',
+            'flex justify-start items-center gap-3.5 whitespace-nowrap',
             'h-10 border border-outline rounded-sm text-sm bg-input text-foreground focus:border-primary-500',
             'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
             'px-4 placeholder:text-muted-foreground font-mono w-max',
