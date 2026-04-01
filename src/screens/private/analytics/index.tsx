@@ -1,5 +1,6 @@
 import { HitsByLocationCard } from "./components/HitsByLocationCard"
 import { TopMostAccessedUrlsCard } from "./components/TopMostAccessedUrlsCard"
+import { TopMostAccessedUrlsDetailCard } from "./components/TopMostAccessedUrlsDetailCard"
 
 export function AnalyticsScreen () {
   return (
@@ -10,8 +11,15 @@ export function AnalyticsScreen () {
         </div>
       </header>
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-6 gap-4">
-        <HitsByLocationCard />
-        <TopMostAccessedUrlsCard />
+        <HitsByLocationCard 
+          className="col-span-2 md:col-span-1"
+        />
+        <TopMostAccessedUrlsCard 
+          className="col-span-2 md:col-span-1"
+        />
+        <TopMostAccessedUrlsDetailCard  
+          className="col-span-2"
+        />
       </div>
     </div>
   )
