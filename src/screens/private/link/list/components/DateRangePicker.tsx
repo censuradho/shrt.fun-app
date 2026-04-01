@@ -113,7 +113,7 @@ export function DateRangePicker(props: DateRangePickerProps) {
       open={open}
       onOpenChange={(nextOpen) => {
         setOpen(nextOpen)
-        if (nextOpen) setDraft(selectedRange)
+        if (nextOpen) setDraft(selectedRange ?? { from: new Date(), to: new Date() })
       }}
     >
       <DialogTrigger asChild>
