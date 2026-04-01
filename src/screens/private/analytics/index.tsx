@@ -1,4 +1,5 @@
 import { HitsByLocationCard } from "./components/HitsByLocationCard"
+import { ReferrerDistributionCard } from "./components/ReferrerDistributionCard"
 import { TopMostAccessedUrlsCard } from "./components/TopMostAccessedUrlsCard"
 import { TopMostAccessedUrlsDetailCard } from "./components/TopMostAccessedUrlsDetailCard"
 
@@ -20,6 +21,7 @@ export function AnalyticsScreen () {
         <TopMostAccessedUrlsDetailCard  
           className="col-span-2"
         />
+        <ReferrerDistributionCard />
       </div>
     </div>
   )
