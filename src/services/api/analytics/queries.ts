@@ -33,3 +33,10 @@ export function useTopMostAccessedUrlsQuery (params?: TopMostAccessedUrlsQuery) 
     queryFn: () => analyticsService.topMostAccessedUrls(params)
   })
 }
+
+export function useTopMostAccessedUrlsDetailQuery (params?: TopMostAccessedUrlsQuery) {
+  return useQuery({
+    queryKey: ['analytics', 'url', 'ranking', 'detail', params],
+    queryFn: () => analyticsService.topMostAccessedUrlsDetail(params)
+  })
+}

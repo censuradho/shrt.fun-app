@@ -1,6 +1,6 @@
 import { api } from "..";
 import type { OffsetPaginationParams } from "../types";
-import type { FindHistCountByLocationResponse, FindHitsByCityResponse, FindHitsByCountryResponse, TopMostAccessedUrlResponse, TopMostAccessedUrlsQuery } from "./types";
+import type { FindHistCountByLocationResponse, FindHitsByCityResponse, FindHitsByCountryResponse, TopMostAccessedUrlDetailResponse, TopMostAccessedUrlResponse, TopMostAccessedUrlsQuery } from "./types";
 
 async function findHistCountByLocation (id: string) {
   const { data } = await api.get<FindHistCountByLocationResponse>(`/analytics/locations/hits/url/${id}`);
@@ -31,10 +31,18 @@ async function topMostAccessedUrls (params?: TopMostAccessedUrlsQuery) {
   return data
 }
 
+async function topMostAccessedUrlsDetail (params?: TopMostAccessedUrlsQuery) {
+  const { data } = await api.get<TopMostAccessedUrlDetailResponse>('/analytics/url/ranking/details', {
+    params
+  })
+  return data
+}
+
 
 export const analyticsService = {
   findHistCountByLocation,
   findHitsByCity,
   findHitsByCountry,
-  topMostAccessedUrls
+  topMostAccessedUrls,
+  topMostAccessedUrlsDetail
 }

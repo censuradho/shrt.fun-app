@@ -17,6 +17,13 @@ export type  TopMostAccessedUrlResponse = Array<{
   hitsCount: number;
 }>
 
+export type TopMostAccessedUrlDetailResponse = Array<TopMostAccessedUrlResponse[number] & {
+  city?: string | null
+  country?: string | null
+  device?: string | null
+  os?: string | null
+}>
+
 export interface TopMostAccessedUrlsQuery {
   limit?: number
   isActive?: boolean
