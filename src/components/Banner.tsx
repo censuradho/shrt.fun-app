@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import { Icon, type IconNames } from "./icons";
 
 const variants = {
-  alert: "dark:bg-destructive/10 border-destructive dark:text-destructive dark:border-destructive border",
+  alert: "dark:bg-destructive/10 dark:text-destructive",
   info: "bg-blue-100 text-blue-800",
   success: "bg-green-100 text-green-800",
   warning: "bg-yellow-100 text-yellow-800",
