@@ -17,7 +17,7 @@ import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
 import { ConfirmationDialog } from "@/components/ConfirmationDialog";
 import { Banner } from "@/components/Banner";
 import { Icon } from "@/components/icons";
-import { DateRangePicker } from "./components/DateRangePicker";
+import { QueryMenu } from "./components/QueryMenu";
 
 export function LinkListScreen () {
   
@@ -50,6 +50,15 @@ export function LinkListScreen () {
   } = useLinkListViewModel()
   const queryClient = useQueryClient()
 
+  const hasQueries = (() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { isActive: _, ...otherQueries} = queries
+
+    return Object.values(otherQueries).some(value => value !== undefined)
+  })()
+
+  const totalItems = links?.pages?.reduce((total, page) => total + (page.data?.data.length || 0), 0) || 0 
+  
   const renderUrls = links?.pages?.flatMap(page => (
     page.data?.data.map(link => {
       const menu: LinkMenuProps = {
@@ -142,34 +151,25 @@ export function LinkListScreen () {
             <h1 className="text-2xl font-bold mb-4">Meus links</h1>
             <LinkButton to={paths.private.link.create}>Criar link</LinkButton>
           </div>
-          <div className="flex flex-row flex-wrap md:items-center gap-4  pb-4">
-            <div className="w-full md:max-w-100">
-              <TextField
-                id="search"
-                name="search"
-                placeholder="Buscar links"
-                label="Buscar links"
-                renderLabel={false}
-                inputMode="url"
-                headIcon={{
-                  name: 'Search'
-                }}
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                errorMessage={!isSearchValid ? 'URL inválida' : undefined}
-              />
-            </div>
-            <DateRangePicker
-              createdAfter={queries.createdAfter}
-              createdBefore={queries.createdBefore}
-              placeholder="Filtrar pela data de criação"
-              onApply={({ createdAfter, createdBefore }) => {
-                handleChangeQueries('createdAfter', createdAfter)
-                handleChangeQueries('createdBefore', createdBefore)
-                queryClient.invalidateQueries({ queryKey: ['links'] })
-              }}
-            />
-          </div>
+          <QueryMenu
+            search={search}
+            onSearchChange={setSearch}
+            isSearchValid={isSearchValid}
+            createdAfter={queries.createdAfter}
+            createdBefore={queries.createdBefore}
+            hasQueries={hasQueries}
+            totalItems={totalItems}
+            onApplyDateRange={({ createdAfter, createdBefore }) => {
+              handleChangeQueries('createdAfter', createdAfter)
+              handleChangeQueries('createdBefore', createdBefore)
+              queryClient.invalidateQueries({ queryKey: ['links'] })
+            }}
+            onClear={() => {
+              handleChangeQueries('createdAfter', undefined)
+              handleChangeQueries('createdBefore', undefined)
+              queryClient.invalidateQueries({ queryKey: ['links'] })
+            }}
+          />
           {(isTogglingLinkActive || isPending) && <LinearProgress  className="absolute bottom-0 left-0"/>}
         </header>
         <ToolsMenu 
