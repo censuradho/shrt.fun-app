@@ -50,6 +50,7 @@ export function CreateLinkScreen () {
               label="URL de destino"
               placeholder="https://www.exemplo.com"
               register={form.register('url')}
+              inputMode="url"
               errorMessage={errors.url?.message}
               id="url"
             />

@@ -118,6 +118,7 @@ export function LinkListScreen () {
               placeholder="Buscar links"
               label="Buscar links"
               renderLabel={false}
+              inputMode="url"
               headIcon={{
                 name: 'Search'
               }}
