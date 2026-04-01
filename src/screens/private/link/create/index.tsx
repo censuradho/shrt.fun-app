@@ -6,6 +6,7 @@ import { appConfig } from "@/config/app";
 import { SuccessCreateDialog } from "./components/SuccessCreateDialog";
 import { Icon } from "@/components/icons";
 import { useNavigate } from "react-router";
+import { paths } from "@/constants/routes";
 
 export function CreateLinkScreen () {
   const navigate = useNavigate()
@@ -27,7 +28,7 @@ export function CreateLinkScreen () {
         open={!!successModal}
         onOpenChange={() => { 
           setSuccessModal(null) 
-          navigate(-1)
+          navigate(paths.private.link.list)
         }}
         link={successModal?.shortUrl || ''}
       />
