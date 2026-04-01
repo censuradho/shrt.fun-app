@@ -4,6 +4,7 @@ import { useDeleteLinkMutation, useFindManyUrlPaginated, useToggleLinkIsActiveMu
 import { type UrlNode, type FindManyLinksQueries } from "@/services/api/url/types";
 import { urlValidation } from "@/utils/validations";
 import { useEffect, useRef, useState } from "react";
+import { format } from 'date-fns'
 
 export const ViewEnum = {
   LIST: 'list',
@@ -19,6 +20,7 @@ export function useLinkListViewModel () {
   const [queries, setQueries] = useState<FindManyLinksQueries>({
     isActive: 'true'
   })
+
   const [view, setView] = useState<ViewEnumType>(ViewEnum.LIST)
   const [sharing, setSharing] = useState<{ id: string, shortUrl: string } | null>(null)
 
@@ -32,7 +34,15 @@ export function useLinkListViewModel () {
     error,
     fetchNextPage,
     isFetched,
-  } = useFindManyUrlPaginated(queries)
+  } = useFindManyUrlPaginated({
+    ...queries,
+    ...(queries.createdAfter && ({
+      createdAfter: format(new Date(queries.createdAfter), 'yyyy-MM-dd')
+    })),
+    ...(queries.createdBefore && ({
+      createdBefore: format(new Date(queries.createdBefore), 'yyyy-MM-dd')
+    }))
+  })
 
   const {
     mutate: toggleLinkIsActive,
