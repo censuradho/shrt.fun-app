@@ -6,6 +6,8 @@ import { useTopMostAccessedUrlsDetailQuery } from "@/services/api/analytics/quer
 import { clearHttp, getDomain } from "@/utils/getDomain"
 import { useState } from "react"
 import type { BaseCardProps } from "./types"
+import { CopyButton } from "@/components/CopyButton"
+import { copyToClipboard } from "@/utils/copyToClipboard"
 
 
 export function TopMostAccessedUrlsDetailCard ({ className }: BaseCardProps) {
@@ -31,13 +33,22 @@ export function TopMostAccessedUrlsDetailCard ({ className }: BaseCardProps) {
     const device = item.device || "Dispositivo Desconecido"
 
     return (
-      <li key={index} className="flex flex-col md:flex-row md:items-center bg-popover rounded-md border border-outline px-2 py-4 md:py-1 md:px-2 justify-between gap-2 md:gap-4">
-        <div className="flex flex-col flex-1">
-          <span className="text-xs text-card-foreground">{item.title || `${getDomain(item.originalUrl)} - Sem título`}</span>
-          <strong className="text-xs text-foreground truncate flex-1">{index + 1}. {clearHttp(item.shortUrl)}</strong>
+      <li key={index} className="flex flex-col md:flex-row md:items-start bg-popover rounded-md border border-outline px-2 py-4 md:py-1 md:px-2 justify-between gap-2 md:gap-6">
+        <div className="flex flex-col flex-1 gap-1">
+          <div className="grid grid-cols-1 gap-1">
+            <span className="text-xs text-card-foreground">{item.title || `${getDomain(item.originalUrl)} - Sem título`}</span>
+            <div className="flex items-center gap-4">
+              <span className="text-xs text-card-foreground">{`${country} - ${city} (${os} - ${device})`}</span>
+              <span className="text-xs font-semibold text-card-foreground whitespace-nowrap">{formatClicks(item.hitsCount)} cliques</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-[auto_1fr] items-center gap-1">
+            <strong className="text-xs text-foreground truncate flex-1">{index + 1}. {clearHttp(item.shortUrl)}</strong>
+            <CopyButton 
+              onClick={() => copyToClipboard(item.shortUrl)}
+            />
+          </div>
         </div>
-        <span className="text-xs text-card-foreground">{`${country} - ${city} (${os} - ${device})`}</span>
-        <span className="text-sm text-card-foreground whitespace-nowrap">{formatClicks(item.hitsCount)} cliques</span>
       </li>
     )
   })
