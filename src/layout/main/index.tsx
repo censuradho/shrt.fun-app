@@ -3,11 +3,13 @@ import { useAuth } from "@/contexts/auth/auth.context";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import { AccountMenu } from "./components/AccountMenu";
 import { ExpandedNavigation } from "./components/ExpandedNavigation";
 import { IconNavigation } from "./components/IconNavigation";
 import { MobileNavigation } from "./components/MobileNavigation";
+import Logo from "@/assets/logo-short.svg?react"
+import { paths } from "@/constants/routes";
 
 
 export function MainLayout () {
@@ -26,6 +28,11 @@ export function MainLayout () {
               'max-w-15': !expanded
             }
           )}>
+          <div className="w-full flex justify-start px-6 items-center h-12 shrink-0">
+            <Link to={paths.private.link.list}>
+              <Logo className="text-foreground w-8 h-8"/>
+            </Link>
+          </div>
           <div className="h-12 ">
 
           </div>
