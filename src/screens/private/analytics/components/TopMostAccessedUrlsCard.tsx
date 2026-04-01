@@ -28,7 +28,10 @@ export function TopMostAccessedUrlsCard ({ className }: BaseCardProps) {
   const renderItems = data?.map((item, index) => (
     <li key={index} className="flex items-center bg-popover rounded-md border border-outline py-1 px-2 justify-between gap-4">
       <div className="flex flex-col flex-1">
-        <span className="text-xs text-card-foreground">{item.title || `${getDomain(item.originalUrl)} - Sem título`}</span>
+        <div className="grid grid-cols-[auto_1fr] gap-2 items-center">
+          <span className="text-xs text-card-foreground">{item.title || `${getDomain(item.originalUrl)} - Sem título`}</span>
+          <span className="text-xs font-semibold text-card-foreground whitespace-nowrap">{formatClicks(item.hitsCount)} clicks</span>
+        </div>
         <div className="grid grid-cols-[auto_1fr] items-center gap-1">
           <strong className="text-xs text-foreground truncate">{index + 1}. {clearHttp(item.shortUrl)}</strong>
           <CopyButton 
@@ -36,7 +39,6 @@ export function TopMostAccessedUrlsCard ({ className }: BaseCardProps) {
           />
         </div>
       </div>
-      <span className="text-sm text-card-foreground whitespace-nowrap">{formatClicks(item.hitsCount)} clicks</span>
     </li>
   ))
 
