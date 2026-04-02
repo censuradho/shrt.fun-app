@@ -38,6 +38,7 @@ export interface UrlNode {
     cornersDotStyle?: string
     centerLogo?: string
     dotsStyle?: string
+    hideWatermark?: boolean
   }
 }
 
@@ -49,6 +50,7 @@ export interface QrCodePreviewRequestPayload {
   cornersSquareStyle?: string
   cornersDotStyle?: string
   centerLogo?: string
+  hideWatermark?: boolean
   watermarkLogo?: string
   dotsStyle?: string
 }
