@@ -17,7 +17,7 @@ export function useUrlDetailViewModel() {
   return {
     data,
     isPending,
-    qrCode,
+    qrCode: qrCode?.qrCode,
     isGeneratingQrCode
   }
 }
