@@ -12,6 +12,15 @@ export function QrCodeCustomizeScreen () {
     <div className="grid md:grid-cols-[720px_1fr] flex-1 h-full">
       <section className="flex flex-col bg-card px-4 mx-1 mt-1 rounded-tl-2xl relative pb-10">
         <div className="w-full max-w-[600px] flex-1 mx-auto mt-10 ">
+          <Button
+            variant="ghost"
+            className="w-full mb-8 md:hidden sticky top-1 z-10 shadow-2xl"
+            headIcon={{
+              name: 'QrCode'
+            }}
+          >
+            Preview do seu QR Code
+          </Button>
           <header className="flex justify-between items-center gap-4">
             <h1 className="text-2xl font-bold">Personalize o design</h1>
           </header>
