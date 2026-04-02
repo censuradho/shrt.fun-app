@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import { qrCodeCustomizeValidations, type QRCodeCustomizeFormData } from "../validations";
+import { useAuth } from "@/contexts/auth/auth.context";
 
 export function useQRCustomizeViewModel () {
+  const { isFree } = useAuth()
+
   const navigate = useNavigate()
   
   const {
@@ -26,7 +29,7 @@ export function useQRCustomizeViewModel () {
       hasWaterMark: true
     },
     values: {
-      hasWaterMark: !(url?.qrCodeOptions?.hideWatermark),
+      hasWaterMark: !(url?.qrCodeOptions?.hideWatermark) && !isFree,
       dotsColor: url?.qrCodeOptions?.dotsColor,
       backgroundColor: url?.qrCodeOptions?.backgroundColor,
       centerLogo: url?.qrCodeOptions?.centerLogo,
