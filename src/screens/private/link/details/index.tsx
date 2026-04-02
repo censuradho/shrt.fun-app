@@ -40,7 +40,7 @@ export function DetailLinkScreen () {
           </button>
         </header>
         <section className="bg-card rounded-md p-4 mt-6 flex flex-col gap-4">
-          <div className="grid grid-cols-[64px_1fr_auto] gap-4">
+          <div className="grid md:grid-cols-[64px_1fr_auto] gap-4">
             <Avatar size="xl" className="rounded-sm">
               <AvatarImage
                 src={getLinkFavicon(data.originalUrl, 64)}
@@ -52,7 +52,7 @@ export function DetailLinkScreen () {
             </Avatar>
             <div className="col-span-2">
               <h1 className="text-2xl ">{data.title ? data.title : getDomain(data.originalUrl) + ' - Sem título'} </h1>
-              <div className="flex items-center gap-2">
+              <div className="grid grid-cols-[auto_1fr] items-center gap-2">
                 <a
                   href={data.shortUrl}
                   target="_blank"
@@ -64,7 +64,7 @@ export function DetailLinkScreen () {
                 <CopyButton onClick={() => copyToClipboard(data.shortUrl)} />
               </div>
               {/* Original URL */}
-              <div className="flex items-center gap-1 text-muted-foreground min-w-0 ">
+              <div className="grid grid-cols-[auto_1fr] items-center gap-1 text-muted-foreground min-w-0 ">
                 <Icon name="CornerDownRight" size={14} className="shrink-0" />
                 <a
                   href={data.originalUrl}
@@ -85,7 +85,6 @@ export function DetailLinkScreen () {
               className="text-sm">{formatDate(data.createdAt, {
                 hour: 'numeric',
                 minute: 'numeric',
-                timeZoneName: 'short',
               })}
             </span>
           </div>
@@ -93,7 +92,7 @@ export function DetailLinkScreen () {
         <section className="w-full mt-6 flex flex-col card px-4 py-6">
           <h2 className="text-lg">QR Code</h2>
           <div className="mt-6">
-            <div className="flex items-start gap-3.5">
+            <div className="grid md:flex items-start gap-3.5">
               <QRCodePreview
                 src={qrCode ?? null}
                 isPending={isGeneratingQrCode}
