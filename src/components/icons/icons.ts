@@ -38,9 +38,13 @@ import {
   RefreshCw,
   Settings,
   Image,
+  Download,
+  PaintRoller
 } from 'lucide-react'
 
 export const icons = {
+  PaintRoller,
+  Download,
   Image,
   Settings,
   RefreshCw,
