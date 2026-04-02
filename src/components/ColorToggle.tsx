@@ -31,7 +31,7 @@ export function ColorToggle (props: ColorToggleProps) {
       {selected && (
         <Icon
           name="Check"
-          className="absolute z-20 text-white pointer-events-none"
+          className="absolute z-2 text-white pointer-events-none"
           size={14}
         />
       )}
