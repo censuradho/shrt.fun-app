@@ -11,12 +11,13 @@ import cornersDotSquare from '@/assets/qrCodeCornerPreview/cornersDotSquare.svg'
 import cornersSquareDot from '@/assets/qrCodeCornerPreview/cornersSquareDot.svg'
 import cornersSquareExtra from '@/assets/qrCodeCornerPreview/cornersSquareExtra.svg'
 import type { QRCodeCustomizeFormData } from '../validations'
+import { QRCodeDotStyleEnum } from '@/constants/qrCode'
 
 const dots = [
-  { value: 'square', src: dotSquare },
-  { value: 'fluid', src: dotsFluid },
-  { value: 'mixed', src: dotsMixed },
-  { value: 'rounded', src: dotsRounded },
+  { value: QRCodeDotStyleEnum.SQUARE, src: dotSquare },
+  { value: QRCodeDotStyleEnum.FLUID, src: dotsFluid },
+  { value: QRCodeDotStyleEnum.MIXED, src: dotsMixed },
+  { value: QRCodeDotStyleEnum.ROUNDED, src: dotsRounded },
 ]
 
 const corners = [
