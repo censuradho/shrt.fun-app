@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient, type InfiniteData } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 import { urlService } from ".";
-import type { FindManyLinksQueries, FindManyUrlPaginated, UrlNode } from "./types";
+import type { FindManyLinksQueries, FindManyUrlPaginated, QrCodePreviewRequestPayload, UrlNode } from "./types";
 import { toastifyApiErrorMessage } from "../toastifyApiErrorMessage";
 
 type LinksCache = InfiniteData<AxiosResponse<FindManyUrlPaginated>>
@@ -118,6 +118,24 @@ export function useGenerateQrCodePreviewMutation () {
   return useMutation({
     mutationFn: urlService.generateQrCodePreview,
     mutationKey: ['generate-qrcode-preview'],
+    onError: (error) => {
+      toastifyApiErrorMessage(error)
+    }
+  })
+}
+
+export function useCustomizeQRCodeMutation () {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({
+      urlId, 
+      payload
+    }: { urlId: string, payload: QrCodePreviewRequestPayload }) => urlService.customizeQRCode(urlId, payload),
+    mutationKey: ['customize-qrcode'],
+    onSuccess: (_, { urlId }) => {
+      queryClient.invalidateQueries({ queryKey: ['qrcode', urlId] })
+    },
     onError: (error) => {
       toastifyApiErrorMessage(error)
     }

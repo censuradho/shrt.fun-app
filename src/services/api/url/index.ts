@@ -37,6 +37,13 @@ async function getQrCode (urlId: string) {
   return data
 }
 
+async function customizeQRCode (urlId: string, payload: QrCodePreviewRequestPayload) {
+  const { data }  = await api.patch(`/url/${urlId}/qrcode`, payload)
+
+  return data
+
+}
+
 export const urlService = {
   findManyPaginated,
   create,
@@ -44,5 +51,6 @@ export const urlService = {
   getById,
   deleteById,
   generateQrCodePreview,
-  getQrCode
+  getQrCode,
+  customizeQRCode
 }
