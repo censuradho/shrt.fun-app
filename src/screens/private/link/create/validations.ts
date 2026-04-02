@@ -1,6 +1,6 @@
 import { errorMessages } from "@/constants/errorMessages";
 import { sanitizeString } from "@/utils/sanitizeString";
-import { slugValidation, urlValidation } from "@/utils/validations";
+import { domainValidation, slugValidation, urlValidation } from "@/utils/validations";
 import z from "zod";
 
 export const createLinkValidation = z.object({
@@ -8,7 +8,8 @@ export const createLinkValidation = z.object({
     .string()
     .min(1, errorMessages.required)
     .transform(sanitizeString)
-    .refine(url => urlValidation(url), 'URL inválida'),
+    .refine(url => urlValidation(url), 'URL inválida')
+    .refine(url => domainValidation(url), 'É necessário uma URL válida, como "yourbrnd.co/niceurl"'),
   slug: z
     .string()
     .optional()
