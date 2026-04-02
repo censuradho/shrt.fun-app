@@ -6,12 +6,12 @@ import dotsMixed from '@/assets/qrcodesDotsPreview/dotsMixed.svg'
 import dotsRounded from '@/assets/qrcodesDotsPreview/dotsRounded.svg'
 import dotsFluid from '@/assets/qrcodesDotsPreview/dotsFluid.svg'
 
-import cornersDotDot from '@/assets/qrCodeCornerPreview/cornersDotDot.svg'
-import cornersDotSquare from '@/assets/qrCodeCornerPreview/cornersDotSquare.svg'
 import cornersSquareDot from '@/assets/qrCodeCornerPreview/cornersSquareDot.svg'
 import cornersSquareExtra from '@/assets/qrCodeCornerPreview/cornersSquareExtra.svg'
+import cornersDotSquare from '@/assets/qrCodeCornerPreview/cornersDotSquare.svg'
+
 import type { QRCodeCustomizeFormData } from '../validations'
-import { QRCodeDotStyleEnum } from '@/constants/qrCode'
+import { QRCodeCornersSquareStyleEnum, QRCodeDotStyleEnum } from '@/constants/qrCode'
 
 const dots = [
   { value: QRCodeDotStyleEnum.SQUARE, src: dotSquare },
@@ -21,10 +21,9 @@ const dots = [
 ]
 
 const corners = [
-  { value: 'dot', src: cornersDotDot },
-  { value: 'dotSquare', src: cornersDotSquare },
-  { value: 'squareDot', src: cornersSquareDot },
-  { value: 'extra-rounded', src: cornersSquareExtra },
+  { value: QRCodeCornersSquareStyleEnum.SQUARE, src: cornersDotSquare },
+  { value: QRCodeCornersSquareStyleEnum.DOT, src: cornersSquareDot },
+  { value: QRCodeCornersSquareStyleEnum.EXTRA_ROUNDED, src: cornersSquareExtra },
 ]
 
 const itemClassName = "p-2 border-5 border-outline rounded-md bg-white cursor-pointer outline-none data-[state=checked]:border-primary-500 focus-visible:ring-2 focus-visible:ring-ring"
@@ -80,8 +79,8 @@ export function StyleCard ({ form }: StyleCardProps) {
                   value={value}
                   className={itemClassName}
                 >
-                  <div className="overflow-hidden rounded-md">
-                    <img src={src} className="size-10 rounded-md" />
+                  <div className="rounded-md">
+                    <img src={src} className="size-10" />
                   </div>
                 </RadioGroupPrimitive.Item>
               ))}
