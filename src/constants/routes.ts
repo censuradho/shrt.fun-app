@@ -11,7 +11,8 @@ export const paths = {
     link: {
       list: "/app/links",
       create: "/app/links/create",
-      details: '/app/links/:id'
+      details: '/app/links/:id',
+      qrCustomize: '/app/links/:id/qrcode'
     }
   }
 } as const
