@@ -1,12 +1,24 @@
-import { Icon } from "@/components/icons"
-import { useUrlDetailViewModel } from "./hooks/useUrlDetailViewModel"
-import { useNavigate } from "react-router"
-import { AvatarFallback, AvatarImage, Avatar } from "@/components/ui/avatar"
-import { getDomain, getLinkFavicon } from "@/utils/getDomain"
 import { CopyButton } from "@/components/CopyButton"
-import { copyToClipboard } from "@/utils/copyToClipboard"
+import { IconButton } from "@/components/IconButton"
+import { Icon } from "@/components/icons"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
 import { formatDate } from "@/lib/date"
+import { copyToClipboard } from "@/utils/copyToClipboard"
+import { downloadQrCode } from "@/utils/downloadQrCode"
+import { getDomain, getLinkFavicon } from "@/utils/getDomain"
+import { useNavigate } from "react-router"
 import { QRCodePreview } from "../create/components/QRCodePreview"
+import { useUrlDetailViewModel } from "./hooks/useUrlDetailViewModel"
+import { Button } from "@/components/Button"
 
 export function DetailLinkScreen () {
   const {
@@ -81,10 +93,49 @@ export function DetailLinkScreen () {
         <section className="w-full mt-6 flex flex-col card px-4 py-6">
           <h2 className="text-lg">QR Code</h2>
           <div className="mt-6">
-            <QRCodePreview
-              src={qrCode?.qrCode ?? null}
-              isPending={isGeneratingQrCode}
-            />
+            <div className="flex items-start gap-3.5">
+              <QRCodePreview
+                src={qrCode?.qrCode ?? null}
+                isPending={isGeneratingQrCode}
+              />
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="ghost"
+                >Ver detalhes</Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <IconButton 
+                      icon={{
+                        name: 'Ellipsis'
+                      }}
+                    />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-40" align="start">
+
+                    <DropdownMenuGroup>
+                      <DropdownMenuLabel>Opções de download</DropdownMenuLabel>
+                      <DropdownMenuItem onClick={() => downloadQrCode(qrCode!.qrCode, 'svg')}>
+                        <Icon name="Download" />
+                      Download SVG
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => downloadQrCode(qrCode!.qrCode, 'png')}>
+                        <Icon name="Download" />
+                      Download PNG
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => downloadQrCode(qrCode!.qrCode, 'jpg')}>
+                        <Icon name="Download" />
+                      Download JPEG
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>
+                      <Icon name="PaintRoller" />
+                    Customizar
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </div>
           </div>
         </section>
       </div>
