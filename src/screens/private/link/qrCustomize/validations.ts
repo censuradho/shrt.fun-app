@@ -30,7 +30,7 @@ export const qrCodeCustomizeValidations = z.object({
     .regex(/^data:image\/(png|jpeg|jpg);base64,[A-Za-z0-9+/]+=*$/, "Formato de imagem inválido")
     .max(MAX_CENTER_LOGO_SIZE, 'O logo deve ser menor que 2MB')
     .optional(),
-  watermarkLogo: z.boolean(),
+  hasWaterMark: z.boolean().optional(),
 })
 
 export type QRCodeCustomizeFormData = z.infer<typeof qrCodeCustomizeValidations>
