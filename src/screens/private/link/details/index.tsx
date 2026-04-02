@@ -6,12 +6,13 @@ import { getDomain, getLinkFavicon } from "@/utils/getDomain"
 import { CopyButton } from "@/components/CopyButton"
 import { copyToClipboard } from "@/utils/copyToClipboard"
 import { formatDate } from "@/lib/date"
-import { LocationChart } from "./components/LocationChart"
+import { QRCodePreview } from "../create/components/QRCodePreview"
 
 export function DetailLinkScreen () {
   const {
     data,
-    hitsCountByLocation
+    isGeneratingQrCode,
+    qrCode
   } = useUrlDetailViewModel()
   const navigate = useNavigate()
 
@@ -77,8 +78,14 @@ export function DetailLinkScreen () {
             </span>
           </div>
         </section>
-        <section className="w-full mt-6 flex flex-col justify-center items-center">
-          <LocationChart data={hitsCountByLocation.data || []} />
+        <section className="w-full mt-6 flex flex-col card px-4 py-6">
+          <h2 className="text-lg">QR Code</h2>
+          <div className="mt-6">
+            <QRCodePreview
+              src={qrCode?.qrCode ?? null}
+              isPending={isGeneratingQrCode}
+            />
+          </div>
         </section>
       </div>
     </>
