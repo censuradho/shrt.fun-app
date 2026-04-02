@@ -12,13 +12,19 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { downloadQrCode } from "@/utils/downloadQrCode"
 import { QRCodePreview } from "../../create/components/QRCodePreview"
+import { useNavigate } from "react-router"
+import { resolvePath } from "@/utils/resolvePath"
+import { paths } from "@/constants/routes"
 
 interface QRCodeSectionProps {
+  urlId: string
   qrCode: string | undefined
   isPending: boolean
 }
 
-export function QRCodeSection ({ qrCode, isPending }: QRCodeSectionProps) {
+export function QRCodeSection ({ urlId, qrCode, isPending }: QRCodeSectionProps) {
+  const navigate = useNavigate()
+
   return (
     <section className="w-full mt-6 flex flex-col card px-4 py-6">
       <h2 className="text-lg">QR Code</h2>
@@ -51,7 +57,7 @@ export function QRCodeSection ({ qrCode, isPending }: QRCodeSectionProps) {
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate(resolvePath(paths.private.link.qrCustomize, { id: urlId })) }>
                   <Icon name="PaintRoller" />
                   Customizar
                 </DropdownMenuItem>
