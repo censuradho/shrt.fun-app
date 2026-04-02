@@ -20,7 +20,7 @@ export function ImageBase64Input ({
   label,
   errorMessage,
   className,
-  accept = 'image/png,image/jpeg,image/svg+xml',
+  accept = 'image/png,image/jpeg',
 }: ImageBase64InputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [sizeError, setSizeError] = useState<string | null>(null)
@@ -79,7 +79,7 @@ export function ImageBase64Input ({
               Remover
             </button>
           )}
-          <span className="text-xs text-muted-foreground">PNG, JPEG ou SVG. Máx. {MAX_SIZE_MB}MB</span>
+          <span className="text-xs text-muted-foreground">PNG ou JPEG. Máx. {MAX_SIZE_MB}MB</span>
         </div>
       </div>
       <input
