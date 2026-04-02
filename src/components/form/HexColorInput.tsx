@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { type ChangeEvent, useCallback, useRef } from "react"
+import { type ChangeEvent, type ReactNode, useCallback, useRef } from "react"
 
 export interface HexColorInputProps {
   value?: string
@@ -8,6 +8,7 @@ export interface HexColorInputProps {
   className?: string
   disabled?: boolean
   errorMessage?: string
+  tailLabel?: ReactNode
 }
 
 export function HexColorInput ({ 
@@ -16,7 +17,8 @@ export function HexColorInput ({
   label, 
   className,
   disabled,
-  errorMessage
+  errorMessage,
+  tailLabel
 }: HexColorInputProps) {
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,8 +39,13 @@ export function HexColorInput ({
 
   return (
     <div className={cn("flex flex-col gap-1.5 w-full", className)}>
-      {label && (
-        <span className="text-xxs uppercase text-card-foreground">{label}</span>
+      {(label || tailLabel) && (
+        <div className="flex justify-between items-center w-full text-card-foreground">
+          {label && (
+            <span className="text-xxs uppercase ">{label}</span>
+          )}
+          {tailLabel}
+        </div>
       )}
       <div className="flex items-center gap-2 border border-outline rounded-sm px-3 h-10 bg-input w-full focus-within:border-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background">
         <label className="relative cursor-pointer shrink-0">
@@ -50,7 +57,7 @@ export function HexColorInput ({
             type="color"
             value={isValid ? value : '#000000'}
             onChange={handleSwatchChange}
-            className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+            className="absolute inset-0 opacity-0 w-full h-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
             disabled={disabled}
           />
         </label>
@@ -60,7 +67,7 @@ export function HexColorInput ({
           onChange={handleTextChange}
           maxLength={7}
           disabled={disabled}
-          className="w-full text-sm bg-transparent outline-none text-foreground disabled:text-muted-foreground"
+          className="w-full text-sm bg-transparent outline-none text-foreground disabled:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
           spellCheck={false}
         />
       </div>
