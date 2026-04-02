@@ -3,6 +3,7 @@ import { useNavigate } from "react-router"
 import { LinkInfoSection } from "./components/LinkInfoSection"
 import { QRCodeSection } from "./components/QRCodeSection"
 import { useUrlDetailViewModel } from "./hooks/useUrlDetailViewModel"
+import { paths } from "@/constants/routes"
 
 export function DetailLinkScreen () {
   const {
@@ -17,7 +18,7 @@ export function DetailLinkScreen () {
     <>
       <div className="container mt-10">
         <header className="flex justify-between items-center gap-4">
-          <button className="cursor-pointer flex items-center gap-2" onClick={() => navigate(-1)}>
+          <button className="cursor-pointer flex items-center gap-2" onClick={() => navigate(paths.private.link.list)}>
             <Icon size={20} name="ChevronLeft" />
             <span className="text-md font-medium">Voltar a lista</span>
           </button>
@@ -25,6 +26,7 @@ export function DetailLinkScreen () {
         <LinkInfoSection data={data} loading={isPending} />
         <QRCodeSection 
           qrCode={qrCode} 
+          urlId={data?.id ?? ''}
           isPending={isGeneratingQrCode} 
         />
       </div>
