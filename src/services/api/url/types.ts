@@ -12,6 +12,9 @@ export interface CreateUrlRequestPayload {
   slug?: string | null
   title?: string | null
   generateQrCode?: boolean
+  qrOptions?: {
+    dotsColor?: string
+  }
 }
 
 export interface UrlNode {
