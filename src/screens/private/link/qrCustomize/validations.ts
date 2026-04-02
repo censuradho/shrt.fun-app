@@ -13,7 +13,7 @@ export const qrCodeCustomizeValidations = z.object({
     QRCodeDotStyleEnum.EXTRA_ROUNDED,
     QRCodeDotStyleEnum.MIXED,
     QRCodeDotStyleEnum.FLUID,
-  ]),
+  ]).optional(),
   dotsColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, "Cor inválida").optional(),
   backgroundColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, "Cor inválida").optional(),
   cornersSquareStyle: z.enum([
