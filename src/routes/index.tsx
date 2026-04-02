@@ -10,6 +10,7 @@ import { DetailLinkScreen } from "@/screens/private/link/details";
 import { AnalyticsScreen } from "@/screens/private/analytics";
 import { ForgotPasswordScreen } from "@/screens/public/forgotPassword";
 import { ResetPasswordScreen } from "@/screens/public/resetPassword";
+import { QrCodeCustomizeScreen } from "@/screens/private/link/qrCustomize";
 
 
 export function AppRoutes () {
@@ -25,6 +26,7 @@ export function AppRoutes () {
           <Route path={paths.private.link.list} element={<LinkListScreen />} />
           <Route path={paths.private.link.create} element={<CreateLinkScreen />} />
           <Route path={paths.private.link.details} element={<DetailLinkScreen />} />
+          <Route path={paths.private.link.qrCustomize} element={<QrCodeCustomizeScreen />} />
           <Route path={paths.private.analytics} element={<AnalyticsScreen />} />
         </Route>
       </Route>
