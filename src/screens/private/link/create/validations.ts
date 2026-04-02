@@ -18,7 +18,9 @@ export const createLinkValidation = z.object({
     .string()
     .max(255, errorMessages.maxLength(255))
     .optional()
-    .transform(sanitizeString)
+    .transform(sanitizeString),
+  generateQrCode: z.boolean().optional().default(false),
+  qrCodeColor: z.string().optional(),
 })
 
 export type CreateLinkFormData = z.infer<typeof createLinkValidation>
