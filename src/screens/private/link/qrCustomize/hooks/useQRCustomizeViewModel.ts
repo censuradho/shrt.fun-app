@@ -3,8 +3,12 @@ import { useForm } from "react-hook-form";
 import { qrCodeCustomizeValidations, type QRCodeCustomizeFormData } from "../validations";
 import { useParams } from "react-router";
 import { useFindUrlByIdQuery } from "@/services/api/url/queries";
+import { useAuth } from "@/contexts/auth/auth.context";
+import { PLANS_ENUM } from "@/constants/plans";
 
 export function useQRCustomizeViewModel () {
+  const { me } = useAuth()
+
   const id = useParams().id as string
 
   const {
@@ -15,10 +19,10 @@ export function useQRCustomizeViewModel () {
   const form = useForm({
     resolver: zodResolver(qrCodeCustomizeValidations),
     defaultValues: {
-      watermarkLogo: true
+      hasWaterMark: true
     },
     values: {
-      watermarkLogo: !!url?.qrCodeOptions?.watermarkLogo,
+      hasWaterMark:  me?.plan.name === PLANS_ENUM.FREE,
       dotsColor: url?.qrCodeOptions?.dotsColor,
       backgroundColor: url?.qrCodeOptions?.backgroundColor,
       centerLogo: url?.qrCodeOptions?.centerLogo,
