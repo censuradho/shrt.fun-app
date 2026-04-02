@@ -7,13 +7,15 @@ import { cn } from "@/lib/utils";
 import { QRCodePreviewCard } from "./components/QRCodePreview";
 import { QRCodePreviewDialog } from "./components/QRCodePreviewDialog";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { useNavigate } from "react-router";
 
 export function QrCodeCustomizeScreen () {
-  const { form } = useQRCustomizeViewModel()
+  const { form, isPending, handleSubmit } = useQRCustomizeViewModel()
   const { isMobile } = useWindowSize()
-
+  const navigate = useNavigate()
+  
   return (
-    <div className="grid md:grid-cols-[720px_1fr] flex-1 h-full">
+    <form onSubmit={form.handleSubmit(handleSubmit)} className="grid md:grid-cols-[720px_1fr] flex-1 h-full">
       <section className="flex flex-col bg-card px-4 mx-1 mt-1 rounded-tl-2xl relative pb-10">
         <div className="w-full max-w-150 flex-1 mx-auto mt-10 ">
           {isMobile && (
@@ -48,9 +50,9 @@ export function QrCodeCustomizeScreen () {
         )}>
           <Button
             variant="text"
-            type="button"
+            onClick={() => navigate(-1)}
           >Cancelar</Button>
-          <Button>Salvar</Button>
+          <Button type="submit" loading={isPending}>Salvar</Button>
         </div>
       </section>
       {!isMobile && (
@@ -60,6 +62,6 @@ export function QrCodeCustomizeScreen () {
           />
         </div>
       )}
-    </div>
+    </form>
   )
 }
