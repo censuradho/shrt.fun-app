@@ -7,9 +7,11 @@ export function useQRCustomizeViewModel () {
     resolver: zodResolver(qrCodeCustomizeValidations),
     defaultValues: {
       watermarkLogo: true
-    }
+    },
+    mode: 'onChange'
   })
 
+  console.log(form.formState.errors)
   return {
     form
   }
