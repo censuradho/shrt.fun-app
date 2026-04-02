@@ -30,6 +30,7 @@ export function QRCodePreviewCard ({ form }: QRCodePreviewCardProps) {
       cornersDotStyle: specs.cornersDotStyle,
       cornersSquareStyle: specs.cornersSquareStyle,
       centerLogo: specs.centerLogo,
+      hideWatermark: !specs.hasWaterMark,
     })
   }, [specs])
 
