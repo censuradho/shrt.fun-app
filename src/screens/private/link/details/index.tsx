@@ -95,7 +95,7 @@ export function DetailLinkScreen () {
           <div className="mt-6">
             <div className="flex items-start gap-3.5">
               <QRCodePreview
-                src={qrCode?.qrCode ?? null}
+                src={qrCode ?? null}
                 isPending={isGeneratingQrCode}
               />
               <div className="flex items-center gap-4">
@@ -114,15 +114,15 @@ export function DetailLinkScreen () {
 
                     <DropdownMenuGroup>
                       <DropdownMenuLabel>Opções de download</DropdownMenuLabel>
-                      <DropdownMenuItem onClick={() => downloadQrCode(qrCode!.qrCode, 'svg')}>
+                      <DropdownMenuItem onClick={() => qrCode && downloadQrCode(qrCode, 'svg')}>
                         <Icon name="Download" />
                       Download SVG
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => downloadQrCode(qrCode!.qrCode, 'png')}>
+                      <DropdownMenuItem onClick={() => qrCode && downloadQrCode(qrCode, 'png')}>
                         <Icon name="Download" />
                       Download PNG
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => downloadQrCode(qrCode!.qrCode, 'jpg')}>
+                      <DropdownMenuItem onClick={() => qrCode && downloadQrCode(qrCode, 'jpg')}>
                         <Icon name="Download" />
                       Download JPEG
                       </DropdownMenuItem>
