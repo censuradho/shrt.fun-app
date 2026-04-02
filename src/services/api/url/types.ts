@@ -31,7 +31,13 @@ export interface UrlNode {
   updatedAt: string
   hasQrCode?: boolean
   qrCodeOptions: {
-    dotsColor: string
+    dotsColor?: string
+    watermarkLogo?: string
+    backgroundColor?: string
+    cornersSquareStyle?: string
+    cornersDotStyle?: string
+    centerLogo?: string
+    dotsStyle?: string
   }
 }
 
