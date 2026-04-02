@@ -24,10 +24,11 @@ export function DetailLinkScreen () {
           </button>
         </header>
         <LinkInfoSection data={data} loading={isPending} />
-        <QRCodeSection 
-          qrCode={qrCode} 
+        <QRCodeSection
+          qrCode={qrCode}
           urlId={data?.id ?? ''}
-          isPending={isGeneratingQrCode} 
+          isPending={isGeneratingQrCode}
+          hasQrCode={data?.hasQrCode}
         />
       </div>
     </>
