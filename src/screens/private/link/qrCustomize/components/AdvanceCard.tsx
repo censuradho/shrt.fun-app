@@ -16,7 +16,7 @@ export function AdvanceCard ({ form }: AdvanceCardProps) {
         <SwitchHook 
           control={form.control}
           name="watermarkLogo"
-          label={`${appConfig.name} logo`}
+          label={`${appConfig.name} marca d'água`}
           disabled
           renderLabel
         />
