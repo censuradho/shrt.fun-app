@@ -1,3 +1,4 @@
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { ThemeProvider as NextThemeProvider, useTheme as useNextTheme } from "next-themes"
 import { createContext, useContext } from "react"
 
@@ -26,7 +27,9 @@ function ThemeContextBridge({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
-      {children}
+      <TooltipProvider>
+        {children}
+      </TooltipProvider>
     </ThemeContext.Provider>
   )
 }
