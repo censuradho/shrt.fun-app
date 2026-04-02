@@ -17,9 +17,12 @@ import { QueryMenu } from "./components/QueryMenu";
 import { ShareLinkDialog } from "./components/ShareLinkDialog";
 import { ToolsMenu } from "./components/ToolsMenu";
 import { useLinkListViewModel } from "./hooks/useLinkListViewModel";
+import { useNavigate } from "react-router";
+import { resolvePath } from "@/utils/resolvePath";
 
 export function LinkListScreen () {
-  
+  const navigate = useNavigate()
+
   const { 
     sentinelRef, 
     links, 
@@ -66,7 +69,7 @@ export function LinkListScreen () {
         onDelete: () => setConfirmationModal(link), 
         onEdit: () => toastyComingSoon, 
         onViewQrCode: toastyComingSoon, 
-        onDetails: toastyComingSoon,
+        onDetails: () =>  navigate(resolvePath(paths.private.link.details, { id: link.id })),
         isActive: link.isActive
       }
 
