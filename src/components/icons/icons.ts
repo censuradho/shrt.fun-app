@@ -36,10 +36,12 @@ import {
   Trash,
   House,
   RefreshCw,
-  Settings
+  Settings,
+  Image,
 } from 'lucide-react'
 
 export const icons = {
+  Image,
   Settings,
   RefreshCw,
   Trash,
