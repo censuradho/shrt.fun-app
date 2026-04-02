@@ -1,9 +1,9 @@
 import { format } from "date-fns"
 import { ptBR  } from "date-fns/locale"
 
-export function formatDate(dateString: string, options?: Intl.DateTimeFormatOptions): string {
+export function formatDate(dateString: string, options?: Intl.DateTimeFormatOptions, locale: string = 'pt-BR'): string {
   const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', {
+  return date.toLocaleDateString(locale, {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
