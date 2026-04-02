@@ -38,7 +38,13 @@ export interface UrlNode {
 export type FindManyUrlPaginated = CursorPaginationResult<UrlNode>
 
 export interface QrCodePreviewRequestPayload {
-  dotsColor: string
+  dotsColor?: string
+  backgroundColor?: string
+  cornersSquareStyle?: string
+  cornersDotStyle?: string
+  centerLogo?: string
+  watermarkLogo?: string
+  dotsStyle?: string
 }
 export interface QrCodePreviewResponse {
   qrCode: string
