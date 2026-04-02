@@ -11,8 +11,8 @@ export function useQRCustomizeViewModel () {
     mode: 'onChange'
   })
 
-  console.log(form.formState.errors)
+
   return {
-    form
+    form,
   }
 }
