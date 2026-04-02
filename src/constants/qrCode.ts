@@ -18,6 +18,7 @@ export const QRCodeCornersSquareStyleEnum = {
   EXTRA_ROUNDED: 'extra-rounded',
 } as const
 
+
 export const QRCodeCornersDotStyleEnum = {
   DOT: 'dot',
   SQUARE: 'square',
