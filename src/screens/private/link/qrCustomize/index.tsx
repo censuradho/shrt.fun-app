@@ -4,6 +4,7 @@ import { ColorsCard } from "./components/ColorsCard";
 import { StyleCard } from "./components/StylesCard";
 import { useQRCustomizeViewModel } from "./hooks/useQRCustomizeViewModel";
 import { cn } from "@/lib/utils";
+import { QRCodePreviewCard } from "./components/QRCodePreview";
 
 export function QrCodeCustomizeScreen () {
   const { form } = useQRCustomizeViewModel()
@@ -43,8 +44,10 @@ export function QrCodeCustomizeScreen () {
           <Button>Salvar</Button>
         </div>
       </section>
-      <div>
-        {/* blank space */}
+      <div className="hidden md:flex items-center justify-center flex-1">
+        <QRCodePreviewCard 
+          form={form}
+        />
       </div>
     </div>
   )
