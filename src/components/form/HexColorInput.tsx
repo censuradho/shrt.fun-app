@@ -60,7 +60,7 @@ export function HexColorInput ({
           onChange={handleTextChange}
           maxLength={7}
           disabled={disabled}
-          className="w-20 text-sm bg-transparent outline-none text-foreground disabled:text-muted-foreground"
+          className="w-full text-sm bg-transparent outline-none text-foreground disabled:text-muted-foreground"
           spellCheck={false}
         />
       </div>
