@@ -1,13 +1,20 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { qrCodeCustomizeValidations, type QRCodeCustomizeFormData } from "../validations";
-import { useParams } from "react-router";
-import { useFindUrlByIdQuery } from "@/services/api/url/queries";
+import { useNavigate, useParams } from "react-router";
+import { useCustomizeQRCodeMutation, useFindUrlByIdQuery } from "@/services/api/url/queries";
 import { useAuth } from "@/contexts/auth/auth.context";
 import { PLANS_ENUM } from "@/constants/plans";
+import { toast } from "sonner";
 
 export function useQRCustomizeViewModel () {
   const { me } = useAuth()
+  const navigate = useNavigate()
+  
+  const {
+    mutate,
+    isPending
+  } = useCustomizeQRCodeMutation()
 
   const id = useParams().id as string
 
@@ -33,7 +40,20 @@ export function useQRCustomizeViewModel () {
     mode: 'onChange'
   })
 
+  const handleSubmit = (data: QRCodeCustomizeFormData) => {
+    mutate(
+      { urlId: id, payload: data },
+      { onSuccess: () => {
+        toast.success('QR Code atualizado com sucesso!')
+        navigate(-1)
+      } 
+      }
+    )
+  }
+
   return {
     form,
+    isPending,
+    handleSubmit,
   }
 }
