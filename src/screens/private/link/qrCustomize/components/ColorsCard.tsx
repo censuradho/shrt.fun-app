@@ -1,6 +1,6 @@
 import { ColorPickerHook } from '../../create/components/ColorPickerHook'
 import { HexColorInputHook } from '@/components/hook/HexColorInputHook'
-import { type UseFormReturn } from 'react-hook-form'
+import { useFormState, type UseFormReturn } from 'react-hook-form'
 import type { QRCodeCustomizeFormData } from '../validations'
 
 interface ColorsCardProps {
@@ -8,6 +8,7 @@ interface ColorsCardProps {
 }
 
 export function ColorsCard ({ form }: ColorsCardProps) {
+  const { errors } = useFormState({ control: form.control })
   return (
     <div>
       <h2 className="text-lg">Escolha suas cores</h2>
@@ -25,11 +26,13 @@ export function ColorsCard ({ form }: ColorsCardProps) {
           control={form.control}
           name="dotsColor"
           label="Code"
+          errorMessage={errors.dotsColor?.message}
         />
         <HexColorInputHook
           control={form.control}
           name="backgroundColor"
           label="Background"
+          errorMessage={errors.backgroundColor?.message}
         />
       </div>
     </div>
