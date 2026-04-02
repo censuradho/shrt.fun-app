@@ -1,3 +1,4 @@
+import type { QRCodeCornersDotStyle, QRCodeCornersSquareStyle, QRCodeDotsStyle } from "@/constants/qrCode";
 import type { CursorPaginationParams, CursorPaginationResult } from "../types";
 
 export interface FindManyLinksQueries extends CursorPaginationParams {
@@ -41,4 +42,16 @@ export interface QrCodePreviewRequestPayload {
 }
 export interface QrCodePreviewResponse {
   qrCode: string
+}
+
+export interface CustomizeQRCodeRequestPayload {
+  dotsStyle?: QRCodeDotsStyle
+  dotsColor?: string
+  backgroundColor?: string
+  cornersSquareStyle?: QRCodeCornersSquareStyle
+  cornersDotStyle?: QRCodeCornersDotStyle
+  /**base64*/
+  centerLogo?: string
+  /**base64*/
+  watermarkLogo?: string  
 }
