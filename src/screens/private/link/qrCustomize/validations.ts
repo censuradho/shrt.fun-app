@@ -1,5 +1,7 @@
 import { QRCodeCornersSquareStyleEnum, QRCodeDotStyleEnum } from "@/constants/qrCode";
+import { base64MaxSize } from "@/utils/base64MaxSize";
 import z from "zod";
+const MAX_CENTER_LOGO_SIZE = base64MaxSize(2 * 1024 * 1024) // 2MB
 
 export const qrCodeCustomizeValidations = z.object({
   dotsStyle: z.enum([
@@ -23,7 +25,11 @@ export const qrCodeCustomizeValidations = z.object({
     QRCodeCornersSquareStyleEnum.DOT,
     QRCodeCornersSquareStyleEnum.SQUARE,
   ]).optional(),
-  centerLogo: z.string().regex(/^data:image\/(png|jpeg|jpg|svg\+xml);base64,/).optional(),
+  centerLogo: z
+    .string()
+    .regex(/^data:image\/(png|jpeg|jpg);base64,[A-Za-z0-9+/]+=*$/, "Formato de imagem inválido")
+    .max(MAX_CENTER_LOGO_SIZE, 'O logo deve ser menor que 2MB')
+    .optional(),
   watermarkLogo: z.boolean(),
 })
 
