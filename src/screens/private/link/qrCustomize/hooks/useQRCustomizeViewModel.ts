@@ -1,14 +1,11 @@
+import { useCustomizeQRCodeMutation, useFindUrlByIdQuery } from "@/services/api/url/queries";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { qrCodeCustomizeValidations, type QRCodeCustomizeFormData } from "../validations";
 import { useNavigate, useParams } from "react-router";
-import { useCustomizeQRCodeMutation, useFindUrlByIdQuery } from "@/services/api/url/queries";
-import { useAuth } from "@/contexts/auth/auth.context";
-import { PLANS_ENUM } from "@/constants/plans";
 import { toast } from "sonner";
+import { qrCodeCustomizeValidations, type QRCodeCustomizeFormData } from "../validations";
 
 export function useQRCustomizeViewModel () {
-  const { me } = useAuth()
   const navigate = useNavigate()
   
   const {
@@ -29,7 +26,7 @@ export function useQRCustomizeViewModel () {
       hasWaterMark: true
     },
     values: {
-      hasWaterMark:  me?.plan.name === PLANS_ENUM.FREE,
+      hasWaterMark: !(url?.qrCodeOptions?.hideWatermark),
       dotsColor: url?.qrCodeOptions?.dotsColor,
       backgroundColor: url?.qrCodeOptions?.backgroundColor,
       centerLogo: url?.qrCodeOptions?.centerLogo,
