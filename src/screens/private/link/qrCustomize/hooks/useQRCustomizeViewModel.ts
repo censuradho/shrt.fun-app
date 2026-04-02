@@ -42,7 +42,10 @@ export function useQRCustomizeViewModel () {
 
   const handleSubmit = (data: QRCodeCustomizeFormData) => {
     mutate(
-      { urlId: id, payload: data },
+      { urlId: id, payload: {
+        ...data,
+        hideWatermark: !data.hasWaterMark
+      } },
       { onSuccess: () => {
         toast.success('QR Code atualizado com sucesso!')
         navigate(-1)
