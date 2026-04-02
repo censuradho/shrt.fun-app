@@ -5,7 +5,9 @@ interface HexColorInputHookProps<T extends FieldValues> extends Pick<
 HexColorInputProps, 
 'errorMessage' |
 'label' |
-'className'
+'className' |
+'tailLabel' |
+'disabled'
 > {
   control: Control<T>
   name: Path<T>
