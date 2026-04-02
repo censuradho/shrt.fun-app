@@ -43,6 +43,11 @@ export function useCreateLinkViewModel () {
       slug: data.slug || undefined,
       title: data.title || undefined,
       generateQrCode: data.generateQrCode || false,
+      ...(data.generateQrCode && ({ 
+        qrOptions: {
+          dotsColor: data.qrCodeColor || '#000000'
+        }
+      }))
     }, {
       onSuccess: ({ data }) => {
         setSuccessModal(data)
