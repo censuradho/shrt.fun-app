@@ -1,7 +1,7 @@
-import { useCreateUrlMutation } from "@/services/api/url/queries";
+import { useCreateUrlMutation, useGenerateQrCodePreviewMutation } from "@/services/api/url/queries";
 import { slugify } from "@/utils/slugify";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { createLinkValidation, type CreateLinkFormData } from "../validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -11,7 +11,7 @@ interface SuccessModalData {
 
 export function useCreateLinkViewModel () {
   const [successModal, setSuccessModal] = useState<SuccessModalData | null>(null);
-  
+
   const form = useForm({
     resolver: zodResolver(createLinkValidation),
     mode: 'onChange'
@@ -22,11 +22,27 @@ export function useCreateLinkViewModel () {
     isPending
   } = useCreateUrlMutation()
 
+  const generateQrCode = useWatch({ control: form.control, name: 'generateQrCode' })
+  const qrCodeColor = useWatch({ control: form.control, name: 'qrCodeColor' })
+
+
+  const {
+    mutate: fetchQrCodePreview,
+    data: qrCodePreview,
+    isPending: isQrCodePreviewPending,
+  } = useGenerateQrCodePreviewMutation()
+
+  useEffect(() => {
+    if (!generateQrCode) return
+    fetchQrCodePreview({ dotsColor: qrCodeColor || '#000000' })
+  }, [generateQrCode, qrCodeColor, fetchQrCodePreview])
+
   const handleSubmit = (data: CreateLinkFormData) => {
     mutate({
       url: data.url,
       slug: data.slug || undefined,
-      title: data.title || undefined
+      title: data.title || undefined,
+      generateQrCode: data.generateQrCode || false,
     }, {
       onSuccess: ({ data }) => {
         setSuccessModal(data)
@@ -64,6 +80,8 @@ export function useCreateLinkViewModel () {
     successModal,
     setSuccessModal,
     handleGenerateSlug,
-    handleSubmit
+    handleSubmit,
+    qrCodePreview: qrCodePreview?.qrCode,
+    isQrCodePreviewPending,
   }
 }
