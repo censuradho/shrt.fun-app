@@ -23,7 +23,7 @@ export const qrCodeCustomizeValidations = z.object({
     QRCodeCornersSquareStyleEnum.DOT,
     QRCodeCornersSquareStyleEnum.SQUARE,
   ]).optional(),
-  centerLogo: z.string().optional(),
+  centerLogo: z.string().regex(/^data:image\/(png|jpeg|jpg|svg\+xml);base64,/).optional(),
   watermarkLogo: z.boolean(),
 })
 
