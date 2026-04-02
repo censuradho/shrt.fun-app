@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 import { paths } from "@/constants/routes";
 import { SwitchHook } from "@/components/hook/SwitchHook";
 import { ColorPickerHook } from "./components/QRCodeCard";
-import { Spinner } from "@/components/spinner";
+import { QRCodePreview } from "./components/QRCodePreview";
 
 export function CreateLinkScreen () {
   const navigate = useNavigate()
@@ -130,17 +130,12 @@ export function CreateLinkScreen () {
                     </div>
                     <span className="text-xs text-card-foreground">Arquivo tipo: PNG. 1:1 aspect ratio. Tamanho max: 5MB, 2500x2500px</span>
                   </div>
-                  <div className="md:pr-4 flex flex-col  gap-3 items-center justify-center">
-                    <div className="size-37 rounded bg-accent border border-outline flex items-center justify-center">
-                      {isQrCodePreviewPending ? (
-                        <Spinner />
-                      ) : (
-                        <img 
-                          className="size-37 rounded border border-outline"
-                          src={`data:image/svg+xml;utf8,${encodeURIComponent(qrCodePreview ?? '')}`}
-                        />
-                      )}
-                    </div>
+                  <div className="md:pr-4 flex flex-col gap-3 items-center justify-center">
+
+                    <QRCodePreview
+                      src={qrCodePreview ?? null}
+                      isPending={isQrCodePreviewPending}
+                    />
                     <span className="text-center max-w-60 md:max-w-37 text-xs text-card-foreground">More customizations are available after creating.</span>
                   </div>
                 </div>
