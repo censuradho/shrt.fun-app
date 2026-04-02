@@ -31,11 +31,18 @@ async function generateQrCodePreview (payload: QrCodePreviewRequestPayload) {
   return data
 }
 
+async function getQrCode (urlId: string) {
+  const { data }  = await api.get<{ qrCode: string }>(`/url/${urlId}/qrcode`)
+
+  return data
+}
+
 export const urlService = {
   findManyPaginated,
   create,
   toggleIsActive,
   getById,
   deleteById,
-  generateQrCodePreview
+  generateQrCodePreview,
+  getQrCode
 }

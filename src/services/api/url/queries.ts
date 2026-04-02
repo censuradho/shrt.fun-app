@@ -31,6 +31,14 @@ export function useFindManyUrlPaginated (queries: FindManyLinksQueries) {
   })
 }
 
+export function useGetQrCode (urlId: string) {
+  return useQuery({
+    queryKey: ['qrcode', urlId],
+    queryFn: () => urlService.getQrCode(urlId),
+    enabled: !!urlId
+  })
+}
+
 export function useFindUrlByIdQuery (id: string) {
   return useQuery({
     queryKey: ['link', id],
