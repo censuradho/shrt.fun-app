@@ -15,7 +15,7 @@ export function QrCodeCustomizeScreen () {
   return (
     <div className="grid md:grid-cols-[720px_1fr] flex-1 h-full">
       <section className="flex flex-col bg-card px-4 mx-1 mt-1 rounded-tl-2xl relative pb-10">
-        <div className="w-full max-w-[600px] flex-1 mx-auto mt-10 ">
+        <div className="w-full max-w-150 flex-1 mx-auto mt-10 ">
           {isMobile && (
             <QRCodePreviewDialog
               form={form}
@@ -43,7 +43,7 @@ export function QrCodeCustomizeScreen () {
         </div>
         <div className={cn(
           'w-full z-5 flex bottom-4 mx-auto gap-2 md:bg-popover md:border border-outline',
-          'rounded-md px-4 py-2 mt-8 md:mt-6 flex justify-between items-center max-w-[600px]',
+          'rounded-md px-4 py-2 mt-8 md:mt-6 flex justify-between items-center max-w-150',
           'md:sticky'
         )}>
           <Button
