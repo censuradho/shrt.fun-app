@@ -105,3 +105,13 @@ export function useDeleteLinkMutation () {
     }
   })
 }
+
+export function useGenerateQrCodePreviewMutation () {
+  return useMutation({
+    mutationFn: urlService.generateQrCodePreview,
+    mutationKey: ['generate-qrcode-preview'],
+    onError: (error) => {
+      toastifyApiErrorMessage(error)
+    }
+  })
+}

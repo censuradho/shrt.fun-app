@@ -11,6 +11,7 @@ export interface CreateUrlRequestPayload {
   url: string
   slug?: string | null
   title?: string | null
+  generateQrCode?: boolean
 }
 
 export interface UrlNode {
@@ -27,3 +28,10 @@ export interface UrlNode {
 }
 
 export type FindManyUrlPaginated = CursorPaginationResult<UrlNode>
+
+export interface QrCodePreviewRequestPayload {
+  dotsColor: string
+}
+export interface QrCodePreviewResponse {
+  qrCode: string
+}
