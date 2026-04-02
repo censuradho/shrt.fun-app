@@ -8,7 +8,7 @@ import { Icon } from "@/components/icons";
 import { useNavigate } from "react-router";
 import { paths } from "@/constants/routes";
 import { SwitchHook } from "@/components/hook/SwitchHook";
-import { ColorPickerHook } from "./components/QRCodeCard";
+import { ColorPickerHook } from "./components/ColorPickerHook";
 import { QRCodePreview } from "./components/QRCodePreview";
 
 export function CreateLinkScreen () {
