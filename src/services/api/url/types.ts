@@ -28,6 +28,10 @@ export interface UrlNode {
   expireAt?: string
   createdAt: string
   updatedAt: string
+  hasQrCode?: boolean
+  qrCodeOptions: {
+    dotsColor: string
+  }
 }
 
 export type FindManyUrlPaginated = CursorPaginationResult<UrlNode>
