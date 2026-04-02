@@ -24,7 +24,7 @@ export function QrCodeCustomizeScreen () {
               trigger={(
                 <Button
                   variant="ghost"
-                  className="w-full mb-8 md:hidden sticky top-1 z-10 shadow-2xl"
+                  className="w-full mb-8 md:hidden sticky top-1 z-10 shadow-2xl bg-foreground text-background"
                   headIcon={{ name: 'QrCode' }}
                 >
                 Preview do seu QR Code
