@@ -34,8 +34,9 @@ export function QrCodeCustomizeScreen () {
           </div>
         </div>
         <div className={cn(
-          'w-full z-5 flex sticky bottom-4 mx-auto gap-2 bg-popover border border-outline',
-          'rounded-md px-4 py-2 mt-6 flex justify-between items-center max-w-[600px]',
+          'w-full z-5 flex bottom-4 mx-auto gap-2 md:bg-popover md:border border-outline',
+          'rounded-md px-4 py-2 mt-8 md:mt-6 flex justify-between items-center max-w-[600px]',
+          'md:sticky'
         )}>
           <Button
             variant="text"
