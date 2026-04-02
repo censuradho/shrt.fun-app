@@ -1,3 +1,4 @@
+import { PLANS_ENUM } from "@/constants/plans";
 import type { AuthUser } from "@/lib/supabase";
 import { authGateway } from "@/lib/supabase";
 import { setApiToken } from "@/services/api";
@@ -13,6 +14,7 @@ interface AuthContextValue {
   signOut: () => Promise<void>
   me?: Me | null
   refetchMe?: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<Me, Error>>
+  isFree?: boolean
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -28,6 +30,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isLoading: isMeLoading,
     refetch: refetchMe
   } = useMeQuery(!!supabaseUser);
+
+  const isFree = me?.plan.name === PLANS_ENUM.FREE;
 
   useEffect(() => {
     authGateway.getUser()
@@ -68,7 +72,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         signIn, 
         signOut,
         me,
-        refetchMe
+        refetchMe,
+        isFree
       }}
     >
       {children}
