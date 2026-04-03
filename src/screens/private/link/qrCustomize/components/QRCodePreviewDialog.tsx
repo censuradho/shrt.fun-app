@@ -25,6 +25,7 @@ export function QRCodePreviewDialog ({ form, trigger }: QRCodePreviewDialogProps
           <DialogTitle>Preview do QR Code</DialogTitle>
         </DialogHeader>
         <QRCodePreviewCard form={form} />
+        <span className="text-sm text-muted-foreground max-w-60 text-center">Sempre teste antes de compartilhar, as cores podem interferir na legibilidade do QR Code.</span>
       </DialogContent>
     </Dialog>
   )
