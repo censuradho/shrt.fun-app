@@ -22,19 +22,29 @@ export function QRCodePreviewCard ({ form }: QRCodePreviewCardProps) {
   } = useGenerateQrCodePreviewMutation()
 
   useEffect(() => {
-    if (!isValidHexColor(specs.backgroundColor || '') ) return
-    if (!isValidHexColor(specs.dotsColor || '') ) return
+
+    const {
+      backgroundColor,
+      dotsColor,dotsStyle,
+      cornersDotStyle,
+      cornersSquareStyle,
+      centerLogo,
+      hasWaterMark
+    } = specs
+
+    if (backgroundColor && !isValidHexColor(backgroundColor || '') ) return
+    if (dotsColor && !isValidHexColor(dotsColor || '') ) return
     
     mutate({
-      ...(specs.dotsColor && ({
-        dotsColor: specs.dotsColor,
+      ...(dotsColor && ({
+        dotsColor,
       })),
-      backgroundColor: specs.backgroundColor,
-      dotsStyle: specs.dotsStyle,
-      cornersDotStyle: specs.cornersDotStyle,
-      cornersSquareStyle: specs.cornersSquareStyle,
-      centerLogo: specs.centerLogo,
-      hideWatermark: !specs.hasWaterMark,
+      backgroundColor: backgroundColor,
+      dotsStyle: dotsStyle,
+      cornersDotStyle: cornersDotStyle,
+      cornersSquareStyle: cornersSquareStyle,
+      centerLogo: centerLogo,
+      hideWatermark: !hasWaterMark,
     })
   }, [specs])
 
@@ -43,7 +53,7 @@ export function QRCodePreviewCard ({ form }: QRCodePreviewCardProps) {
       <QRCodePreview 
         src={data?.qrCode || null} 
         isPending={isPending}
-        size={18}
+        size={300}
       />
     </>
   )
