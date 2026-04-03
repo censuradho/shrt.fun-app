@@ -1,4 +1,4 @@
-import { Spinner } from "@/components/spinner"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface QRCodePreviewProps {
   src: string | null
@@ -6,18 +6,27 @@ interface QRCodePreviewProps {
   size?: number
 }
 
-export function QRCodePreview ({ src, isPending, size = 37 }: QRCodePreviewProps) {
-  
+export function QRCodePreview ({ src, isPending, size = 200 }: QRCodePreviewProps) {
+
+  if (isPending) return (
+    <Skeleton 
+      style={{
+        width: `${size}px`,
+        height: `${size}px`
+      }}
+    />
+  )
+
   return (
-    <div className={`size-${size} rounded bg-accent border border-outline flex items-center justify-center`}>
-      {isPending ? (
-        <Spinner />
-      ) : (
-        <img
-          className={`size-${size} rounded border border-outline`}
-          src={`data:image/svg+xml;utf8,${encodeURIComponent(src ?? '')}`}
-        />
-      )}
+    <div className={`rounded border border-outline flex items-center justify-center size-[${size}px]`}>
+      <img
+        className={`rounded border border-outline w-[${size}px] h-[${size}px]`}
+        src={`data:image/svg+xml;utf8,${encodeURIComponent(src ?? '')}`}
+        style={{
+          width: `${size}px`,
+          height: `${size}px`
+        }}
+      />
     </div>
   )
 }
