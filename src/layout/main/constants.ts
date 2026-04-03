@@ -22,5 +22,10 @@ export const navigation: NavigationNode[] = [
     label: "Analytics",
     path: paths.private.analytics,
     icon: "ChartSpline"
+  },
+  {
+    label: "QR Code",
+    path: paths.private.analytics,
+    icon: "QrCode"
   }
 ]
