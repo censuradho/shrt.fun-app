@@ -56,14 +56,12 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
   }, [chartData])
 
   const renderLegend = chartData.map((entry, index) => (
-    <li key={index} className="text-sm flex items-center justify-between gap-6 w-full">
-      <div>
-        <span className="inline-block w-3 h-3 mr-2 rounded-full" style={{ backgroundColor: entry.fill }} />
-        <span className="text-card-foreground">
-          {entry.referrer}
-        </span>
-      </div>
-      <span>{entry.percentage}%</span>
+    <li key={index} className="text-sm flex items-center justify-between gap-4 w-full border-b border-outline py-2 first:pt-0 last:border-b-0">
+      <span className="text-card-foreground flex items-start gap-2 min-w-0">
+        <span className="inline-block shrink-0 w-3 h-3 mt-1 rounded-full" style={{ backgroundColor: entry.fill }} />
+        <span className="break-all">{entry.referrer}</span>
+      </span>
+      <span className="shrink-0 text-muted-foreground font-medium">{entry.percentage}%</span>
     </li>
   ))
 
@@ -79,10 +77,10 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
         <p className="text-center text-muted-foreground">Nenhum dado disponível</p>
       )}
       {!isPending && !!data?.length && (
-        <div className="flex flex-col lg:flex-row justify-between gap-6">
+        <div className="flex flex-col items-center lg:flex-row lg:items-start gap-6">
           <ChartContainer
             config={chartConfig}
-            className="aspect-square h-60 [&_.recharts-text]:fill-background"
+            className="aspect-square w-full max-w-60 shrink-0 [&_.recharts-text]:fill-background"
           >
             <PieChart>
               <ChartTooltip
@@ -121,7 +119,7 @@ export function ReferrerDistributionCard({ className }: BaseCardProps) {
               </Pie>
             </PieChart>
           </ChartContainer>
-          <ul className="w-full">{renderLegend}</ul>
+          <ul className="w-full min-w-0">{renderLegend}</ul>
         </div>
       )}
 
