@@ -3,6 +3,7 @@ import type { QRCodeCustomizeFormData } from "../validations";
 import { useGenerateQrCodePreviewMutation } from "@/services/api/url/queries";
 import { useEffect } from "react";
 import { QRCodePreview } from "../../create/components/QRCodePreview";
+import { isValidHexColor } from "@/utils/validations";
 
 interface QRCodePreviewCardProps {
   form: UseFormReturn<QRCodeCustomizeFormData>
@@ -21,6 +22,9 @@ export function QRCodePreviewCard ({ form }: QRCodePreviewCardProps) {
   } = useGenerateQrCodePreviewMutation()
 
   useEffect(() => {
+    if (!isValidHexColor(specs.backgroundColor || '') ) return
+    if (!isValidHexColor(specs.dotsColor || '') ) return
+    
     mutate({
       ...(specs.dotsColor && ({
         dotsColor: specs.dotsColor,
