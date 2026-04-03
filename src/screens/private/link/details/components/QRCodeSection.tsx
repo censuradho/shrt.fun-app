@@ -83,7 +83,6 @@ export function QRCodeSection ({ urlId, qrCode, isPending, hasQrCode }: QRCodeSe
             <QRCodePreview
               src={qrCode ?? null}
               isPending={isPending}
-              size={48}
             />
           </div>
         )}
