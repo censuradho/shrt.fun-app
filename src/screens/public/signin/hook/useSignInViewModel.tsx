@@ -28,9 +28,11 @@ export function useSignInViewModel () {
         data.email, 
         data.password,
       )
-      refetchMe?.().then(() => {
-        navigate(paths.private.link.list)
-      })
+
+      const meResult = await refetchMe?.()
+
+      if (meResult?.isSuccess) navigate(paths.private.link.list)
+      if (meResult?.isError) toast.error('Erro ao obter informações do usuário')
 
     } catch (error) {
       if (isApiError(error)) {
@@ -40,6 +42,7 @@ export function useSignInViewModel () {
         }
         if (error.status === 400 && error.message === SUPABASE_ERROR_MESSAGES.INVALID_EMAIL_OR_PASSWORD) {
           toast.error('E-mail ou senha inválidos')
+          return
         }
       }
     }
