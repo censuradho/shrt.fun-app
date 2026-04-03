@@ -170,6 +170,7 @@ export function LinkListScreen () {
               handleChangeQueries('createdAfter', undefined)
               handleChangeQueries('createdBefore', undefined)
               queryClient.invalidateQueries({ queryKey: ['links'] })
+              setSearch('')
             }}
           />
           {(isTogglingLinkActive || isPending) && <LinearProgress  className="absolute bottom-0 left-0"/>}
