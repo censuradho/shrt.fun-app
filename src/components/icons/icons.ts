@@ -39,7 +39,8 @@ import {
   Settings,
   Image,
   Download,
-  PaintRoller
+  PaintRoller,
+  X
 } from 'lucide-react'
 
 export const icons = {
@@ -83,6 +84,7 @@ export const icons = {
   MousePointerClick,
   Calendar,
   Tag,
-  House
+  House,
+  X
 }
 
