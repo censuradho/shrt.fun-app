@@ -1,5 +1,6 @@
 import { QRCodeCornersSquareStyleEnum, QRCodeDotStyleEnum } from "@/constants/qrCode";
 import { base64MaxSize } from "@/utils/base64MaxSize";
+import { isValidHexColor } from "@/utils/validations";
 import z from "zod";
 const MAX_CENTER_LOGO_SIZE = base64MaxSize(2 * 1024 * 1024) // 2MB
 
@@ -14,8 +15,8 @@ export const qrCodeCustomizeValidations = z.object({
     QRCodeDotStyleEnum.MIXED,
     QRCodeDotStyleEnum.FLUID,
   ]).optional(),
-  dotsColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, "Cor inválida").optional(),
-  backgroundColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, "Cor inválida").optional(),
+  dotsColor: z.string().refine(isValidHexColor, "Cor inválida").optional(),
+  backgroundColor: z.string().refine(isValidHexColor, "Cor inválida").optional(),
   cornersSquareStyle: z.enum([
     QRCodeCornersSquareStyleEnum.DOT,
     QRCodeCornersSquareStyleEnum.SQUARE,
