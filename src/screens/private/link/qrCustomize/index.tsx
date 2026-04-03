@@ -56,10 +56,11 @@ export function QrCodeCustomizeScreen () {
         </div>
       </section>
       {!isMobile && (
-        <div className="hidden md:flex items-center justify-center flex-1">
+        <div className="hidden md:flex items-center justify-center flex-1 flex-col gap-4">
           <QRCodePreviewCard 
             form={form}
           />
+          <span className="text-sm text-muted-foreground max-w-60 text-center">Sempre teste antes de compartilhar, as cores podem interferir na legibilidade do QR Code.</span>
         </div>
       )}
     </form>
