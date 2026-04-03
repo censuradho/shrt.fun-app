@@ -67,7 +67,7 @@ export function LinkListScreen () {
         onShare: () => setSharing({ shortUrl: link.shortUrl, id: link.id }),
         onToggleActive: () => toggleLinkIsActive(link.id),
         onDelete: () => setConfirmationModal(link), 
-        onEdit: () => toastyComingSoon, 
+        onEdit: () => navigate(resolvePath(paths.private.link.update, { id: link.id })),
         onViewQrCode: toastyComingSoon, 
         onDetails: () =>  navigate(resolvePath(paths.private.link.details, { id: link.id })),
         isActive: link.isActive
