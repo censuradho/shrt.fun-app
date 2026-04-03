@@ -25,3 +25,7 @@ export function domainValidation (url: string): boolean {
     return false
   }
 }
+
+export function isValidHexColor (color: string): boolean {
+  return /^#[0-9a-fA-F]{6}$/.test(color)
+}
