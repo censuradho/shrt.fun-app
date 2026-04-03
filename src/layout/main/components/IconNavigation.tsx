@@ -22,9 +22,11 @@ export function IconNavigation() {
   ))
   return (
     <div className="w-full flex-col flex flex-1 px-2 pt-6">
-      <Link to={paths.private.link.create} className="bg-primary-500 rounded text-primary-foreground p-2 mb-6 flex items-center justify-center cursor-pointer hover:bg-primary-600">
-        <Icon name="Plus" size={20} />
-      </Link>
+      <div className="border-b border-outline">
+        <Link to={paths.private.link.create} className="bg-primary-500 rounded text-primary-foreground p-2 mb-6 flex items-center justify-center cursor-pointer hover:bg-primary-600">
+          <Icon name="Plus" size={20} />
+        </Link>
+      </div>
       <nav>
         <ul className="flex flex-col gap justify-center items-center gap-4 my-10">
           {renderNavigation}

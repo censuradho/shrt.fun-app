@@ -28,14 +28,16 @@ export function ExpandedNavigation () {
 
   return (
     <div className="w-full flex-col flex flex-1">
-      <div className="px-4 pt-6">
-        <LinkButton 
-          to={paths.private.link.create}
-          headIcon={{
-            name: "Plus",
-          }}
-          className="w-full mb-6 justify-center"
-        >Criar novo</LinkButton>
+      <div className="px-4">
+        <div className="pt-6 border-b border-outline">
+          <LinkButton 
+            to={paths.private.link.create}
+            headIcon={{
+              name: "Plus",
+            }}
+            className="w-full mb-6 justify-center"
+          >Criar novo</LinkButton>
+        </div>
       </div>
       <nav className="w-full flex-1 px-4 my-10">
         <ul 
