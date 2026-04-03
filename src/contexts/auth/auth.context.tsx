@@ -4,8 +4,10 @@ import { authGateway } from "@/lib/supabase";
 import { setApiToken } from "@/services/api";
 import { useMeQuery } from "@/services/api/auth/queries";
 import type { Me } from "@/services/api/auth/types";
+import { paths } from "@/constants/routes";
 import { useQueryClient, type QueryObserverResult, type RefetchOptions } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 interface AuthContextValue {
   supabaseUser: AuthUser | null
@@ -20,16 +22,30 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const location = useLocation()
+
+  const isInPrivateAppPath =
+    location.pathname === paths.private.root ||
+    location.pathname.startsWith(`${paths.private.root}/`)
+  
   const [supabaseUser, setSupabaseUser] = useState<AuthUser | null>(null);
   const queryClient = useQueryClient()
   
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldAutoLoadMe, setShouldAutoLoadMe] = useState(true);
+
+  const shouldEnableMeQuery = !!supabaseUser && isInPrivateAppPath && shouldAutoLoadMe
 
   const {
     data: me,
     isLoading: isMeLoading,
+    isFetched: isMeFetched,
     refetch: refetchMe
-  } = useMeQuery(!!supabaseUser);
+  } = useMeQuery(shouldEnableMeQuery);
+
+  useEffect(() => {
+    if (isMeFetched && shouldAutoLoadMe) setShouldAutoLoadMe(false)
+  }, [isMeFetched, shouldAutoLoadMe])
 
   const isFree = me?.plan.name === PLANS_ENUM.FREE;
 
