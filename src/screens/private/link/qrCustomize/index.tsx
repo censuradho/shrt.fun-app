@@ -15,8 +15,8 @@ export function QrCodeCustomizeScreen () {
   const navigate = useNavigate()
   
   return (
-    <form onSubmit={form.handleSubmit(handleSubmit)} className="grid md:grid-cols-[720px_1fr] flex-1 h-full">
-      <section className="flex flex-col bg-card px-4 mx-1 mt-1 rounded-tl-2xl relative pb-10">
+    <form onSubmit={form.handleSubmit(handleSubmit)} className="grid flex-1 h-full md:grid-cols-[minmax(0,1fr)_280px] lg:grid-cols-[minmax(0,782px)_minmax(280px,1fr)] xl:grid-cols-[820px_minmax(320px,1fr)]">
+      <section className="flex min-w-0 flex-col bg-card px-4 mx-1 mt-1 rounded-tl-2xl relative pb-10">
         <div className="w-full max-w-150 flex-1 mx-auto mt-10 ">
           {isMobile && (
             <QRCodePreviewDialog
@@ -56,7 +56,7 @@ export function QrCodeCustomizeScreen () {
         </div>
       </section>
       {!isMobile && (
-        <div className="hidden md:flex items-center justify-center flex-1 flex-col gap-4">
+        <div className="hidden min-w-0 md:flex items-center justify-center flex-1 flex-col gap-4 px-4 lg:px-6">
           <QRCodePreviewCard 
             form={form}
           />
