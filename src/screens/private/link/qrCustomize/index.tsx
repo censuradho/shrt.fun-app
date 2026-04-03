@@ -50,6 +50,7 @@ export function QrCodeCustomizeScreen () {
         )}>
           <Button
             variant="text"
+            type="button"
             onClick={() => navigate(-1)}
           >Cancelar</Button>
           <Button type="submit" loading={isPending}>Salvar</Button>
