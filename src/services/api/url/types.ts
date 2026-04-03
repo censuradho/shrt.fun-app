@@ -58,6 +58,12 @@ export interface QrCodePreviewResponse {
   qrCode: string
 }
 
+export interface UpdateUrlRequestPayload {
+  title?: string
+  description?: string
+  expireAt?: Date | null
+}
+
 export interface CustomizeQRCodeRequestPayload {
   dotsStyle?: QRCodeDotsStyle
   dotsColor?: string

@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient, type InfiniteData } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 import { urlService } from ".";
-import type { FindManyLinksQueries, FindManyUrlPaginated, QrCodePreviewRequestPayload, UrlNode } from "./types";
+import type { FindManyLinksQueries, FindManyUrlPaginated, QrCodePreviewRequestPayload, UpdateUrlRequestPayload, UrlNode } from "./types";
 import { toastifyApiErrorMessage } from "../toastifyApiErrorMessage";
 
 type LinksCache = InfiniteData<AxiosResponse<FindManyUrlPaginated>>
@@ -107,6 +107,23 @@ export function useDeleteLinkMutation () {
         exact: false,
         refetchType: 'all'
       })
+    },
+    onError: (error) => {
+      toastifyApiErrorMessage(error)
+    }
+  })
+}
+
+export function useUpdateUrlMutation () {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({ id, payload }: { id: string, payload: UpdateUrlRequestPayload }) =>
+      urlService.update(id, payload),
+    mutationKey: ['update-link'],
+    onSuccess: (_, { id }) => {
+      queryClient.invalidateQueries({ queryKey: ['link', id] })
+      queryClient.invalidateQueries({ queryKey: ['links'], exact: false, refetchType: 'all' })
     },
     onError: (error) => {
       toastifyApiErrorMessage(error)

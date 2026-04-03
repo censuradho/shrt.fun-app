@@ -1,5 +1,5 @@
 import { api } from "..";
-import type { CreateUrlRequestPayload, FindManyLinksQueries, FindManyUrlPaginated, QrCodePreviewRequestPayload, QrCodePreviewResponse, UrlNode } from "./types";
+import type { CreateUrlRequestPayload, FindManyLinksQueries, FindManyUrlPaginated, QrCodePreviewRequestPayload, QrCodePreviewResponse, UpdateUrlRequestPayload, UrlNode } from "./types";
 
 function findManyPaginated (queries: FindManyLinksQueries) {
   return api.get<FindManyUrlPaginated>('/url', {
@@ -25,6 +25,11 @@ function deleteById (id: string) {
   return api.delete(`/url/${id}`)
 }
 
+async function update (id: string, payload: UpdateUrlRequestPayload) {
+  const { data } = await api.put(`/url/${id}`, payload)
+  return data
+}
+
 async function generateQrCodePreview (payload: QrCodePreviewRequestPayload) {
   const { data }  = await api.post<QrCodePreviewResponse>('/url/qrcode/preview', payload)
 
@@ -47,6 +52,7 @@ async function customizeQRCode (urlId: string, payload: QrCodePreviewRequestPayl
 export const urlService = {
   findManyPaginated,
   create,
+  update,
   toggleIsActive,
   getById,
   deleteById,
