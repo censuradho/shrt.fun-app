@@ -25,7 +25,7 @@ export const navigation: NavigationNode[] = [
   },
   {
     label: "QR Code",
-    path: paths.private.analytics,
+    path: 'paths.private.analyticspaths.private.analytics',
     icon: "QrCode"
   }
 ]
