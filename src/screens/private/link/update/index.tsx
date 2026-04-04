@@ -14,6 +14,8 @@ export function UpdateLinkScreen () {
     handleSubmit,
   } = useUpdateLinkViewModel()
 
+  if (isPending) return null
+
   return (
     <div className="pt-10 h-full flex flex-col">
       <header className="container-sm flex justify-between items-center gap-4">
