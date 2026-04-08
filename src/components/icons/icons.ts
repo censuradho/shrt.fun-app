@@ -40,10 +40,12 @@ import {
   Image,
   Download,
   PaintRoller,
-  X
+  X,
+  ArrowLeftToLine
 } from 'lucide-react'
 
 export const icons = {
+  ArrowLeftToLine,
   PaintRoller,
   Download,
   Image,
