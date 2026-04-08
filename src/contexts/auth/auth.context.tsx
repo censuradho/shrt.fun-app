@@ -23,13 +23,13 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const location = useLocation()
+  const queryClient = useQueryClient()
 
   const isInPrivateAppPath =
     location.pathname === paths.private.root ||
     location.pathname.startsWith(`${paths.private.root}/`)
   
   const [supabaseUser, setSupabaseUser] = useState<AuthUser | null>(null);
-  const queryClient = useQueryClient()
   
   const [isLoading, setIsLoading] = useState(true);
   const [shouldAutoLoadMe, setShouldAutoLoadMe] = useState(true);
@@ -40,7 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     data: me,
     isLoading: isMeLoading,
     isFetched: isMeFetched,
-    refetch: refetchMe
+    refetch: refetchMe,
   } = useMeQuery(shouldEnableMeQuery);
 
   useEffect(() => {
@@ -56,7 +56,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const unsubscribe = authGateway.onAuthStateChange((event, session) => {
       setApiToken(session?.accessToken ?? null);
       
-      if (event === 'SIGNED_OUT') setSupabaseUser(null);
+      if (event === 'SIGNED_OUT') {
+        void queryClient.invalidateQueries()
+        queryClient.clear()
+        setSupabaseUser(null)
+      };
     });
 
     return unsubscribe;
@@ -75,6 +79,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function signOut() {
     await authGateway.signOut();
+    await queryClient.invalidateQueries()
+    queryClient.clear();
     setSupabaseUser(null);
     setApiToken(null);
     queryClient.clear();
