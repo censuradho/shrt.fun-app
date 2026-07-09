@@ -1,75 +1,34 @@
-# React + TypeScript + Vite
+## mv-ui
+UI de encurtador de URLs com analytics em tempo real e geolocalização.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma plataforma performática para criar URLs curtas, gerar QR codes, e acompanhar engajamentos detalhados por localização, dispositivo e navegador. Ideal para campanhas de marketing, tracking de links e análise de audiência geográfica.
 
-Currently, two official plugins are available:
+Features
+🔗 Encurtamento de URLs com slugs customizáveis
+📊 Analytics em tempo real (hits, engajamentos, cliques)
+🌍 Rastreamento geográfico (país, cidade) com mapa de engajamentos
+📱 Detecção automática de dispositivo (mobile/desktop) e SO
+🎯 Geração de QR codes com opções de customização
+🔐 Autenticação com JWT (email/senha + OAuth via Supabase)
+⚡ Cache inteligente com Redis
+🛡️ Rate limiting e proteção contra abuso
+📈 Paginação otimizada para grandes volumes de dados
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Stack Técnico
+Runtime: Node.js >= 24
+Framework: React
+Style: Tailwind
+Primitive Components: Shadcn
+HTTP data fetch: Tanstack React Query
+Hadless Table: Transtack React Table
 
-## React Compiler
+## UI Preview
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### Capa
+<img width="1920" height="1327" alt="image" src="https://github.com/user-attachments/assets/4a9f8df7-06e7-4475-aa85-3c1ef652d8ad" />
 
-Note: This will impact Vite dev & build performances.
+### Design Token 
+<img width="1200" height="1021" alt="image" src="https://github.com/user-attachments/assets/5e0507a3-1625-4183-8dd6-9627f4c81d2f" />
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### UI Exemplo (Tela de geração de QR Code)
+<img width="1280" height="683" alt="image" src="https://github.com/user-attachments/assets/4a8c03c1-eee0-4fd1-868f-525cf5fb424b" />
