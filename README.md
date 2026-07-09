@@ -1,4 +1,4 @@
-# mv-app
+# shrt.fun
 
 UI de um encurtador de URLs com analytics em tempo real, geolocalização e geração de QR Codes.
 
